@@ -4,7 +4,7 @@ import "./globals.css";
 import SiteHeader from "./_components/SiteHeader";
 import SiteFooter from "./_components/SiteFooter";
 
-const siteUrl = "https://gidtechnologies.com";
+const siteUrl = "https://www.gidtechnologies.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

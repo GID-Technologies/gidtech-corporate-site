@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://gidtechnologies.com/sitemap.xml
+Sitemap: https://www.gidtechnologies.com/sitemap.xml
