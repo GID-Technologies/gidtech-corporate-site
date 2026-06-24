@@ -57,7 +57,7 @@ export default function SiteHeader() {
                 className={`rounded-full px-4 py-2 text-sm transition ${
                   active
                     ? "bg-white text-black"
-                    : "text-neutral-400 hover:bg-white/[0.06] hover:text-white"
+                    : "text-neutral-300 hover:bg-white/[0.08] hover:text-white"
                 }`}
               >
                 {item.label}
@@ -87,7 +87,7 @@ export default function SiteHeader() {
       </div>
 
       {open ? (
-        <div className="border-t border-white/10 bg-black/96 px-5 py-5 backdrop-blur-2xl lg:hidden">
+        <div className="border-t border-white/10 bg-black px-5 py-6 shadow-[0_30px_80px_rgba(0,0,0,0.9)] lg:hidden">
           <div className="mx-auto grid max-w-7xl gap-2">
             {navItems.map((item) => {
               const active = pathname === item.href;

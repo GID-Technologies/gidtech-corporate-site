@@ -137,6 +137,24 @@ const principles: {
   { title: "Long-term ecosystem thinking", icon: Network },
 ];
 
+const statBetScreenshots = [
+  {
+    title: "Homepage",
+    label: "Football intelligence platform",
+    src: "/work/image.png",
+  },
+  {
+    title: "Performance Tracker",
+    label: "Public outcome review and tracking",
+    src: "/work/statbet-performance-tracker.png",
+  },
+  {
+    title: "World Cup Board",
+    label: "Tournament intelligence experience",
+    src: "/work/statbet-worldcup-page.png",
+  },
+];
+
 function SmartLink({
   href,
   children,
@@ -282,64 +300,60 @@ function Hero() {
             <div className="mb-5 flex items-center justify-between border-b border-white/10 pb-5">
               <div>
                 <p className="text-xs uppercase tracking-[0.25em] text-neutral-500">
-                  Company system
+                  GIDTech command view
                 </p>
                 <h3 className="mt-2 text-xl font-semibold text-white">
-                  GIDTech execution model
+                  Product and visibility ecosystem
                 </h3>
               </div>
+
               <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-black">
                 Active
               </span>
             </div>
 
-            <div className="space-y-4">
-              {[
-                {
-                  num: "01",
-                  title: "Build live products",
-                  copy: "StatBet proves real product execution.",
-                  icon: Rocket,
-                },
-                {
-                  num: "02",
-                  title: "Create visibility systems",
-                  copy: "GidAds supports business trust and discovery.",
-                  icon: Search,
-                },
-                {
-                  num: "03",
-                  title: "Prepare ecosystem platforms",
-                  copy: "Connection products planned with controlled growth.",
-                  icon: Network,
-                },
-              ].map((item) => {
-                const Icon = item.icon;
+            <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black shadow-premium">
+              <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+                <div>
+                  <p className="text-sm font-semibold text-white">StatBet</p>
+                  <p className="text-xs text-neutral-500">Live proof product</p>
+                </div>
 
-                return (
-                  <div
-                    key={item.title}
-                    className="rounded-3xl border border-white/10 bg-black/35 p-5 transition duration-300 hover:border-white/25 hover:bg-white/[0.045]"
-                  >
-                    <div className="flex items-start gap-4">
-                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-white">
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <p className="text-xs font-semibold text-neutral-500">
-                          {item.num}
-                        </p>
-                        <h4 className="mt-1 font-semibold text-white">
-                          {item.title}
-                        </h4>
-                        <p className="mt-2 text-sm leading-6 text-neutral-400">
-                          {item.copy}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+                <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-neutral-400">
+                  Live
+                </span>
+              </div>
+
+              <div className="relative aspect-[16/9]">
+                <Image
+                  src="/work/image.png"
+                  alt="StatBet live platform screenshot"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 560px"
+                  priority
+                />
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-3">
+              {[
+                { label: "StatBet", status: "Live" },
+                { label: "GidAds", status: "Current" },
+                { label: "GidConnect", status: "Planned" },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-2xl border border-white/10 bg-white/[0.035] p-4"
+                >
+                  <p className="text-sm font-semibold text-white">
+                    {item.label}
+                  </p>
+                  <p className="mt-2 text-xs uppercase tracking-[0.18em] text-neutral-600">
+                    {item.status}
+                  </p>
+                </div>
+              ))}
             </div>
 
             <div className="mt-5 rounded-3xl border border-white/10 bg-white/[0.035] p-5">
@@ -461,71 +475,113 @@ function StatBetProof() {
     <section id="statbet" className="section-shell px-5 py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="premium-border glass overflow-hidden rounded-[2rem]">
-          <div className="grid gap-0 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="border-b border-white/10 p-8 md:p-12 lg:border-b-0 lg:border-r lg:border-white/10">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
                 Proof of execution
               </p>
+
               <h2 className="text-balance text-4xl font-semibold tracking-[-0.04em] text-white md:text-6xl">
                 StatBet proves GIDTech can build beyond theory.
               </h2>
+
               <p className="mt-6 text-lg leading-8 text-neutral-400">
                 StatBet is a live football intelligence platform built under GID
                 Technologies. It demonstrates our ability to build, launch,
                 monitor, and publicly position a real digital product.
               </p>
 
+              <div className="mt-8 grid gap-3">
+                {statBetChips.map((chip) => {
+                  const Icon = chip.icon;
+
+                  return (
+                    <div
+                      key={chip.label}
+                      className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-4 text-sm font-medium text-neutral-200"
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon className="h-4 w-4 text-neutral-500" />
+                        <span>{chip.label}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
                 <PrimaryButton href="https://statbet.gidtechnologies.com">
                   Visit StatBet
                 </PrimaryButton>
-                <SecondaryButton href="/products">
-                  View Ecosystem Roadmap
+                <SecondaryButton href="/statbet">
+                  View Case Study
                 </SecondaryButton>
               </div>
             </div>
 
-            <div className="relative overflow-hidden p-8 md:p-12">
+            <div className="relative overflow-hidden p-5 md:p-8">
               <div className="absolute inset-0 bg-grid-pattern bg-[size:42px_42px] opacity-20 [mask-image:radial-gradient(circle_at_center,black,transparent_75%)]" />
-              <div className="relative">
-                <div className="mb-8 flex items-center justify-between rounded-3xl border border-white/10 bg-black/40 p-5">
+
+              <div className="relative space-y-5">
+                <div className="flex items-center justify-between rounded-3xl border border-white/10 bg-black/50 p-5">
                   <div>
                     <p className="text-sm text-neutral-500">
-                      Flagship proof product
+                      Live product preview
                     </p>
                     <h3 className="mt-1 text-2xl font-semibold text-white">
                       StatBet
                     </h3>
                   </div>
+
                   <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-black">
                     Live
                   </span>
                 </div>
 
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {statBetChips.map((chip) => {
-                    const Icon = chip.icon;
+                <div className="grid gap-5">
+                  {statBetScreenshots.map((shot, index) => (
+                    <div
+                      key={shot.title}
+                      className={`overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.035] shadow-premium ${
+                        index === 0 ? "" : "md:ml-10"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+                        <div>
+                          <p className="text-sm font-semibold text-white">
+                            {shot.title}
+                          </p>
+                          <p className="text-xs text-neutral-500">
+                            {shot.label}
+                          </p>
+                        </div>
 
-                    return (
-                      <div
-                        key={chip.label}
-                        className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-sm font-medium text-neutral-200"
-                      >
-                        <div className="flex items-center gap-3">
-                          <Icon className="h-4 w-4 text-neutral-400" />
-                          <span>{chip.label}</span>
+                        <div className="flex gap-1.5">
+                          <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
                         </div>
                       </div>
-                    );
-                  })}
+
+                      <div className="relative aspect-[16/8.5] bg-black">
+                        <Image
+                          src={shot.src}
+                          alt={`StatBet ${shot.title} screenshot`}
+                          fill
+                          className="object-cover object-top"
+                          sizes="(max-width: 768px) 100vw, 650px"
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
 
-                <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+                <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
                   <p className="text-sm leading-7 text-neutral-300">
-                    StatBet acts as public proof that GIDTech can move beyond
-                    ideas into execution: a live platform, a custom domain,
-                    public positioning, visibility monitoring, and structured
-                    product presentation.
+                    This is the credibility bridge: GIDTech does not only talk
+                    about digital platforms and visibility. It already has a
+                    live product that can be visited, reviewed, monitored, and
+                    improved.
                   </p>
                 </div>
               </div>
@@ -536,7 +592,6 @@ function StatBetProof() {
     </section>
   );
 }
-
 function GidAds() {
   return (
     <section id="gidads" className="section-shell px-5 py-24 md:px-8">

@@ -1,5 +1,19 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import {
+  ArrowRight,
+  Briefcase,
+  Building2,
+  ExternalLink,
+  FileText,
+  Globe2,
+  Mail,
+  MapPin,
+  Megaphone,
+  MessageCircle,
+  Monitor,
+  ShieldCheck,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -8,12 +22,30 @@ export const metadata: Metadata = {
 };
 
 const projectTypes = [
-  "Business visibility setup",
-  "Digital showroom or landing page",
-  "Company profile or business presentation",
-  "Website planning or technology solution",
-  "GidAds visibility proposal",
-  "Partnership or business discussion",
+  {
+    title: "Business visibility setup",
+    icon: Megaphone,
+  },
+  {
+    title: "Digital showroom or landing page",
+    icon: Monitor,
+  },
+  {
+    title: "Company profile or business presentation",
+    icon: FileText,
+  },
+  {
+    title: "Website planning or technology solution",
+    icon: Globe2,
+  },
+  {
+    title: "GidAds visibility proposal",
+    icon: Briefcase,
+  },
+  {
+    title: "Partnership or business discussion",
+    icon: MessageCircle,
+  },
 ];
 
 const contactRoutes = [
@@ -22,96 +54,106 @@ const contactRoutes = [
     text: "For project discussions, proposals, business visibility, and company enquiries.",
     href: "mailto:gidtech8@gmail.com",
     label: "gidtech8@gmail.com",
+    icon: Mail,
   },
   {
     title: "View StatBet",
     text: "Explore GIDTech’s live proof product before starting a business conversation.",
     href: "https://statbet.gidtechnologies.com/",
     label: "Visit StatBet",
+    icon: ExternalLink,
   },
   {
     title: "Explore GidAds",
     text: "Learn how GIDTech supports business visibility, presentation, campaign planning, and enquiry flow.",
     href: "/gidads",
     label: "View Business Visibility Systems",
+    icon: Megaphone,
   },
 ];
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
-      <section className="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
+    <main className="min-h-screen bg-black text-white">
+      <section className="section-shell mx-auto max-w-7xl px-5 pb-24 pt-32 md:px-8 md:pb-32 md:pt-40">
         <Link
           href="/"
-          className="mb-10 inline-flex rounded-full border border-cyan-300/20 px-4 py-2 text-sm text-cyan-100 transition hover:bg-cyan-300/10"
+          className="mb-8 inline-flex rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/[0.08] hover:text-white"
         >
           ← Back to Home
         </Link>
 
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <div>
-            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.35em] text-cyan-300">
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.35em] text-neutral-500">
               Contact GID Technologies
             </p>
 
-            <h1 className="text-4xl font-semibold tracking-[-0.04em] text-white md:text-6xl">
+            <h1 className="text-balance text-4xl font-semibold tracking-[-0.05em] text-white md:text-6xl">
               Start a project, request a visibility proposal, or discuss a
               digital product.
             </h1>
 
-            <p className="mt-8 text-lg leading-8 text-slate-300 md:text-xl">
+            <p className="mt-8 text-lg leading-8 text-neutral-400 md:text-xl">
               Work with GID Technologies on practical digital products, business
               visibility systems, online presence, business presentation, and
               technology solutions.
             </p>
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <a
                 href="mailto:gidtech8@gmail.com?subject=Project%20Enquiry%20-%20GID%20Technologies"
-                className="rounded-full bg-cyan-300 px-5 py-3 text-center text-sm font-bold text-slate-950 transition hover:bg-cyan-200"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200"
               >
                 Email GID Technologies
+                <ArrowRight className="h-4 w-4" />
               </a>
+
               <Link
                 href="/gidads"
-                className="rounded-full border border-white/15 px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
               >
                 Request Visibility Support
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-cyan-300/20 bg-cyan-300/[0.06] p-6 shadow-2xl shadow-cyan-950/40">
-            <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/80 p-6">
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
+          <div className="premium-border overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.025] p-5">
+            <div className="rounded-[1.5rem] border border-white/10 bg-black/70 p-6">
+              <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                <Building2 className="h-6 w-6 text-white" />
+              </div>
+
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
                 Company contact
               </p>
 
               <div className="mt-6 space-y-5">
-                <div>
-                  <p className="text-sm text-slate-500">Email</p>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+                  <p className="text-sm text-neutral-500">Email</p>
                   <a
                     href="mailto:gidtech8@gmail.com"
-                    className="mt-1 block font-semibold text-white hover:text-cyan-200"
+                    className="mt-1 block break-all font-semibold text-white hover:text-neutral-200"
                   >
                     gidtech8@gmail.com
                   </a>
                 </div>
 
-                <div>
-                  <p className="text-sm text-slate-500">Base</p>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+                  <p className="text-sm text-neutral-500">Base</p>
                   <p className="mt-1 font-semibold text-white">
                     Lagos, Nigeria
                   </p>
                 </div>
 
-                <div>
-                  <p className="text-sm text-slate-500">Registration</p>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+                  <p className="text-sm text-neutral-500">Registration</p>
                   <p className="mt-1 font-semibold text-white">RC 9595315</p>
                 </div>
 
-                <div>
-                  <p className="text-sm text-slate-500">Focus</p>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+                  <p className="text-sm text-neutral-500">Focus</p>
                   <p className="mt-1 font-semibold text-white">
                     Digital products, business visibility, and practical
                     technology solutions.
@@ -123,55 +165,72 @@ export default function ContactPage() {
         </div>
 
         <div className="mt-20">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
             What you can contact us for
           </p>
 
-          <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-[-0.03em] md:text-4xl">
+          <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-[-0.04em] text-white md:text-4xl">
             Clear business conversations, scoped properly from the start.
           </h2>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {projectTypes.map((type) => (
-              <div
-                key={type}
-                className="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-slate-200"
-              >
-                {type}
-              </div>
-            ))}
+            {projectTypes.map((type) => {
+              const Icon = type.icon;
+
+              return (
+                <div
+                  key={type.title}
+                  className="rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-5 text-neutral-300"
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                      <Icon className="h-4 w-4 text-white" />
+                    </span>
+                    <span>{type.title}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
         <div className="mt-20 grid gap-5 md:grid-cols-3">
           {contactRoutes.map((route) => {
             const isExternal = route.href.startsWith("http");
+            const Icon = route.icon;
 
             return (
               <div
                 key={route.title}
-                className="rounded-3xl border border-white/10 bg-white/[0.04] p-6"
+                className="glass rounded-[1.75rem] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25"
               >
+                <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                  <Icon className="h-5 w-5 text-white" />
+                </div>
+
                 <h2 className="text-xl font-semibold text-white">
                   {route.title}
                 </h2>
-                <p className="mt-4 leading-7 text-slate-300">{route.text}</p>
+
+                <p className="mt-4 leading-7 text-neutral-400">{route.text}</p>
 
                 {isExternal || route.href.startsWith("mailto:") ? (
                   <a
                     href={route.href}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noreferrer" : undefined}
-                    className="mt-7 inline-flex rounded-full border border-white/15 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+                    className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
                   >
                     {route.label}
+                    <ArrowRight className="h-4 w-4" />
                   </a>
                 ) : (
                   <Link
                     href={route.href}
-                    className="mt-7 inline-flex rounded-full border border-white/15 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+                    className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
                   >
                     {route.label}
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 )}
               </div>
@@ -179,29 +238,34 @@ export default function ContactPage() {
           })}
         </div>
 
-        <div className="mt-20 rounded-3xl border border-cyan-300/20 bg-cyan-300/[0.06] p-8 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
+        <div className="mt-20 rounded-[2rem] border border-white/10 bg-white/[0.035] p-8">
+          <div className="mx-auto mb-8 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+            <ShieldCheck className="h-6 w-6 text-white" />
+          </div>
+
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
             Before execution
           </p>
 
-          <h2 className="mx-auto mt-4 max-w-4xl text-3xl font-semibold tracking-[-0.03em] md:text-5xl">
+          <h2 className="mx-auto mt-4 max-w-4xl text-center text-balance text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
             Serious work starts with clear scope, timeline, deliverables, and
             approved expenses.
           </h2>
 
-          <p className="mx-auto mt-6 max-w-3xl leading-8 text-slate-300">
+          <p className="mx-auto mt-6 max-w-3xl text-center leading-8 text-neutral-400">
             GID Technologies works best when expectations are clear from the
             beginning. Project scope, professional service fees, third-party
             costs, campaign budgets, revisions, and timelines should be agreed
             before execution.
           </p>
 
-          <div className="mt-8">
+          <div className="mt-8 flex justify-center">
             <a
               href="mailto:gidtech8@gmail.com?subject=Business%20Visibility%20Proposal%20Request"
-              className="inline-flex rounded-full bg-cyan-300 px-6 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-200"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200"
             >
               Request a Proposal
+              <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
