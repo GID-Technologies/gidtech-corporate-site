@@ -46,7 +46,7 @@ export default function SiteHeader() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-[9999] isolate border-b border-white/10 bg-black/95 backdrop-blur-2xl">
+      <header className="fixed inset-x-0 top-0 z-[9999] isolate border-b border-white/10 bg-black/95 md:backdrop-blur-2xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
           <Link
             href="/"

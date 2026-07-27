@@ -129,3 +129,12 @@ body {
   background-size: 64px 64px;
   mask-image: linear-gradient(to bottom, black, transparent 82%);
 }
+@media (max-width: 767px) {
+  .noise {
+    display: none;
+  }
+
+  .glass {
+    backdrop-filter: none;
+  }
+}

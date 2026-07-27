@@ -13,28 +13,33 @@ export default function ProductScreenshot({
   src,
   alt,
   priority = false,
-  cropTop = 10,
-  zoom = 1.13,
+  cropTop = 8,
+  zoom = 1.08,
   className = "",
 }: ProductScreenshotProps) {
+  const extraBottom = Math.max(0, (zoom - 1) * 100);
+
   return (
     <div
-      className={`relative aspect-[16/9] overflow-hidden bg-black ${className}`}
+      className={`relative isolate aspect-[16/9] overflow-hidden bg-black ${className}`}
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        priority={priority}
-        quality={92}
-        sizes="(max-width: 768px) 100vw, 720px"
-        className="object-cover"
+      <div
+        className="absolute inset-x-0"
         style={{
-          transform: `scale(${zoom})`,
-          transformOrigin: "center top",
           top: `-${cropTop}%`,
+          bottom: `-${extraBottom}%`,
         }}
-      />
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          quality={92}
+          sizes="(max-width: 768px) 100vw, 720px"
+          className="object-cover object-top"
+        />
+      </div>
     </div>
   );
 }
