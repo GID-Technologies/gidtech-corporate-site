@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "GID Technologies",
     "GIDTech",
     "StatBet",
-    "GidAds",
+    "Business Visibility Systems",
     "business visibility systems",
     "digital products",
     "technology solutions",

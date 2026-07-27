@@ -14,6 +14,8 @@ import {
   Monitor,
   ShieldCheck,
 } from "lucide-react";
+import { Suspense } from "react";
+import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -39,7 +41,7 @@ const projectTypes = [
     icon: Globe2,
   },
   {
-    title: "GidAds visibility proposal",
+    title: "Business visibility review",
     icon: Briefcase,
   },
   {
@@ -64,10 +66,10 @@ const contactRoutes = [
     icon: ExternalLink,
   },
   {
-    title: "Explore GidAds",
-    text: "Learn how GIDTech supports business visibility, presentation, campaign planning, and enquiry flow.",
-    href: "/gidads",
-    label: "View Business Visibility Systems",
+    title: "Explore Business Visibility Systems",
+    text: "See how GID Technologies supports business presentation, discoverability, enquiry flow, campaign planning, and visibility improvement.",
+    href: "/solutions#visibility-systems",
+    label: "View Visibility Solutions",
     icon: Megaphone,
   },
 ];
@@ -102,15 +104,15 @@ export default function ContactPage() {
 
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <a
-                href="mailto:gidtech8@gmail.com?subject=Project%20Enquiry%20-%20GID%20Technologies"
+                href="#contact-form"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200"
               >
-                Email GID Technologies
+                Start Your Enquiry
                 <ArrowRight className="h-4 w-4" />
               </a>
 
               <Link
-                href="/gidads"
+                href="/solutions#visibility-systems"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
               >
                 Request Visibility Support
@@ -163,6 +165,34 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+
+        <section id="contact-form" className="mt-20 scroll-mt-28">
+          <div className="mb-10 max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
+              Tell us what you need
+            </p>
+
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
+              Start with the problem, opportunity, or outcome.
+            </h2>
+
+            <p className="mt-5 text-lg leading-8 text-neutral-400">
+              Select the solution, visibility service, partnership path, or
+              Build With GID opportunity that best describes your reason for
+              contacting us.
+            </p>
+          </div>
+
+          <Suspense
+            fallback={
+              <div className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-8 text-neutral-400">
+                Loading enquiry form…
+              </div>
+            }
+          >
+            <ContactForm />
+          </Suspense>
+        </section>
 
         <div className="mt-20">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
@@ -261,10 +291,10 @@ export default function ContactPage() {
 
           <div className="mt-8 flex justify-center">
             <a
-              href="mailto:gidtech8@gmail.com?subject=Business%20Visibility%20Proposal%20Request"
+              href="#contact-form"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200"
             >
-              Request a Proposal
+              Start Your Enquiry
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>

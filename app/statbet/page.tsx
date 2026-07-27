@@ -11,6 +11,7 @@ import {
   Network,
   ShieldCheck,
 } from "lucide-react";
+import ProductScreenshot from "../_components/ProductScreenshot";
 
 export const metadata: Metadata = {
   title: "StatBet Case Study",
@@ -127,7 +128,7 @@ export default function StatBetPage() {
               </a>
 
               <Link
-                href="/gidads"
+                href="/solutions#visibility-systems"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
               >
                 Explore Business Visibility

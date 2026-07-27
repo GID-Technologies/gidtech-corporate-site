@@ -4,19 +4,34 @@ import { ExternalLink, Mail, MapPin, ShieldCheck } from "lucide-react";
 
 const footerLinks = [
   { label: "About", href: "/about" },
+  { label: "Business Solutions", href: "/solutions" },
   { label: "Products", href: "/products" },
-  { label: "StatBet", href: "/statbet" },
-  { label: "GidAds", href: "/gidads" },
+  { label: "Build With GID", href: "/build-with-gid" },
   { label: "Contact", href: "/contact" },
 ];
 
 const productLinks = [
-  { label: "StatBet", href: "/statbet", status: "Live" },
-  { label: "GidAds", href: "/gidads", status: "Current focus" },
-  { label: "GidConnect", href: "/products", status: "Planned" },
-  { label: "CleanConnect", href: "/products", status: "Planned" },
+  {
+    label: "StatBet",
+    href: "/statbet",
+    status: "Live",
+  },
+  {
+    label: "PaperTalk",
+    href: "/products",
+    status: "Active development",
+  },
+  {
+    label: "Mechanic Connection",
+    href: "/products",
+    status: "Concept validation",
+  },
+  {
+    label: "Property Connection",
+    href: "/products",
+    status: "Concept validation",
+  },
 ];
-
 export default function SiteFooter() {
   return (
     <footer className="border-t border-white/10 bg-black px-5 py-14 text-neutral-400 md:px-8">

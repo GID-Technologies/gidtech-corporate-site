@@ -107,10 +107,10 @@ export default function AboutPage() {
               </Link>
 
               <Link
-                href="/gidads"
+                href="/solutions#visibility-systems"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
               >
-                Explore GidAds
+                Explore Visibility Solutions
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

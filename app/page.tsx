@@ -4,13 +4,17 @@ import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
+  Accessibility,
   BarChart3,
   Briefcase,
   Building2,
+  Car,
   CheckCircle2,
   Eye,
   FileText,
   Globe2,
+  Handshake,
+  House,
   Layers3,
   Mail,
   MapPin,
@@ -20,8 +24,11 @@ import {
   Rocket,
   Search,
   ShieldCheck,
+  Users,
+  Wrench,
   Workflow,
 } from "lucide-react";
+import ProductScreenshot from "./_components/ProductScreenshot";
 
 const credibilityItems = [
   "Registered company: RC 9595315",
@@ -30,25 +37,93 @@ const credibilityItems = [
   "Based in Lagos, Nigeria",
 ];
 
-const whatWeDo: {
-  title: string;
-  copy: string;
+const businessProblems: {
+  problem: string;
+  solution: string;
+  outcome: string;
+  href: string;
   icon: LucideIcon;
 }[] = [
   {
-    title: "Digital Products",
-    copy: "We build practical platforms and digital systems designed around real problems, clear user flows, and long-term growth.",
+    problem: "Your business does not look credible enough online.",
+    solution: "Business Websites",
+    outcome:
+      "Present the business professionally, explain its offers clearly, and create reliable customer contact paths.",
+    href: "/solutions#business-websites",
+    icon: Globe2,
+  },
+  {
+    problem: "People struggle to find, understand, or contact the business.",
+    solution: "Visibility Systems",
+    outcome:
+      "Improve public presentation, discoverability, campaign direction, and enquiry flow through structured visibility systems.",
+    href: "/solutions#visibility-systems",
+    icon: Search,
+  },
+  {
+    problem: "Manual and repetitive work slows the team down.",
+    solution: "Automation",
+    outcome:
+      "Organize forms, enquiries, notifications, follow-ups, and repeated workflows into a clearer system.",
+    href: "/solutions#automation",
+    icon: Workflow,
+  },
+  {
+    problem: "Generic tools do not fit the business or product idea.",
+    solution: "Custom Platforms",
+    outcome:
+      "Plan and build dashboards, portals, internal tools, MVPs, and practical web platforms around real requirements.",
+    href: "/solutions#custom-platforms",
     icon: Layers3,
+  },
+];
+
+const featuredSolutions: {
+  title: string;
+  description: string;
+  outcome: string;
+  href: string;
+  icon: LucideIcon;
+}[] = [
+  {
+    title: "Business Websites & Digital Showrooms",
+    description:
+      "Professional digital presence that explains the business, presents its offers, strengthens trust, and supports customer enquiries.",
+    outcome: "Better credibility and clearer customer journeys.",
+    href: "/solutions#business-websites",
+    icon: Globe2,
   },
   {
     title: "Business Visibility Systems",
-    copy: "We help businesses improve online presence, customer trust, enquiry flow, campaign visibility, and professional presentation.",
+    description:
+      "Structured positioning, visibility assessment, campaign planning, social direction, and enquiry-flow support for serious businesses.",
+    outcome: "Improved discoverability, trust, and public presentation.",
+    href: "/solutions#visibility-systems",
     icon: Megaphone,
   },
   {
-    title: "Technology Solutions",
-    copy: "We support companies with landing pages, digital showrooms, website planning, software direction, and business presentation tools.",
+    title: "Custom Platforms & Business Tools",
+    description:
+      "Practical web applications, dashboards, portals, MVPs, and internal tools designed around specific business workflows.",
+    outcome: "Technology that fits the actual process.",
+    href: "/solutions#custom-platforms",
     icon: Monitor,
+  },
+  {
+    title: "Automation & Intelligent Workflows",
+    description:
+      "Forms, enquiry routing, follow-up systems, notifications, and intelligent assistance for repetitive business processes.",
+    outcome: "Less manual work and more operational consistency.",
+    href: "/solutions#automation",
+    icon: Workflow,
+  },
+  {
+    title: "Ongoing Digital Care",
+    description:
+      "Structured post-launch maintenance for websites, content, integrations, performance, and essential business information.",
+    outcome: "Better reliability after launch.",
+    href: "/solutions#digital-care",
+    icon: Wrench,
   },
 ];
 
@@ -64,65 +139,169 @@ const statBetChips: {
   { label: "Public football intelligence pages", icon: FileText },
 ];
 
-const gidadsCards: {
+const visibilityCards: {
   title: string;
+  copy: string;
   icon: LucideIcon;
 }[] = [
-  { title: "Digital showroom setup", icon: Monitor },
-  { title: "WhatsApp/contact flow", icon: Mail },
-  { title: "Social media cleanup", icon: ShieldCheck },
-  { title: "Campaign planning", icon: Workflow },
-  { title: "Field advertising support", icon: MapPin },
-  { title: "Monthly reporting", icon: BarChart3 },
+  {
+    title: "Business presentation",
+    copy: "Professional websites, digital showrooms, business profiles, and clearer public positioning.",
+    icon: Monitor,
+  },
+  {
+    title: "Customer enquiry flow",
+    copy: "Clear WhatsApp, email, call, form, and message routes for interested customers.",
+    icon: Mail,
+  },
+  {
+    title: "Online discoverability",
+    copy: "Search visibility, social positioning, business information, and stronger digital presence.",
+    icon: Search,
+  },
+  {
+    title: "Campaign direction",
+    copy: "Structured campaign planning around business goals, target customers, available offers, and approved budgets.",
+    icon: Workflow,
+  },
+  {
+    title: "Offline visibility support",
+    copy: "Field promotion, physical materials, event visibility, and local awareness where appropriate.",
+    icon: MapPin,
+  },
+  {
+    title: "Monitoring and improvement",
+    copy: "Practical reporting, enquiry review, visibility signals, and improvement recommendations.",
+    icon: BarChart3,
+  },
+];
+const industries: {
+  title: string;
+  copy: string;
+  icon: LucideIcon;
+}[] = [
+  {
+    title: "Local Businesses",
+    copy: "Professional presence, clearer offers, customer contact paths, and visibility support.",
+    icon: Briefcase,
+  },
+  {
+    title: "Schools & Training",
+    copy: "Websites, admission information, portals, enquiry systems, and parent communication flows.",
+    icon: FileText,
+  },
+  {
+    title: "Churches & Events",
+    copy: "Event registration, information pages, donation direction, communication, and public visibility.",
+    icon: Users,
+  },
+  {
+    title: "Hospitality & Food",
+    copy: "Menus, booking and enquiry routes, business information, promotions, and customer discovery.",
+    icon: Building2,
+  },
+  {
+    title: "Property & Real Estate",
+    copy: "Property showcases, lead capture, enquiry systems, digital presentation, and campaign support.",
+    icon: MapPin,
+  },
+  {
+    title: "Service Companies",
+    copy: "Clear service presentation, customer intake, workflow support, and ongoing digital care.",
+    icon: Workflow,
+  },
 ];
 
-const roadmap = [
+const roadmap: {
+  name: string;
+  category: string;
+  status: string;
+  href: string;
+  icon: LucideIcon;
+}[] = [
   {
     name: "StatBet",
-    category: "Football intelligence platform",
+    category: "Live football intelligence platform",
     status: "Live",
+    href: "/statbet",
+    icon: BarChart3,
   },
   {
-    name: "GidAds",
-    category: "Business visibility systems",
-    status: "Current focus",
+    name: "PaperTalk",
+    category:
+      "Assistive document-reading technology — working title under review",
+    status: "Active development",
+    href: "/products",
+    icon: Accessibility,
   },
   {
-    name: "GidConnect",
-    category: "Property and opportunity connection concept",
-    status: "Planned",
+    name: "Mechanic Connection",
+    category:
+      "Nearby mechanic, roadside support, and car-parts connection concept",
+    status: "Concept validation",
+    href: "/products",
+    icon: Car,
   },
   {
-    name: "CleanConnect",
-    category: "Service connection concept",
-    status: "Planned",
+    name: "Property Connection",
+    category: "Housing discovery and property-enquiry connection concept",
+    status: "Concept validation",
+    href: "/products",
+    icon: House,
   },
 ];
 
 const process = [
   {
     step: "Discover",
-    copy: "Understand the business, product, market, and current visibility gap.",
+    copy: "Understand the business, product, market, customers, and current gap.",
   },
   {
     step: "Plan",
-    copy: "Define scope, structure, messaging, tools, and the execution route.",
+    copy: "Define the solution, scope, messaging, tools, responsibilities, and execution route.",
   },
   {
     step: "Build / Set Up",
-    copy: "Create the platform, showroom, page, campaign setup, or support system.",
+    copy: "Create the platform, website, showroom, workflow, campaign setup, or support system.",
   },
   {
     step: "Launch",
-    copy: "Release the work publicly with clean contact paths and clear presentation.",
+    copy: "Release the work publicly with clear contact paths and professional presentation.",
   },
   {
     step: "Monitor",
-    copy: "Track activity, visibility signals, enquiries, and operational feedback.",
+    copy: "Review activity, visibility signals, enquiries, performance, and operational feedback.",
   },
   {
     step: "Improve",
-    copy: "Improve the system based on evidence, client goals, and market response.",
+    copy: "Refine the system based on evidence, business goals, and real market response.",
+  },
+];
+
+const buildWithGidPaths: {
+  title: string;
+  copy: string;
+  icon: LucideIcon;
+}[] = [
+  {
+    title: "Build Products With Us",
+    copy: "For developers, designers, product thinkers, and technical contributors interested in practical digital products.",
+    icon: Layers3,
+  },
+  {
+    title: "Become a Business Partner",
+    copy: "For people who can introduce businesses, support sales, create opportunities, or expand GIDTech’s reach.",
+    icon: Handshake,
+  },
+  {
+    title: "Explore Strategic Support",
+    copy: "For potential sponsors, investors, institutions, and partners interested in the company’s product direction.",
+    icon: Network,
+  },
+  {
+    title: "Become an Early User",
+    copy: "For businesses and individuals willing to test products, join pilots, give feedback, and shape future releases.",
+    icon: Rocket,
   },
 ];
 
@@ -253,12 +432,12 @@ function Hero() {
   return (
     <section
       id="home"
-      className="section-shell relative min-h-[92vh] overflow-hidden px-5 pb-16 pt-32 md:px-8 md:pt-36 lg:pt-40"
+      className="section-shell relative min-h-[90vh] overflow-hidden px-5 pb-16 pt-28 md:px-8 md:pt-36 lg:pt-40"
     >
       <div className="absolute inset-0 -z-20 bg-grid-pattern bg-[size:64px_64px] opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
       <div className="absolute left-1/2 top-20 -z-10 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-white/[0.045] blur-3xl" />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
         <div className="animate-fade-up">
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-xs font-medium text-neutral-200">
             <span className="h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_18px_rgba(255,255,255,0.55)]" />
@@ -266,22 +445,36 @@ function Hero() {
           </div>
 
           <h1 className="text-balance max-w-5xl text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            Building digital infrastructure for products, businesses, and
-            connected ecosystems.
+            Practical digital solutions that help businesses earn trust, improve
+            visibility, and operate better.
           </h1>
 
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-neutral-400 md:text-xl">
-            GID Technologies creates practical digital products, business
-            visibility systems, and technology solutions that help companies
-            become more trusted, discoverable, and ready for modern growth.
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-neutral-400 md:mt-8 md:text-xl">
+            GID Technologies builds business websites, visibility systems,
+            custom platforms, automation workflows, and digital products around
+            real business problems and measurable outcomes.
           </p>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <PrimaryButton href="/statbet">View Proof of Work</PrimaryButton>
-            <SecondaryButton href="/contact">Start a Project</SecondaryButton>
+          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+            <PrimaryButton href="/solutions">
+              Explore Business Solutions
+            </PrimaryButton>
+            <SecondaryButton href="/statbet">
+              View Proof of Work
+            </SecondaryButton>
           </div>
 
-          <div className="mt-12 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-6">
+            <Link
+              href="/build-with-gid"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-400 transition hover:text-white"
+            >
+              Build, partner, or grow with GID
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {credibilityItems.map((item) => (
               <div
                 key={item}
@@ -302,9 +495,9 @@ function Hero() {
                 <p className="text-xs uppercase tracking-[0.25em] text-neutral-500">
                   GIDTech command view
                 </p>
-                <h3 className="mt-2 text-xl font-semibold text-white">
-                  Product and visibility ecosystem
-                </h3>
+                <h2 className="mt-2 text-xl font-semibold text-white">
+                  Product and solution ecosystem
+                </h2>
               </div>
 
               <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-black">
@@ -324,23 +517,20 @@ function Hero() {
                 </span>
               </div>
 
-              <div className="relative aspect-[16/9]">
-                <Image
-                  src="/work/image.png"
-                  alt="StatBet live platform screenshot"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 768px) 100vw, 560px"
-                  priority
-                />
-              </div>
+              <ProductScreenshot
+                src="/work/image.png"
+                alt="StatBet live football intelligence platform"
+                priority
+                cropTop={10}
+                zoom={1.14}
+              />
             </div>
 
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               {[
-                { label: "StatBet", status: "Live" },
-                { label: "GidAds", status: "Current" },
-                { label: "GidConnect", status: "Planned" },
+                { label: "Solutions", status: "Client work" },
+                { label: "StatBet", status: "Live product" },
+                { label: "PaperTalk", status: "In development" },
               ].map((item) => (
                 <div
                   key={item.label}
@@ -359,8 +549,8 @@ function Hero() {
             <div className="mt-5 rounded-3xl border border-white/10 bg-white/[0.035] p-5">
               <div className="flex items-center justify-between gap-4">
                 <p className="text-sm leading-7 text-neutral-300">
-                  Public trust layer for products, visibility work, and serious
-                  business conversations.
+                  One company connecting client solutions, live products,
+                  assistive technology, and future connection platforms.
                 </p>
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.04]">
                   <Building2 className="h-5 w-5 text-white" />
@@ -372,6 +562,128 @@ function Hero() {
           <div className="absolute -bottom-6 -left-2 hidden rounded-3xl border border-white/15 bg-white/[0.06] px-5 py-4 text-sm text-neutral-200 shadow-card backdrop-blur md:block">
             Live product proof, not empty positioning.
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BusinessProblems() {
+  return (
+    <section className="section-shell px-5 py-20 md:px-8 md:py-24">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          eyebrow="Start with the problem"
+          title="Business owners should recognize their challenge before thinking about the technology."
+          copy="These are the practical problems GID Technologies is structured to help solve."
+        />
+
+        <div className="grid gap-5 md:grid-cols-2">
+          {businessProblems.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <article
+                key={item.problem}
+                className="glass group rounded-[1.75rem] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25"
+              >
+                <div className="flex items-start justify-between gap-5">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                    <Icon className="h-5 w-5 text-white" />
+                  </span>
+
+                  <span className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-500">
+                    {item.solution}
+                  </span>
+                </div>
+
+                <h3 className="mt-8 text-2xl font-semibold tracking-[-0.03em] text-white">
+                  {item.problem}
+                </h3>
+
+                <p className="mt-4 leading-7 text-neutral-400">
+                  {item.outcome}
+                </p>
+
+                <Link
+                  href={item.href}
+                  className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-white transition group-hover:gap-3"
+                >
+                  See the solution
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturedSolutions() {
+  return (
+    <section id="solutions" className="section-shell px-5 py-24 md:px-8">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          eyebrow="Featured business solutions"
+          title="Clear solutions clients can understand, evaluate, and hire."
+          copy="The emphasis is not technology for decoration. It is stronger credibility, better customer journeys, improved visibility, and smoother operations."
+        />
+
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {featuredSolutions.map((solution, index) => {
+            const Icon = solution.icon;
+
+            return (
+              <article
+                key={solution.title}
+                className={`glass group rounded-[1.75rem] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25 ${
+                  index === 0 ? "lg:col-span-2" : ""
+                }`}
+              >
+                <div className="flex items-start justify-between gap-5">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                    <Icon className="h-5 w-5 text-white" />
+                  </span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-700">
+                    0{index + 1}
+                  </span>
+                </div>
+
+                <h3 className="mt-9 text-2xl font-semibold tracking-[-0.03em] text-white">
+                  {solution.title}
+                </h3>
+
+                <p className="mt-4 leading-7 text-neutral-400">
+                  {solution.description}
+                </p>
+
+                <div className="mt-6 rounded-2xl border border-white/10 bg-black/50 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-600">
+                    Business outcome
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-neutral-300">
+                    {solution.outcome}
+                  </p>
+                </div>
+
+                <Link
+                  href={solution.href}
+                  className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-white transition group-hover:gap-3"
+                >
+                  Explore this solution
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="mt-9 flex justify-center">
+          <PrimaryButton href="/solutions">
+            View All Business Solutions
+          </PrimaryButton>
         </div>
       </div>
     </section>
@@ -402,24 +714,18 @@ function BrandProof() {
             </p>
 
             <h2 className="text-balance text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
-              The parent company behind practical products and visibility
-              systems.
+              The registered company behind client solutions, StatBet,
+              PaperTalk, and future connection platforms.
             </h2>
 
             <p className="mt-6 text-base leading-8 text-neutral-400 md:text-lg">
-              GID Technologies is the public trust layer behind StatBet, GidAds,
-              and the company’s future connection ecosystem. The website exists
-              to show the company clearly, professionally, and honestly before
-              deeper business conversations begin.
+              GID Technologies exists as the public trust layer behind practical
+              client solutions, live digital products, assistive technology, and
+              the company’s future connection platforms.
             </p>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {[
-                "Registered company: RC 9595315",
-                "Live proof product: StatBet",
-                "Business visibility systems",
-                "Based in Lagos, Nigeria",
-              ].map((item) => (
+              {credibilityItems.map((item) => (
                 <div
                   key={item}
                   className="rounded-2xl border border-white/10 bg-black/45 px-4 py-3 text-sm text-neutral-300"
@@ -429,41 +735,6 @@ function BrandProof() {
               ))}
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function WhatWeDo() {
-  return (
-    <section id="about" className="section-shell px-5 py-24 md:px-8">
-      <div className="mx-auto max-w-7xl">
-        <SectionHeading
-          eyebrow="What we do"
-          title="Practical technology work with a clear business purpose."
-          copy="GID Technologies connects product building, online presence, campaign visibility, and business presentation into one serious execution layer."
-        />
-
-        <div className="grid gap-5 md:grid-cols-3">
-          {whatWeDo.map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <article
-                key={item.title}
-                className="glass group rounded-[1.75rem] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25"
-              >
-                <span className="mb-10 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-white">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <h3 className="text-2xl font-semibold tracking-tight text-white">
-                  {item.title}
-                </h3>
-                <p className="mt-4 leading-7 text-neutral-400">{item.copy}</p>
-              </article>
-            );
-          })}
         </div>
       </div>
     </section>
@@ -487,8 +758,8 @@ function StatBetProof() {
 
               <p className="mt-6 text-lg leading-8 text-neutral-400">
                 StatBet is a live football intelligence platform built under GID
-                Technologies. It demonstrates our ability to build, launch,
-                monitor, and publicly position a real digital product.
+                Technologies. It demonstrates our ability to plan, build,
+                launch, monitor, and publicly position a real digital product.
               </p>
 
               <div className="mt-8 grid gap-3">
@@ -514,7 +785,7 @@ function StatBetProof() {
                   Visit StatBet
                 </PrimaryButton>
                 <SecondaryButton href="/statbet">
-                  View Case Study
+                  Read the Case Study
                 </SecondaryButton>
               </div>
             </div>
@@ -563,25 +834,21 @@ function StatBetProof() {
                         </div>
                       </div>
 
-                      <div className="relative aspect-[16/8.5] bg-black">
-                        <Image
-                          src={shot.src}
-                          alt={`StatBet ${shot.title} screenshot`}
-                          fill
-                          className="object-cover object-top"
-                          sizes="(max-width: 768px) 100vw, 650px"
-                        />
-                      </div>
+                      <ProductScreenshot
+                        src={shot.src}
+                        alt={`StatBet ${shot.title} screenshot`}
+                        cropTop={10}
+                        zoom={1.14}
+                      />
                     </div>
                   ))}
                 </div>
 
                 <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
                   <p className="text-sm leading-7 text-neutral-300">
-                    This is the credibility bridge: GIDTech does not only talk
-                    about digital platforms and visibility. It already has a
-                    live product that can be visited, reviewed, monitored, and
-                    improved.
+                    StatBet gives potential clients and partners something real
+                    to inspect: a public platform, product structure, live
+                    pages, transparent tracking, and continuous improvement.
                   </p>
                 </div>
               </div>
@@ -592,52 +859,114 @@ function StatBetProof() {
     </section>
   );
 }
-function GidAds() {
+
+function WhoWeHelp() {
   return (
-    <section id="gidads" className="section-shell px-5 py-24 md:px-8">
+    <section className="section-shell px-5 py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="Business visibility systems"
-          title="GidAds — visibility infrastructure for serious businesses."
-          copy="GidAds helps businesses become more visible, trusted, discoverable, and professionally presented through digital showrooms, online campaigns, social media positioning, field advertising support, and enquiry flow setup."
+          eyebrow="Who we help"
+          title="Solutions should feel relevant to the business reading the page."
+          copy="These are examples of organizations and business categories that can benefit from GIDTech’s current capabilities."
         />
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {gidadsCards.map((card) => {
+          {industries.map((industry) => {
+            const Icon = industry.icon;
+
+            return (
+              <article
+                key={industry.title}
+                className="rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-6 transition duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.055]"
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                  <Icon className="h-5 w-5 text-white" />
+                </span>
+
+                <h3 className="mt-8 text-xl font-semibold text-white">
+                  {industry.title}
+                </h3>
+                <p className="mt-4 text-sm leading-7 text-neutral-400">
+                  {industry.copy}
+                </p>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="mt-9 flex justify-center">
+          <SecondaryButton href="/contact?service=consultation">
+            Discuss Your Business Type
+          </SecondaryButton>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BusinessVisibility() {
+  return (
+    <section
+      id="business-visibility"
+      className="section-shell px-5 py-24 md:px-8"
+    >
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          eyebrow="Business visibility systems"
+          title="Help customers find, understand, trust, and contact your business."
+          copy="GID Technologies supports businesses with professional presentation, online discoverability, enquiry systems, campaign planning, field visibility, and practical performance review."
+        />
+
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {visibilityCards.map((card) => {
             const Icon = card.icon;
 
             return (
-              <div
+              <article
                 key={card.title}
                 className="group rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-6 transition duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.06]"
               >
                 <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
                   <Icon className="h-5 w-5 text-white" />
                 </div>
+
                 <h3 className="text-xl font-semibold text-white">
                   {card.title}
                 </h3>
-                <p className="mt-4 text-sm leading-6 text-neutral-400">
-                  Structured support designed to improve business presentation,
-                  discovery, contact flow, and campaign clarity.
+
+                <p className="mt-4 text-sm leading-7 text-neutral-400">
+                  {card.copy}
                 </p>
-              </div>
+              </article>
             );
           })}
         </div>
 
-        <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.035] p-6 text-sm leading-7 text-neutral-300">
-          GidAds is not positioned as a promise of guaranteed sales. It is a
-          practical visibility system focused on trust, presentation, discovery,
-          campaign support, and clearer enquiry paths.
+        <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.035] p-6">
+          <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <p className="text-sm font-semibold text-white">
+                Visibility support, not fake promises
+              </p>
+
+              <p className="mt-3 max-w-4xl text-sm leading-7 text-neutral-400">
+                GID Technologies does not guarantee buyers or sales. We improve
+                how a business is presented, discovered, understood, contacted,
+                promoted, monitored, and refined.
+              </p>
+            </div>
+
+            <ShieldCheck className="h-8 w-8 text-neutral-500" />
+          </div>
         </div>
 
         <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <PrimaryButton href="/contact">
-            Request a Visibility Proposal
+          <PrimaryButton href="/contact?service=visibility-system">
+            Request a Visibility Review
           </PrimaryButton>
-          <SecondaryButton href="/statbet">
-            View Proof of Execution
+
+          <SecondaryButton href="/solutions#visibility-systems">
+            Explore Visibility Solutions
           </SecondaryButton>
         </div>
       </div>
@@ -650,29 +979,52 @@ function Roadmap() {
     <section id="products" className="section-shell px-5 py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="Ecosystem roadmap"
-          title="A controlled product ecosystem, built in stages."
-          copy="The website presents what is live, what is commercially active, and what is planned without overstating company scale."
+          eyebrow="Product ecosystem"
+          title="Live proof today. Active development next. Future platforms validated carefully."
+          copy="StatBet is live, PaperTalk is in active development, and the mechanic and property platforms remain under concept validation."
         />
 
         <div className="grid gap-4 lg:grid-cols-4">
-          {roadmap.map((item) => (
-            <article
-              key={item.name}
-              className="glass rounded-[1.5rem] p-6 transition duration-300 hover:-translate-y-1 hover:border-white/25"
-            >
-              <div className="mb-10 flex items-center justify-between gap-4">
-                <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-bold text-neutral-200">
-                  {item.status}
-                </span>
-                <span className="h-2 w-2 rounded-full bg-white/70" />
-              </div>
-              <h3 className="text-2xl font-semibold text-white">{item.name}</h3>
-              <p className="mt-4 min-h-14 text-sm leading-6 text-neutral-400">
-                {item.category}
-              </p>
-            </article>
-          ))}
+          {roadmap.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="glass group rounded-[1.5rem] p-6 transition duration-300 hover:-translate-y-1 hover:border-white/25"
+              >
+                <div className="mb-10 flex items-start justify-between gap-4">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                    <Icon className="h-5 w-5 text-white" />
+                  </span>
+
+                  <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-400">
+                    {item.status}
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-semibold text-white">
+                  {item.name}
+                </h3>
+
+                <p className="mt-4 min-h-20 text-sm leading-7 text-neutral-400">
+                  {item.category}
+                </p>
+
+                <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white transition group-hover:gap-3">
+                  Explore direction
+                  <ArrowRight className="h-4 w-4" />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+
+        <div className="mt-9 flex justify-center">
+          <SecondaryButton href="/products">
+            Explore the Product Roadmap
+          </SecondaryButton>
         </div>
       </div>
     </section>
@@ -684,8 +1036,8 @@ function HowWeWork() {
     <section className="section-shell px-5 py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="How we work"
-          title="A simple execution process from idea to visibility."
+          eyebrow="How engagements work"
+          title="A clear process from business problem to launch and improvement."
         />
 
         <div className="glass rounded-[2rem] p-5 md:p-8">
@@ -713,6 +1065,68 @@ function HowWeWork() {
   );
 }
 
+function BuildWithGID() {
+  return (
+    <section className="section-shell px-5 py-24 md:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="premium-border overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.025]">
+          <div className="grid gap-0 lg:grid-cols-[0.82fr_1.18fr]">
+            <div className="border-b border-white/10 p-8 md:p-12 lg:border-b-0 lg:border-r">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
+                Build With GID
+              </p>
+
+              <h2
+                className="mt-5 
+              text-balance text-4xl font-semibold tracking-[-0.05em] text-white md:text-5xl"
+              >
+                Some people will hire GID. Others may help build what comes
+                next.
+              </h2>
+
+              <p className="mt-6 text-lg leading-8 text-neutral-400">
+                GID Technologies is open to serious conversations with builders,
+                business partners, strategic supporters, sponsors, early users,
+                and people who can create meaningful opportunities.
+              </p>
+
+              <div className="mt-9">
+                <PrimaryButton href="/build-with-gid">
+                  Explore a Path With GID
+                </PrimaryButton>
+              </div>
+            </div>
+
+            <div className="grid gap-4 p-6 md:grid-cols-2 md:p-8">
+              {buildWithGidPaths.map((path) => {
+                const Icon = path.icon;
+
+                return (
+                  <article
+                    key={path.title}
+                    className="rounded-[1.5rem] border border-white/10 bg-black/50 p-6"
+                  >
+                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                      <Icon className="h-5 w-5 text-white" />
+                    </span>
+
+                    <h3 className="mt-7 text-xl font-semibold text-white">
+                      {path.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-neutral-400">
+                      {path.copy}
+                    </p>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Principles() {
   return (
     <section className="section-shell px-5 py-24 md:px-8">
@@ -720,7 +1134,7 @@ function Principles() {
         <SectionHeading
           eyebrow="Operating principles"
           title="Serious work needs clear standards."
-          copy="The site should make GIDTech feel disciplined: practical, truthful, measurable, and built for long-term conversations."
+          copy="GIDTech is positioned around practical execution, honest communication, measurable work, and long-term thinking."
         />
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
@@ -754,24 +1168,28 @@ function ContactCTA() {
         <div className="premium-border relative overflow-hidden rounded-[2rem] bg-black p-8 md:p-14">
           <div className="absolute inset-0 bg-premium-radial opacity-70" />
           <div className="absolute inset-0 bg-grid-pattern bg-[size:58px_58px] opacity-20 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
+
           <div className="relative mx-auto max-w-3xl text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
-              Contact
+              Start with the business problem
             </p>
+
             <h2 className="text-balance text-4xl font-semibold tracking-[-0.04em] text-white md:text-6xl">
-              Ready to build stronger digital presence?
+              Tell us what you are trying to improve.
             </h2>
+
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-neutral-400">
-              Work with GID Technologies on digital products, business
-              visibility, online presence, or practical technology solutions.
+              You do not need to know the exact technology. Explain the business
+              problem, intended outcome, and current situation. GIDTech will
+              help define the most practical next step.
             </p>
 
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-              <PrimaryButton href="mailto:gidtech8@gmail.com?subject=Start%20a%20Project%20with%20GID%20Technologies">
-                Start a Project
+              <PrimaryButton href="/contact?service=consultation">
+                Start a Business Conversation
               </PrimaryButton>
-              <SecondaryButton href="mailto:gidtech8@gmail.com?subject=Request%20a%20Visibility%20Proposal">
-                Request a Visibility Proposal
+              <SecondaryButton href="/solutions">
+                Review the Solutions
               </SecondaryButton>
             </div>
           </div>
@@ -786,12 +1204,15 @@ export default function Home() {
     <main>
       <div className="noise" />
       <Hero />
+      <BusinessProblems />
+      <FeaturedSolutions />
       <BrandProof />
-      <WhatWeDo />
       <StatBetProof />
-      <GidAds />
+      <WhoWeHelp />
+      <BusinessVisibility />
       <Roadmap />
       <HowWeWork />
+      <BuildWithGID />
       <Principles />
       <ContactCTA />
     </main>
