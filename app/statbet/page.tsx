@@ -90,7 +90,7 @@ const screenshots = [
 
 export default function StatBetPage() {
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="statbet-safe min-h-screen bg-black text-white">
       <section className="section-shell mx-auto max-w-7xl px-5 pb-24 pt-32 md:px-8 md:pb-32 md:pt-40">
         <Link
           href="/"

@@ -21,7 +21,11 @@ export default function ProductScreenshot({
 
   return (
     <div
+      data-product-screenshot
       className={`relative isolate aspect-[16/9] overflow-hidden bg-black ${className}`}
+      style={{
+        contain: "layout paint",
+      }}
     >
       <div
         className="absolute inset-x-0"
