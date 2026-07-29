@@ -2,14 +2,16 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import type { LucideIcon } from "lucide-react";
 import {
+  Accessibility,
   ArrowRight,
+  BarChart3,
   BriefcaseBusiness,
+  Car,
   Code2,
   Eye,
   Handshake,
-  Megaphone,
+  House,
   Network,
-  Rocket,
   ShieldCheck,
   Users,
 } from "lucide-react";
@@ -31,58 +33,80 @@ type ConnectionPath = {
 
 const connectionPaths: ConnectionPath[] = [
   {
-    title: "I Need a Business Solution",
+    title: "Hire GID",
     label: "Businesses & Organizations",
     description:
-      "Discuss a business website, digital showroom, custom platform, automation workflow, maintenance need, or practical technology problem.",
+      "Discuss a business website, digital showroom, visibility system, custom platform, automation workflow, or ongoing digital-support need.",
     href: "/contact?service=consultation#contact-form",
-    cta: "Discuss Your Business",
+    cta: "Discuss a Business Project",
     icon: BriefcaseBusiness,
   },
   {
-    title: "My Business Needs Visibility",
-    label: "Business Visibility Systems",
-    description:
-      "Request support with business presentation, discoverability, enquiry flow, campaign planning, online presence, and practical visibility review.",
-    href: "/contact?service=visibility-system#contact-form",
-    cta: "Request a Visibility Review",
-    icon: Megaphone,
-  },
-  {
-    title: "I Want to Build With GID",
+    title: "Build With GID",
     label: "Builders & Contributors",
     description:
-      "Introduce yourself as a developer, designer, product thinker, marketer, business connector, tester, or practical contributor.",
-    href: "/contact?service=build-with-gid#contact-form",
-    cta: "Introduce Yourself",
+      "Explore ways to contribute through development, design, research, marketing, product thinking, operations, testing, or other practical skills.",
+    href: "/build-with-gid",
+    cta: "Explore Build With GID",
     icon: Code2,
   },
   {
-    title: "I Want to Partner or Support",
-    label: "Partners & Strategic Support",
+    title: "Partner With GID",
+    label: "Companies & Institutions",
     description:
-      "Start a conversation around partnership, sponsorship, investment interest, institutional access, referrals, resources, or strategic guidance.",
+      "Start a conversation around technology, distribution, media, data, product testing, institutional access, referrals, or shared opportunities.",
     href: "/contact?service=partnership#contact-form",
-    cta: "Start a Strategic Conversation",
+    cta: "Discuss a Partnership",
     icon: Handshake,
   },
   {
-    title: "I Want to Explore StatBet",
-    label: "Live Product Proof",
+    title: "Support GID",
+    label: "Sponsors & Strategic Supporters",
     description:
-      "See the football intelligence platform that demonstrates GID Technologies’ ability to build, launch, position, and monitor a real digital product.",
-    href: "/statbet",
-    cta: "Explore StatBet",
-    icon: Eye,
+      "Explore sponsorship, investment conversations, mentorship, strategic guidance, infrastructure support, or useful introductions.",
+    href: "/contact?service=build-with-gid&path=strategic-support#contact-form",
+    cta: "Explore Support",
+    icon: ShieldCheck,
   },
   {
-    title: "I Want to Follow the GID Journey",
-    label: "Early Users & Supporters",
+    title: "Explore the Products",
+    label: "Products & Early Users",
     description:
-      "Explore the company, understand the ecosystem, join future pilots, provide feedback, and stay connected to what GID Technologies builds next.",
-    href: "/build-with-gid",
-    cta: "Explore Build With GID",
-    icon: Rocket,
+      "View StatBet, follow PaperTalk’s development, understand the mechanic and property concepts, and explore future testing opportunities.",
+    href: "/products",
+    cta: "View the Product Roadmap",
+    icon: Eye,
+  },
+];
+
+const presentationProducts = [
+  {
+    name: "StatBet",
+    status: "Live",
+    description:
+      "GID Technologies’ live football-intelligence product and strongest public proof of execution.",
+    icon: BarChart3,
+  },
+  {
+    name: "PaperTalk",
+    status: "Active Development",
+    description:
+      "An accessibility-focused product being developed to interpret printed material and make it available through audio.",
+    icon: Accessibility,
+  },
+  {
+    name: "Mechanic Connection",
+    status: "Concept Validation",
+    description:
+      "A connection concept being researched before its users, trust systems, and operating model are locked.",
+    icon: Car,
+  },
+  {
+    name: "Property Connection",
+    status: "Concept Validation",
+    description:
+      "A housing and property-discovery concept still undergoing research and validation before development.",
+    icon: House,
   },
 ];
 
@@ -117,24 +141,24 @@ function addTrackingToHref(href: string, tracking: Record<string, string>) {
 
 const reasonsToConnect = [
   {
-    title: "Build",
-    text: "Contribute technical, creative, commercial, product, or operational value.",
-    icon: Code2,
-  },
-  {
     title: "Hire",
-    text: "Discuss a practical business solution, visibility system, or digital product.",
+    text: "Discuss a practical digital solution for your business or organization.",
     icon: BriefcaseBusiness,
   },
   {
+    title: "Build",
+    text: "Contribute useful technical, creative, commercial, or operational skills.",
+    icon: Code2,
+  },
+  {
     title: "Partner",
-    text: "Create strategic access, support, resources, referrals, or shared opportunities.",
+    text: "Create shared opportunities through access, distribution, data, or collaboration.",
     icon: Network,
   },
   {
-    title: "Test",
-    text: "Join early product use, pilots, feedback programmes, and validation activities.",
-    icon: Users,
+    title: "Support",
+    text: "Provide mentorship, sponsorship, resources, guidance, or strategic introductions.",
+    icon: ShieldCheck,
   },
 ];
 
@@ -151,6 +175,9 @@ export default async function GraduationPage({
     utm_medium: getFirstParam(incomingParams.utm_medium),
     utm_campaign: getFirstParam(incomingParams.utm_campaign),
   };
+  const statBetCaseStudyHref = addTrackingToHref("/statbet", tracking);
+
+  const productRoadmapHref = addTrackingToHref("/products", tracking);
   return (
     <main className="min-h-screen bg-black text-white">
       <section className="section-shell mx-auto max-w-7xl px-5 pb-24 pt-32 md:px-8 md:pb-32 md:pt-40">
@@ -228,6 +255,107 @@ export default async function GraduationPage({
           </div>
         </div>
 
+        <section className="mt-24">
+          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.025]">
+            <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
+              <div className="border-b border-white/10 p-8 md:p-10 lg:border-b-0 lg:border-r">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
+                  What you saw today
+                </p>
+
+                <h2 className="mt-5 text-balance text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
+                  One company. Two connected directions.
+                </h2>
+
+                <p className="mt-6 text-lg leading-8 text-neutral-400">
+                  GID Technologies is a proof-led technology company building
+                  practical business solutions and its own digital products.
+                </p>
+
+                <p className="mt-5 leading-8 text-neutral-400">
+                  One side of the company helps businesses solve practical
+                  digital, visibility, communication, and workflow problems. The
+                  other develops GID-owned products around problems we believe
+                  deserve serious, scalable solutions.
+                </p>
+
+                <div className="mt-8 rounded-2xl border border-white/10 bg-black/50 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-neutral-600">
+                    Our execution approach
+                  </p>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {[
+                      "Research",
+                      "Plan",
+                      "Build",
+                      "Launch",
+                      "Monitor",
+                      "Improve",
+                    ].map((step) => (
+                      <span
+                        key={step}
+                        className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-semibold text-neutral-300"
+                      >
+                        {step}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-8 flex flex-col gap-4">
+                  <Link
+                    href={statBetCaseStudyHref}
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200"
+                  >
+                    View the StatBet Product Case Study
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+
+                  <Link
+                    href={productRoadmapHref}
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+                  >
+                    Explore the Product Roadmap
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid gap-4 p-6 md:grid-cols-2 md:p-8">
+                {presentationProducts.map((product) => {
+                  const Icon = product.icon;
+
+                  return (
+                    <article
+                      key={product.name}
+                      className="rounded-[1.5rem] border border-white/10 bg-black/50 p-6"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                          <Icon className="h-5 w-5 text-white" />
+                        </span>
+
+                        <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-400">
+                          {product.status}
+                        </span>
+                      </div>
+
+                      <h3 className="mt-7 text-xl font-semibold text-white">
+                        {product.name}
+                      </h3>
+
+                      <p className="mt-4 text-sm leading-7 text-neutral-400">
+                        {product.description}
+                      </p>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="connection-paths" className="mt-24 scroll-mt-28">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500">
@@ -235,12 +363,12 @@ export default async function GraduationPage({
             </p>
 
             <h2 className="text-balance text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
-              Select the conversation that makes sense for you.
+              Hire. Build. Partner. Support. Explore.
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-neutral-400 md:text-lg">
-              Each path directs you to the most relevant GIDTech information or
-              enquiry form.
+              Choose the path that best describes what you need, what you can
+              contribute, or what you want to explore after the presentation.
             </p>
           </div>
 
@@ -299,10 +427,10 @@ export default async function GraduationPage({
           </h2>
 
           <p className="mt-6 max-w-4xl text-lg leading-8 text-neutral-400">
-            Submitting an enquiry does not automatically create employment,
-            partnership, investment, sponsorship, project approval, payment, or
-            acceptance. GID Technologies will review each serious introduction
-            according to current priorities, capacity, fit, and mutual value.
+            Submitting an enquiry helps GID Technologies understand your
+            interest and determine the appropriate next step. It does not
+            automatically create an employment, investment, sponsorship,
+            partnership, contributor, product-acceptance, or payment agreement.
           </p>
         </section>
 

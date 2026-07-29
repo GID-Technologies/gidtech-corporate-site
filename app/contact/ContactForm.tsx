@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { FormEvent } from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -76,6 +77,29 @@ export default function ContactForm() {
   const [status, setStatus] = useState<SubmissionStatus>("idle");
   const [feedback, setFeedback] = useState("");
 
+  //Detect Graduation submissions
+  const source = searchParams.get("source") ?? "";
+  const campaign = searchParams.get("utm_campaign") ?? "";
+
+  const isGraduationSubmission =
+    source.startsWith("aptech-graduation") || campaign === "graduation_2026";
+
+  const trackingParams = new URLSearchParams();
+
+  ["source", "utm_source", "utm_medium", "utm_campaign"].forEach((key) => {
+    const value = searchParams.get(key);
+
+    if (value) {
+      trackingParams.set(key, value);
+    }
+  });
+
+  const trackingQuery = trackingParams.toString();
+
+  function trackedHref(pathname: string) {
+    return `${pathname}${trackingQuery ? `?${trackingQuery}` : ""}`;
+  }
+
   useEffect(() => {
     const requestedService = searchParams.get("service");
     const requestedPath = searchParams.get("path");
@@ -130,8 +154,11 @@ export default function ContactForm() {
       }
 
       setStatus("success");
+
       setFeedback(
-        "Your enquiry has been sent to GID Technologies. We will review it and respond through your preferred contact route.",
+        isGraduationSubmission
+          ? "We have received your submission and will review the path you selected."
+          : "Your enquiry has been sent to GID Technologies. We will review it and respond through your preferred contact route.",
       );
 
       form.reset();
@@ -161,6 +188,103 @@ export default function ContactForm() {
 
   const inputClassName =
     "mt-2 w-full rounded-2xl border border-white/10 bg-black/60 px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-neutral-700 focus:border-white/30 focus:bg-black";
+
+  if (status === "success") {
+    return (
+      <div
+        aria-live="polite"
+        className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.035] p-7 md:p-10"
+      >
+        <div className="absolute inset-0 bg-premium-radial opacity-50" />
+
+        <div className="relative">
+          <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/15 bg-white/[0.07]">
+            <CheckCircle2 className="h-7 w-7 text-white" />
+          </span>
+
+          <p className="mt-8 text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
+            Submission received
+          </p>
+
+          <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
+            {isGraduationSubmission
+              ? "Thank you for connecting with GID Technologies."
+              : "Your enquiry is now with GID Technologies."}
+          </h2>
+
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-400">
+            {feedback}
+          </p>
+
+          {isGraduationSubmission ? (
+            <p className="mt-4 max-w-2xl leading-7 text-neutral-500">
+              Thank you for connecting with us after the Aptech graduation
+              presentation. In the meantime, you can explore the company, view
+              the StatBet product case study, and follow the products being
+              developed under GID Technologies.
+            </p>
+          ) : (
+            <p className="mt-4 max-w-2xl leading-7 text-neutral-500">
+              You may continue exploring our solutions, products, and live proof
+              of execution while your enquiry is being reviewed.
+            </p>
+          )}
+
+          <div className="mt-9 grid gap-3 sm:grid-cols-2">
+            <Link
+              href={trackedHref("/")}
+              className="inline-flex items-center justify-between rounded-2xl bg-white px-5 py-4 text-sm font-semibold text-black transition hover:bg-neutral-200"
+            >
+              Explore GID Technologies
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+
+            <Link
+              href={trackedHref("/statbet")}
+              className="inline-flex items-center justify-between rounded-2xl border border-white/15 bg-white/[0.04] px-5 py-4 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+            >
+              View the StatBet Case Study
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+
+            <Link
+              href={trackedHref("/products")}
+              className="inline-flex items-center justify-between rounded-2xl border border-white/15 bg-white/[0.04] px-5 py-4 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+            >
+              Explore the Products
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+
+            {isGraduationSubmission ? (
+              <Link
+                href={trackedHref("/graduation")}
+                className="inline-flex items-center justify-between rounded-2xl border border-white/15 bg-white/[0.04] px-5 py-4 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+              >
+                Return to Graduation Page
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            ) : (
+              <Link
+                href={trackedHref("/build-with-gid")}
+                className="inline-flex items-center justify-between rounded-2xl border border-white/15 bg-white/[0.04] px-5 py-4 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+              >
+                Explore Build With GID
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            )}
+          </div>
+
+          <div className="mt-8 border-t border-white/10 pt-6">
+            <p className="max-w-2xl text-xs leading-6 text-neutral-600">
+              Your submission begins a review and follow-up process. It does not
+              automatically create an employment, investment, sponsorship,
+              partnership, contributor, project, or payment agreement.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <form
@@ -351,16 +475,6 @@ export default function ContactForm() {
           )}
         </button>
       </div>
-
-      {status === "success" ? (
-        <div
-          aria-live="polite"
-          className="mt-6 flex items-start gap-3 rounded-2xl border border-white/15 bg-white/[0.06] p-4 text-sm leading-6 text-neutral-200"
-        >
-          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
-          <p>{feedback}</p>
-        </div>
-      ) : null}
 
       {status === "error" ? (
         <div
