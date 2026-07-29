@@ -35,7 +35,7 @@ const connectionPaths: ConnectionPath[] = [
     label: "Businesses & Organizations",
     description:
       "Discuss a business website, digital showroom, custom platform, automation workflow, maintenance need, or practical technology problem.",
-    href: "/contact?service=consultation&source=aptech-graduation#contact-form",
+    href: "/contact?service=consultation#contact-form",
     cta: "Discuss Your Business",
     icon: BriefcaseBusiness,
   },
@@ -44,7 +44,7 @@ const connectionPaths: ConnectionPath[] = [
     label: "Business Visibility Systems",
     description:
       "Request support with business presentation, discoverability, enquiry flow, campaign planning, online presence, and practical visibility review.",
-    href: "/contact?service=visibility-system&source=aptech-graduation#contact-form",
+    href: "/contact?service=visibility-system#contact-form",
     cta: "Request a Visibility Review",
     icon: Megaphone,
   },
@@ -53,7 +53,7 @@ const connectionPaths: ConnectionPath[] = [
     label: "Builders & Contributors",
     description:
       "Introduce yourself as a developer, designer, product thinker, marketer, business connector, tester, or practical contributor.",
-    href: "/contact?service=build-with-gid&source=aptech-graduation#contact-form",
+    href: "/contact?service=build-with-gid#contact-form",
     cta: "Introduce Yourself",
     icon: Code2,
   },
@@ -62,7 +62,7 @@ const connectionPaths: ConnectionPath[] = [
     label: "Partners & Strategic Support",
     description:
       "Start a conversation around partnership, sponsorship, investment interest, institutional access, referrals, resources, or strategic guidance.",
-    href: "/contact?service=partnership&source=aptech-graduation#contact-form",
+    href: "/contact?service=partnership#contact-form",
     cta: "Start a Strategic Conversation",
     icon: Handshake,
   },
@@ -71,7 +71,7 @@ const connectionPaths: ConnectionPath[] = [
     label: "Live Product Proof",
     description:
       "See the football intelligence platform that demonstrates GID Technologies’ ability to build, launch, position, and monitor a real digital product.",
-    href: "/statbet?source=aptech-graduation",
+    href: "/statbet",
     cta: "Explore StatBet",
     icon: Eye,
   },
@@ -85,6 +85,35 @@ const connectionPaths: ConnectionPath[] = [
     icon: Rocket,
   },
 ];
+
+type GraduationSearchParams = Record<string, string | string[] | undefined>;
+
+function getFirstParam(value: string | string[] | undefined) {
+  if (Array.isArray(value)) {
+    return value[0] ?? "";
+  }
+
+  return value ?? "";
+}
+
+function addTrackingToHref(href: string, tracking: Record<string, string>) {
+  const [pathAndQuery, hash] = href.split("#");
+  const [pathname, existingQuery = ""] = pathAndQuery.split("?");
+
+  const params = new URLSearchParams(existingQuery);
+
+  Object.entries(tracking).forEach(([key, value]) => {
+    if (value) {
+      params.set(key, value);
+    }
+  });
+
+  const queryString = params.toString();
+
+  return `${pathname}${queryString ? `?${queryString}` : ""}${
+    hash ? `#${hash}` : ""
+  }`;
+}
 
 const reasonsToConnect = [
   {
@@ -109,7 +138,19 @@ const reasonsToConnect = [
   },
 ];
 
-export default function GraduationPage() {
+export default async function GraduationPage({
+  searchParams,
+}: {
+  searchParams: Promise<GraduationSearchParams>;
+}) {
+  const incomingParams = await searchParams;
+
+  const tracking = {
+    source: getFirstParam(incomingParams.source) || "aptech-graduation",
+    utm_source: getFirstParam(incomingParams.utm_source),
+    utm_medium: getFirstParam(incomingParams.utm_medium),
+    utm_campaign: getFirstParam(incomingParams.utm_campaign),
+  };
   return (
     <main className="min-h-screen bg-black text-white">
       <section className="section-shell mx-auto max-w-7xl px-5 pb-24 pt-32 md:px-8 md:pb-32 md:pt-40">
@@ -206,6 +247,7 @@ export default function GraduationPage() {
           <div className="grid gap-5 md:grid-cols-2">
             {connectionPaths.map((path) => {
               const Icon = path.icon;
+              const trackedHref = addTrackingToHref(path.href, tracking);
 
               return (
                 <article
@@ -231,7 +273,7 @@ export default function GraduationPage() {
                   </p>
 
                   <Link
-                    href={path.href}
+                    href={trackedHref}
                     className="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200"
                   >
                     {path.cta}
