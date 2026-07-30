@@ -281,7 +281,7 @@ export default function SolutionsPage() {
                   .toLowerCase()
                   .replaceAll(" ", "-")
                   .replaceAll("&", "and")}
-                className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.025]"
+                className="scroll-mt-28 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.025]"
               >
                 <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
                   <div className="border-b border-white/10 p-7 md:p-9 lg:border-b-0 lg:border-r">

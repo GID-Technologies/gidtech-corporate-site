@@ -205,7 +205,11 @@ export default function ProductsPage() {
             return (
               <article
                 key={product.name}
-                className="glass rounded-[1.75rem] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25"
+                id={product.name
+                  .toLowerCase()
+                  .replaceAll(" ", "-")
+                  .replaceAll("&", "and")}
+                className="glass scroll-mt-28 rounded-[1.75rem] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25"
               >
                 <div className="flex flex-wrap items-start justify-between gap-5">
                   <div className="flex items-start gap-4">
