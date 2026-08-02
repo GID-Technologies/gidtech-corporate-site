@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import StatBetProofSequence from "./_components/StatBetProofSequence";
 import {
   ArrowLeft,
   ArrowRight,
@@ -43,12 +44,24 @@ const participationOptions = [
   "I want to follow the journey",
 ];
 
+function getSceneFragmentCount(
+  sceneId: PresentationSceneId,
+  mode: PresentationMode,
+) {
+  if (sceneId === "statbet-proof") {
+    return mode === "core" ? 3 : 6;
+  }
+
+  return 1;
+}
+
 export default function PresentationExperience({
   initialMode,
 }: PresentationExperienceProps) {
   const presentationRootRef = useRef<HTMLDivElement | null>(null);
 
   const [sceneIndex, setSceneIndex] = useState(0);
+  const [fragmentIndex, setFragmentIndex] = useState(0);
   const [sceneRevision, setSceneRevision] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mode, setMode] = useState<PresentationMode>(initialMode);
@@ -64,21 +77,57 @@ export default function PresentationExperience({
     );
 
     setSceneIndex(safeIndex);
+    setFragmentIndex(0);
     setSceneRevision((current) => current + 1);
     setMenuOpen(false);
   }, []);
 
   const nextScene = useCallback(() => {
-    setSceneIndex((current) => Math.min(current + 1, finalSceneIndex));
+    const currentScene = presentationScenes[sceneIndex];
+
+    const fragmentCount = getSceneFragmentCount(currentScene.id, mode);
+
+    if (fragmentIndex < fragmentCount - 1) {
+      setFragmentIndex((current) => current + 1);
+      setSceneRevision((current) => current + 1);
+      return;
+    }
+
+    if (sceneIndex >= finalSceneIndex) {
+      return;
+    }
+
+    setSceneIndex((current) => current + 1);
+    setFragmentIndex(0);
     setSceneRevision((current) => current + 1);
-  }, [finalSceneIndex]);
+  }, [finalSceneIndex, fragmentIndex, mode, sceneIndex]);
 
   const previousScene = useCallback(() => {
-    setSceneIndex((current) => Math.max(current - 1, 0));
+    if (fragmentIndex > 0) {
+      setFragmentIndex((current) => current - 1);
+      setSceneRevision((current) => current + 1);
+      return;
+    }
+
+    if (sceneIndex === 0) {
+      return;
+    }
+
+    const previousSceneIndex = sceneIndex - 1;
+    const previousSceneData = presentationScenes[previousSceneIndex];
+
+    const previousFragmentCount = getSceneFragmentCount(
+      previousSceneData.id,
+      mode,
+    );
+
+    setSceneIndex(previousSceneIndex);
+    setFragmentIndex(previousFragmentCount - 1);
     setSceneRevision((current) => current + 1);
-  }, []);
+  }, [fragmentIndex, mode, sceneIndex]);
 
   const restartScene = useCallback(() => {
+    setFragmentIndex(0);
     setSceneRevision((current) => current + 1);
   }, []);
 
@@ -93,6 +142,13 @@ export default function PresentationExperience({
       // Fullscreen may be blocked until the user interacts.
     }
   }, []);
+
+  //not sure position
+  useEffect(() => {
+    const fragmentCount = getSceneFragmentCount(scene.id, mode);
+
+    setFragmentIndex((current) => Math.min(current, fragmentCount - 1));
+  }, [mode, scene.id]);
 
   useEffect(() => {
     const previousBodyOverflow = document.body.style.overflow;
@@ -251,7 +307,7 @@ export default function PresentationExperience({
         aria-live="polite"
         className="presentation-enter relative z-10 flex h-full w-full items-center justify-center px-[clamp(1.5rem,5vw,6rem)] pb-24 pt-20"
       >
-        {renderScene(scene.id)}
+        {renderScene(scene.id, fragmentIndex, mode)}
       </main>
 
       <button
@@ -464,7 +520,11 @@ export default function PresentationExperience({
   );
 }
 
-function renderScene(sceneId: PresentationSceneId) {
+function renderScene(
+  sceneId: PresentationSceneId,
+  fragmentIndex: number,
+  mode: PresentationMode,
+) {
   switch (sceneId) {
     case "opening":
       return <OpeningScene />;
@@ -476,7 +536,7 @@ function renderScene(sceneId: PresentationSceneId) {
       return <GidModelScene />;
 
     case "statbet-proof":
-      return <StatBetScene />;
+      return <StatBetProofSequence activeStep={fragmentIndex} mode={mode} />;
 
     case "papertalk-proof":
       return <PaperTalkScene />;
@@ -645,47 +705,41 @@ function GidModelScene() {
 }
 
 function StatBetScene() {
-  const lifecycle = [
-    "Original Analysis",
-    "Completed Result",
-    "Outcome Review",
-    "Performance Tracker",
-  ];
-
-  return (
-    <section className="w-full max-w-7xl">
-      <SceneHeading
-        eyebrow="Proof 001 — StatBet"
-        title="From idea to live public product."
-        description="The strongest proof is the complete lifecycle: analysis made, match completed, outcome reviewed and performance recorded."
-      />
-
-      <div className="mt-12 grid gap-4 md:grid-cols-4">
-        {lifecycle.map((step, index) => (
-          <article
-            key={step}
-            className="relative overflow-hidden rounded-[1.75rem] border border-cyan-200/15 bg-[#07131a] p-6"
-          >
-            <span className="text-xs font-semibold text-cyan-200/40">
-              0{index + 1}
-            </span>
-
-            <div className="mt-12 h-24 rounded-2xl border border-white/10 bg-black/50" />
-
-            <p className="mt-6 text-lg font-semibold">{step}</p>
-
-            {index < lifecycle.length - 1 ? (
-              <ArrowRight className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 text-cyan-200/30 md:block" />
-            ) : null}
-          </article>
-        ))}
-      </div>
-
-      <p className="mt-8 text-center text-xl font-semibold text-neutral-300">
-        StatBet proves GID can identify, build, launch, operate and improve.
-      </p>
-    </section>
-  );
+  // const lifecycle = [
+  //   "Original Analysis",
+  //   "Completed Result",
+  //   "Outcome Review",
+  //   "Performance Tracker",
+  // ];
+  // return (
+  //   <section className="w-full max-w-7xl">
+  //     <SceneHeading
+  //       eyebrow="Proof 001 — StatBet"
+  //       title="From idea to live public product."
+  //       description="The strongest proof is the complete lifecycle: analysis made, match completed, outcome reviewed and performance recorded."
+  //     />
+  //     <div className="mt-12 grid gap-4 md:grid-cols-4">
+  //       {lifecycle.map((step, index) => (
+  //         <article
+  //           key={step}
+  //           className="relative overflow-hidden rounded-[1.75rem] border border-cyan-200/15 bg-[#07131a] p-6"
+  //         >
+  //           <span className="text-xs font-semibold text-cyan-200/40">
+  //             0{index + 1}
+  //           </span>
+  //           <div className="mt-12 h-24 rounded-2xl border border-white/10 bg-black/50" />
+  //           <p className="mt-6 text-lg font-semibold">{step}</p>
+  //           {index < lifecycle.length - 1 ? (
+  //             <ArrowRight className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 text-cyan-200/30 md:block" />
+  //           ) : null}
+  //         </article>
+  //       ))}
+  //     </div>
+  //     <p className="mt-8 text-center text-xl font-semibold text-neutral-300">
+  //       StatBet proves GID can identify, build, launch, operate and improve.
+  //     </p>
+  //   </section>
+  // );
 }
 
 function PaperTalkScene() {
