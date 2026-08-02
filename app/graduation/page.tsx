@@ -11,6 +11,9 @@ import {
   Eye,
   Handshake,
   House,
+  ExternalLink,
+  Mail,
+  Sparkles,
   Network,
   ShieldCheck,
   Users,
@@ -162,6 +165,27 @@ const reasonsToConnect = [
   },
 ];
 
+const founders = [
+  {
+    name: "Ashaolu David Ismaila",
+    initials: "AD",
+    title: "Co-Founder — Product & Company Direction",
+    description:
+      "David shapes GID Technologies’ product direction and company strategy, leading the formation and execution of ideas across StatBet, PaperTalk, and the wider product roadmap.",
+    strength: "Ideas and execution of ideas",
+    linkedin: "",
+  },
+  {
+    name: "Gabriel Godwin Enemona",
+    initials: "GE",
+    title: "Co-Founder — Business Operations & Growth",
+    description:
+      "Gabriel strengthens GID Technologies through idea refinement, operational coordination, visibility direction, and growth activity, helping turn company plans into organised execution.",
+    strength: "Idea refinement and operational management",
+    linkedin: "https://www.linkedin.com/in/goddywin10/",
+  },
+];
+
 export default async function GraduationPage({
   searchParams,
 }: {
@@ -178,6 +202,10 @@ export default async function GraduationPage({
   const statBetCaseStudyHref = addTrackingToHref("/statbet", tracking);
 
   const productRoadmapHref = addTrackingToHref("/products", tracking);
+  const founderContactHref = addTrackingToHref(
+    "/contact?service=partnership#contact-form",
+    tracking,
+  );
   return (
     <main className="min-h-screen bg-black text-white">
       <section className="section-shell mx-auto max-w-7xl px-5 pb-24 pt-32 md:px-8 md:pb-32 md:pt-40">
@@ -187,7 +215,6 @@ export default async function GraduationPage({
         >
           ← Visit GID Technologies
         </Link>
-
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.35em] text-neutral-500">
@@ -252,9 +279,16 @@ export default async function GraduationPage({
                 );
               })}
             </div>
+
+            <a
+              href="#founders"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-neutral-300 transition hover:text-white"
+            >
+              Meet the people behind GIDTech
+              <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
         </div>
-
         <section className="mt-24">
           <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.025]">
             <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
@@ -355,7 +389,6 @@ export default async function GraduationPage({
             </div>
           </div>
         </section>
-
         <section id="connection-paths" className="mt-24 scroll-mt-28">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500">
@@ -412,7 +445,109 @@ export default async function GraduationPage({
             })}
           </div>
         </section>
+        //Founders Section
+        <section id="founders" className="mt-24 scroll-mt-28">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500">
+              Meet the builders
+            </p>
 
+            <h2 className="text-balance text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
+              The people shaping GID Technologies.
+            </h2>
+
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-neutral-400 md:text-lg">
+              GID Technologies is being built through shared leadership across
+              product direction, company strategy, operations, visibility,
+              growth, and execution.
+            </p>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-2">
+            {founders.map((founder) => (
+              <article
+                key={founder.name}
+                className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.025] p-7 md:p-9"
+              >
+                <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-white/[0.035] blur-3xl" />
+
+                <div className="relative">
+                  <div className="flex flex-wrap items-start justify-between gap-5">
+                    <div className="flex items-center gap-5">
+                      <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.5rem] border border-white/15 bg-white/[0.06] text-2xl font-semibold tracking-[-0.04em] text-white">
+                        {founder.initials}
+                      </div>
+
+                      <div>
+                        <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
+                          Co-Founder
+                        </span>
+
+                        <h3 className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-white">
+                          {founder.name}
+                        </h3>
+                      </div>
+                    </div>
+
+                    <Sparkles className="h-5 w-5 text-neutral-700" />
+                  </div>
+
+                  <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
+                    {founder.title}
+                  </p>
+
+                  <p className="mt-5 leading-8 text-neutral-400">
+                    {founder.description}
+                  </p>
+
+                  <div className="mt-7 rounded-2xl border border-white/10 bg-black/50 p-5">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-neutral-600">
+                      Core contribution
+                    </p>
+
+                    <p className="mt-3 text-sm font-semibold leading-6 text-neutral-200">
+                      {founder.strength}
+                    </p>
+                  </div>
+
+                  <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                    <Link
+                      href={founderContactHref}
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200"
+                    >
+                      <Mail className="h-4 w-4" />
+                      Contact Through GIDTech
+                    </Link>
+
+                    {founder.linkedin ? (
+                      <a
+                        href={founder.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                        View LinkedIn
+                      </a>
+                    ) : (
+                      <span className="inline-flex items-center justify-center rounded-full border border-white/10 px-5 py-3 text-sm text-neutral-600">
+                        LinkedIn profile coming soon
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-white/[0.025] p-6 text-center">
+            <p className="mx-auto max-w-3xl text-sm leading-7 text-neutral-500">
+              Founder roles describe the areas each person currently leads
+              within GID Technologies. Responsibilities may continue evolving as
+              the company, team, and product portfolio grow.
+            </p>
+          </div>
+        </section>
         <section className="mt-24 rounded-[2rem] border border-white/10 bg-white/[0.025] p-8 md:p-10">
           <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
             <ShieldCheck className="h-6 w-6 text-white" />
@@ -433,7 +568,6 @@ export default async function GraduationPage({
             partnership, contributor, product-acceptance, or payment agreement.
           </p>
         </section>
-
         <section className="mt-24 overflow-hidden rounded-[2rem] border border-white/10 bg-white p-8 text-center text-black md:p-12">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
             Continue the conversation

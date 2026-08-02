@@ -18,7 +18,6 @@ type NavigationGroup = {
   label: string;
   href: string;
   overviewLabel: string;
-  panelPosition: string;
   items: NavigationItem[];
 };
 
@@ -28,7 +27,6 @@ const navigationGroups: NavigationGroup[] = [
     label: "Solutions",
     href: "/solutions",
     overviewLabel: "View All Solutions",
-    panelPosition: "left-0",
     items: [
       {
         label: "Business Websites",
@@ -67,7 +65,6 @@ const navigationGroups: NavigationGroup[] = [
     label: "Products",
     href: "/products",
     overviewLabel: "View Product Roadmap",
-    panelPosition: "left-1/2 -translate-x-1/2",
     items: [
       {
         label: "StatBet",
@@ -104,7 +101,6 @@ const navigationGroups: NavigationGroup[] = [
     label: "Company",
     href: "/about",
     overviewLabel: "About GID Technologies",
-    panelPosition: "right-0",
     items: [
       {
         label: "About GID Technologies",
@@ -138,6 +134,9 @@ const navigationGroups: NavigationGroup[] = [
 export default function SiteHeader() {
   const pathname = usePathname();
   const desktopNavigationRef = useRef<HTMLElement | null>(null);
+  const desktopCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopGroup, setDesktopGroup] = useState<string | null>(null);
@@ -169,26 +168,6 @@ export default function SiteHeader() {
         setMobileOpen(false);
         setMobileGroup(null);
       }
-
-      useEffect(() => {
-        function handlePointerDown(event: PointerEvent) {
-          const target = event.target;
-
-          if (!(target instanceof Node)) {
-            return;
-          }
-
-          if (!desktopNavigationRef.current?.contains(target)) {
-            setDesktopGroup(null);
-          }
-        }
-
-        document.addEventListener("pointerdown", handlePointerDown);
-
-        return () => {
-          document.removeEventListener("pointerdown", handlePointerDown);
-        };
-      }, []);
     }
 
     window.addEventListener("keydown", handleEscape);
@@ -197,6 +176,50 @@ export default function SiteHeader() {
       window.removeEventListener("keydown", handleEscape);
     };
   }, []);
+
+  useEffect(() => {
+    function handlePointerDown(event: PointerEvent) {
+      const target = event.target;
+
+      if (!(target instanceof Node)) {
+        return;
+      }
+
+      if (!desktopNavigationRef.current?.contains(target)) {
+        setDesktopGroup(null);
+      }
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+
+      if (desktopCloseTimerRef.current) {
+        clearTimeout(desktopCloseTimerRef.current);
+      }
+    };
+  }, []);
+
+  function cancelDesktopClose() {
+    if (desktopCloseTimerRef.current) {
+      clearTimeout(desktopCloseTimerRef.current);
+      desktopCloseTimerRef.current = null;
+    }
+  }
+
+  function openDesktopGroup(groupId: string) {
+    cancelDesktopClose();
+    setDesktopGroup(groupId);
+  }
+
+  function scheduleDesktopClose() {
+    cancelDesktopClose();
+
+    desktopCloseTimerRef.current = setTimeout(() => {
+      setDesktopGroup(null);
+    }, 140);
+  }
 
   function cleanHref(href: string) {
     return href.split("#")[0].split("?")[0];
@@ -214,7 +237,10 @@ export default function SiteHeader() {
 
   function isGroupActive(group: NavigationGroup) {
     return (
-      isActive(group.href) || group.items.some((item) => isActive(item.href))
+      isActive(group.href) ||
+      group.items.some(
+        (item) => cleanHref(item.href) !== "/statbet" && isActive(item.href),
+      )
     );
   }
 
@@ -222,6 +248,9 @@ export default function SiteHeader() {
     setMobileOpen(false);
     setMobileGroup(null);
   }
+
+  const activeDesktopGroup =
+    navigationGroups.find((group) => group.id === desktopGroup) ?? null;
 
   return (
     <>
@@ -258,7 +287,9 @@ export default function SiteHeader() {
           <nav
             ref={desktopNavigationRef}
             aria-label="Primary navigation"
-            className="hidden items-center gap-0.5 rounded-full border border-white/10 bg-white/[0.035] p-1 lg:flex"
+            onMouseEnter={cancelDesktopClose}
+            onMouseLeave={scheduleDesktopClose}
+            className="relative hidden items-center gap-0.5 rounded-full border border-white/10 bg-white/[0.035] p-1 lg:flex"
           >
             <Link
               href="/"
@@ -274,18 +305,22 @@ export default function SiteHeader() {
             {navigationGroups.map((group) => {
               const expanded = desktopGroup === group.id;
               const active = isGroupActive(group);
-
               return (
-                <div key={group.id} className="relative">
+                <div
+                  key={group.id}
+                  onMouseEnter={() => openDesktopGroup(group.id)}
+                >
                   <button
                     type="button"
                     aria-haspopup="true"
                     aria-expanded={expanded}
-                    onClick={() =>
+                    onClick={() => {
+                      cancelDesktopClose();
+
                       setDesktopGroup((current) =>
                         current === group.id ? null : group.id,
-                      )
-                    }
+                      );
+                    }}
                     className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm transition ${
                       active
                         ? "bg-white text-black"
@@ -300,50 +335,6 @@ export default function SiteHeader() {
                       }`}
                     />
                   </button>
-
-                  {expanded ? (
-                    <div
-                      className={`absolute top-full z-50 w-[680px] pt-3 ${group.panelPosition}`}
-                    >
-                      <div className="overflow-hidden rounded-[1.75rem] border border-white/15 bg-[#050505] p-3 shadow-[0_30px_100px_rgba(0,0,0,0.98)]">
-                        <div className="grid grid-cols-2 gap-2">
-                          {group.items.map((item) => (
-                            <Link
-                              key={`${group.id}-${item.label}`}
-                              href={item.href}
-                              onClick={() => setDesktopGroup(null)}
-                              className="group rounded-2xl border border-transparent p-4 transition hover:border-white/10 hover:bg-white/[0.055]"
-                            >
-                              <div className="flex items-start justify-between gap-3">
-                                <p className="text-sm font-semibold text-white">
-                                  {item.label}
-                                </p>
-
-                                {item.meta ? (
-                                  <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.05] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-neutral-500">
-                                    {item.meta}
-                                  </span>
-                                ) : null}
-                              </div>
-
-                              <p className="mt-3 text-xs leading-5 text-neutral-500 transition group-hover:text-neutral-400">
-                                {item.description}
-                              </p>
-                            </Link>
-                          ))}
-                        </div>
-
-                        <Link
-                          href={group.href}
-                          onClick={() => setDesktopGroup(null)}
-                          className="mt-3 flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
-                        >
-                          {group.overviewLabel}
-                          <ArrowRight className="h-4 w-4" />
-                        </Link>
-                      </div>
-                    </div>
-                  ) : null}
                 </div>
               );
             })}
@@ -358,6 +349,52 @@ export default function SiteHeader() {
             >
               StatBet
             </Link>
+
+            {activeDesktopGroup ? (
+              <div
+                onMouseEnter={cancelDesktopClose}
+                onMouseLeave={scheduleDesktopClose}
+                className="absolute left-1/2 top-full z-50 w-[680px] max-w-[calc(100vw-2rem)] -translate-x-1/2 pt-3"
+              >
+                <div className="overflow-hidden rounded-[1.75rem] border border-white/15 bg-[#050505] p-3 shadow-[0_30px_100px_rgba(0,0,0,0.98)]">
+                  <div className="grid grid-cols-2 gap-2">
+                    {activeDesktopGroup.items.map((item) => (
+                      <Link
+                        key={`${activeDesktopGroup.id}-${item.label}`}
+                        href={item.href}
+                        onClick={() => setDesktopGroup(null)}
+                        className="group rounded-2xl border border-transparent p-4 transition hover:border-white/10 hover:bg-white/[0.055]"
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <p className="text-sm font-semibold text-white">
+                            {item.label}
+                          </p>
+
+                          {item.meta ? (
+                            <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.05] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-neutral-500">
+                              {item.meta}
+                            </span>
+                          ) : null}
+                        </div>
+
+                        <p className="mt-3 text-xs leading-5 text-neutral-500 transition group-hover:text-neutral-400">
+                          {item.description}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+
+                  <Link
+                    href={activeDesktopGroup.href}
+                    onClick={() => setDesktopGroup(null)}
+                    className="mt-3 flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+                  >
+                    {activeDesktopGroup.overviewLabel}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            ) : null}
           </nav>
 
           <div className="hidden lg:flex">

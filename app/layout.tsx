@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
-import SiteHeader from "./_components/SiteHeader";
-import SiteFooter from "./_components/SiteFooter";
+
+import SiteChrome from "./_components/SiteChrome";
 
 const siteUrl = "https://www.gidtechnologies.com";
 
@@ -77,9 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
