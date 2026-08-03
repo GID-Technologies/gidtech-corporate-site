@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import StatBetProofSequence from "./_components/StatBetProofSequence";
+import PaperTalkProofSequence from "./_components/PaperTalkProofSequence";
+import GidPlatformCoreScene from "./_components/GidPlatformCoreScene";
+import PlatformRoadmapScene from "./_components/PlatformRoadmapScene";
 import {
   ArrowLeft,
   ArrowRight,
@@ -32,7 +35,9 @@ const shortcutSceneIndexes: Record<string, number> = {
   "5": 5,
   "6": 6,
   "7": 7,
-  "0": 7,
+  "8": 8,
+  "9": 9,
+  "0": 9,
 };
 
 const participationOptions = [
@@ -50,6 +55,10 @@ function getSceneFragmentCount(
 ) {
   if (sceneId === "statbet-proof") {
     return mode === "core" ? 3 : 6;
+  }
+
+  if (sceneId === "papertalk-proof") {
+    return mode === "core" ? 3 : 4;
   }
 
   return 1;
@@ -538,8 +547,14 @@ function renderScene(
     case "statbet-proof":
       return <StatBetProofSequence activeStep={fragmentIndex} mode={mode} />;
 
+    case "gid-platform-core":
+      return <GidPlatformCoreScene />;
+
+    case "platform-roadmap":
+      return <PlatformRoadmapScene />;
+
     case "papertalk-proof":
-      return <PaperTalkScene />;
+      return <PaperTalkProofSequence activeStep={fragmentIndex} mode={mode} />;
 
     case "company-position":
       return <CompanyPositionScene />;
@@ -603,8 +618,8 @@ function OpeningScene() {
       </h1>
 
       <p className="mt-8 max-w-4xl text-[clamp(1rem,1.55vw,1.5rem)] leading-8 text-neutral-400">
-        An early-stage startup building practical digital solutions and
-        proof-led products.
+        An early-stage technology startup building practical digital solutions,
+        reusable infrastructure and proof-led products.
       </p>
     </section>
   );
@@ -677,12 +692,12 @@ function GidModelScene() {
           </p>
 
           <h2 className="mt-5 text-4xl font-semibold tracking-[-0.04em]">
-            GID-Owned Products
+            GID-Owned Products and Infrastructure
           </h2>
 
           <p className="mt-5 text-lg leading-8 text-neutral-400">
-            StatBet, PaperTalk and future platforms validated before full
-            development.
+            StatBet, GID Platform Core, PaperTalk and future tracking and
+            logistics services.
           </p>
         </article>
       </div>
@@ -754,7 +769,7 @@ function PaperTalkScene() {
     <section className="grid w-full max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
       <div>
         <SceneHeading
-          eyebrow="Proof 002 — PaperTalk"
+          eyebrow="Proof 003 — PaperTalk"
           title="Printed information, made audible."
           description="A working software prototype demonstrating that GID’s next product has moved beyond an idea."
         />
@@ -787,51 +802,91 @@ function PaperTalkScene() {
 function CompanyPositionScene() {
   const statuses = [
     {
-      label: "Live",
+      level: "Live",
       title: "StatBet",
-      emphasis: true,
+      description: "Publicly deployed and actively operated.",
+      prominence: "primary",
     },
     {
-      label: "Working Prototype · Active Development",
+      level: "Active Backend Development",
+      title: "GID Platform Core",
+      description:
+        "Backend architecture, models, business logic and reusable APIs under construction.",
+      prominence: "primary",
+    },
+    {
+      level: "Working Prototype · Active Development",
       title: "PaperTalk",
-      emphasis: true,
+      description:
+        "Accessibility-focused software progressing through functional development.",
+      prominence: "primary",
     },
     {
-      label: "Concept Validation",
-      title: "Mechanic Connection · Property Connection",
-      emphasis: false,
-    },
-    {
-      label: "Available Now",
+      level: "Available Now",
       title: "GID Business Solutions",
-      emphasis: false,
+      description:
+        "Websites, visibility systems, custom platforms, automation and digital support.",
+      prominence: "secondary",
+    },
+    {
+      level: "Roadmap",
+      title: "GID Track Ecosystem",
+      description:
+        "Tracking, notifications, delivery intelligence and future logistics integrations.",
+      prominence: "secondary",
+    },
+    {
+      level: "Long-Term Validation",
+      title: "Mechanic Connection · Property Connection · GID Car Tracker",
+      description:
+        "Future directions that remain under research and validation.",
+      prominence: "quiet",
     },
   ];
 
   return (
     <section className="w-full max-w-7xl">
       <SceneHeading
-        eyebrow="Where we are now"
-        title="Ambition stays high. Public positioning stays honest."
+        eyebrow="Where GID stands today"
+        title="Early—but not imaginary."
+        description="Every system is presented according to its real stage: live, actively developing, available, on the roadmap, or still being validated."
       />
 
-      <div className="mt-12 grid gap-4 md:grid-cols-2">
+      <div className="mt-10 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {statuses.map((status) => (
           <article
-            key={status.label}
-            className={`rounded-[2rem] border p-7 ${
-              status.emphasis
-                ? "border-cyan-200/20 bg-cyan-200/[0.035]"
-                : "border-white/10 bg-white/[0.025]"
+            key={status.level}
+            className={`rounded-[1.75rem] border p-6 ${
+              status.prominence === "primary"
+                ? "border-cyan-200/20 bg-cyan-200/[0.04]"
+                : status.prominence === "secondary"
+                  ? "border-white/10 bg-white/[0.025]"
+                  : "border-white/[0.07] bg-black/25"
             }`}
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">
-              {status.label}
+            <p
+              className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${
+                status.prominence === "primary"
+                  ? "text-cyan-100/50"
+                  : "text-neutral-600"
+              }`}
+            >
+              {status.level}
             </p>
 
-            <h2 className="mt-7 text-4xl font-semibold tracking-[-0.04em]">
+            <h2
+              className={`mt-5 font-semibold tracking-[-0.04em] ${
+                status.prominence === "primary"
+                  ? "text-3xl text-white"
+                  : "text-2xl text-neutral-200"
+              }`}
+            >
               {status.title}
             </h2>
+
+            <p className="mt-4 text-sm leading-6 text-neutral-500">
+              {status.description}
+            </p>
           </article>
         ))}
       </div>
@@ -844,7 +899,7 @@ function PulseScene() {
     <section className="grid w-full max-w-7xl gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
       <div>
         <SceneHeading
-          eyebrow="Proof 003 — GID Pulse"
+          eyebrow="Proof 004 — GID Pulse"
           title="Where do you fit?"
           description="GID converts the room’s attention into structured opportunities and useful follow-up."
         />

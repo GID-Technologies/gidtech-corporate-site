@@ -5,7 +5,9 @@ export type PresentationSceneId =
   | "problem"
   | "gid-model"
   | "statbet-proof"
+  | "gid-platform-core"
   | "papertalk-proof"
+  | "platform-roadmap"
   | "company-position"
   | "gid-pulse"
   | "closing";
@@ -47,32 +49,47 @@ export const presentationScenes: PresentationScene[] = [
     shortcut: "3",
   },
   {
-    id: "papertalk-proof",
+    id: "gid-platform-core",
     number: "05",
     label: "Proof 002",
-    title: "PaperTalk — printed information, made audible.",
+    title:
+      "GID Platform Core — reusable business infrastructure under active development.",
     shortcut: "4",
   },
   {
-    id: "company-position",
+    id: "papertalk-proof",
     number: "06",
-    label: "Company Position",
-    title: "Where GID Technologies stands now.",
+    label: "Proof 003",
+    title: "PaperTalk — printed information, made audible.",
     shortcut: "5",
   },
   {
-    id: "gid-pulse",
+    id: "platform-roadmap",
     number: "07",
-    label: "Proof 003",
-    title: "GID Pulse — where do you fit?",
+    label: "Platform Roadmap",
+    title: "Build the core once. Extend it carefully.",
     shortcut: "6",
   },
   {
-    id: "closing",
+    id: "company-position",
     number: "08",
+    label: "Company Position",
+    title: "Where GID Technologies stands today.",
+    shortcut: "7",
+  },
+  {
+    id: "gid-pulse",
+    number: "09",
+    label: "Proof 004",
+    title: "GID Pulse — where do you fit?",
+    shortcut: "8",
+  },
+  {
+    id: "closing",
+    number: "10",
     label: "Closing",
     title: "A startup that has started proving itself.",
-    shortcut: "7",
+    shortcut: "9",
   },
 ];
 
@@ -88,17 +105,18 @@ export const presentationModeDetails: Record<
     label: "Core",
     timing: "5 minutes",
     description:
-      "The complete company story with the shortest proof sequences.",
+      "The complete company story with compressed product and engineering proof.",
   },
   recommended: {
     label: "Recommended",
     timing: "8–10 minutes",
     description:
-      "The rehearsed route with controlled StatBet and PaperTalk demonstrations.",
+      "The rehearsed route with controlled StatBet, GID Platform and PaperTalk proof.",
   },
   extended: {
     label: "Extended",
     timing: "12–15 minutes",
-    description: "The main route with selected deeper proof branches.",
+    description:
+      "The complete route with selected technical and product branches.",
   },
 };
