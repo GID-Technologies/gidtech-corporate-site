@@ -9,16 +9,18 @@ const serviceLabels: Record<string, string> = {
   "custom-platform": "Custom platform or business tool",
   automation: "Automation or intelligent workflow",
   "digital-care": "Ongoing digital care and maintenance",
-  "build-with-gid": "Build With GID opportunity",
+  "build-with-gid": "GID connection or contribution opportunity",
   partnership: "Partnership or strategic support",
   other: "Other enquiry",
 };
 
 const pathLabels: Record<string, string> = {
-  builder: "Build products with GID",
+  builder: "Contribute a skill or build with GID",
   "business-partner": "Business or referral partner",
-  "strategic-support": "Sponsorship or strategic support",
-  "early-user": "Early user or pilot business",
+  "strategic-support": "Sponsorship, mentorship, or strategic support",
+  "early-user": "Product tester or early user",
+  introduction: "Useful introduction or connection",
+  "follow-journey": "Follow GID Technologies’ development journey",
 };
 
 function getString(value: unknown) {
@@ -93,7 +95,7 @@ export async function POST(request: Request) {
 
     if (service === "build-with-gid" && !pathLabels[path]) {
       return Response.json(
-        { error: "Please select a valid Build With GID path." },
+        { error: "Please select a valid connection path." },
         { status: 400 },
       );
     }
@@ -135,7 +137,7 @@ export async function POST(request: Request) {
       ["Email", email],
       ["Phone or WhatsApp", phone || "Not provided"],
       ["Enquiry type", serviceLabel],
-      ["Opportunity path", pathLabel],
+      ["Connection path", pathLabel],
       ["Preferred contact method", contactMethod || "Not provided"],
       ["Business or social link", businessLink || "Not provided"],
       ["Source page", source || "Not provided"],
