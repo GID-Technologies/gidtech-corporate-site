@@ -466,7 +466,8 @@ export default async function GraduationPage({
             })}
           </div>
         </section>
-        //Founders Section
+
+        {/* //Founders Section */}
         <section id="founders" className="mt-24 scroll-mt-28">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500">
