@@ -48,7 +48,7 @@ const serviceOptions = [
 const opportunityPaths = [
   {
     value: "builder",
-    label: "Build products with GID",
+    label: "Contribute a skill or build with GID",
   },
   {
     value: "business-partner",
@@ -56,11 +56,19 @@ const opportunityPaths = [
   },
   {
     value: "strategic-support",
-    label: "Explore sponsorship or strategic support",
+    label: "Support GID through sponsorship, mentorship, or resources",
   },
   {
     value: "early-user",
-    label: "Become an early user or pilot business",
+    label: "Test a product or become an early user",
+  },
+  {
+    value: "introduction",
+    label: "Make a useful introduction",
+  },
+  {
+    value: "follow-journey",
+    label: "Follow GID Technologies’ development journey",
   },
 ];
 
@@ -392,7 +400,7 @@ export default function ContactForm() {
 
         {service === "build-with-gid" ? (
           <label className="text-sm font-medium text-neutral-300 md:col-span-2">
-            Build With GID path
+            How would you like to connect?
             <select
               name="path"
               required
@@ -401,7 +409,7 @@ export default function ContactForm() {
               className={inputClassName}
             >
               <option value="" className="bg-black">
-                Select an opportunity path
+                Select a connection path
               </option>
 
               {opportunityPaths.map((option) => (

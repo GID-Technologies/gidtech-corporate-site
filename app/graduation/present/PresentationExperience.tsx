@@ -41,12 +41,30 @@ const shortcutSceneIndexes: Record<string, number> = {
 };
 
 const participationOptions = [
-  "I need a digital solution",
-  "I want to support GID",
-  "I can contribute a skill",
-  "I can make an introduction",
-  "I want to test a product",
-  "I want to follow the journey",
+  {
+    label: "I need a digital solution",
+    category: "Business enquiry",
+  },
+  {
+    label: "I want to support GID",
+    category: "Strategic support",
+  },
+  {
+    label: "I can contribute a skill",
+    category: "Contributor interest",
+  },
+  {
+    label: "I can make an introduction",
+    category: "Useful connection",
+  },
+  {
+    label: "I want to test a product",
+    category: "Product testing",
+  },
+  {
+    label: "I want to follow the journey",
+    category: "Future updates",
+  },
 ];
 
 function getSceneFragmentCount(
@@ -895,31 +913,70 @@ function CompanyPositionScene() {
 }
 
 function PulseScene() {
+  const systemFlow = [
+    "Choose a path",
+    "Record the event source",
+    "Categorise the opportunity",
+    "Route the follow-up",
+  ];
+
   return (
-    <section className="grid w-full max-w-7xl gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+    <section className="grid w-full max-w-7xl gap-9 lg:grid-cols-[1.18fr_0.82fr] lg:items-center">
       <div>
         <SceneHeading
           eyebrow="Proof 004 — GID Pulse"
-          title="Where do you fit?"
-          description="GID converts the room’s attention into structured opportunities and useful follow-up."
+          title="Scan. Choose. Connect."
+          description="GID Pulse turns attention from this room into structured opportunities and useful follow-up."
         />
 
-        <div className="mt-10 grid gap-3 sm:grid-cols-2">
-          {participationOptions.map((option) => (
-            <div
-              key={option}
-              className="rounded-2xl border border-white/10 bg-white/[0.025] px-5 py-4 text-sm font-semibold text-neutral-300"
+        <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          {participationOptions.map((option, index) => (
+            <article
+              key={option.label}
+              className="rounded-[1.35rem] border border-white/10 bg-white/[0.025] px-5 py-4"
             >
-              {option}
+              <div className="flex items-start gap-4">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-black/50 text-[10px] font-semibold text-neutral-600">
+                  0{index + 1}
+                </span>
+
+                <div>
+                  <p className="text-sm font-semibold text-neutral-200">
+                    {option.label}
+                  </p>
+
+                  <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+                    {option.category}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-5 flex flex-wrap items-center gap-2 rounded-[1.5rem] border border-white/10 bg-black/40 p-4">
+          {systemFlow.map((step, index) => (
+            <div key={step} className="flex items-center gap-2">
+              <span className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
+                {step}
+              </span>
+
+              {index < systemFlow.length - 1 ? (
+                <ArrowRight className="h-3.5 w-3.5 text-neutral-700" />
+              ) : null}
             </div>
           ))}
         </div>
       </div>
 
-      <div className="flex flex-col items-center rounded-[2rem] border border-white/10 bg-white p-8 text-center text-black">
+      <div className="flex flex-col items-center rounded-[2rem] border border-white/10 bg-white p-7 text-center text-black shadow-[0_35px_120px_rgba(0,0,0,0.7)]">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">
-          Scan to connect
+          GID Pulse
         </p>
+
+        <h2 className="mt-3 text-2xl font-semibold tracking-[-0.04em]">
+          Where do you fit?
+        </h2>
 
         <Image
           src="/qr/graduation-qr.png"
@@ -927,11 +984,16 @@ function PulseScene() {
           width={420}
           height={420}
           priority
-          className="mt-5 aspect-square w-full max-w-[360px]"
+          className="mt-5 aspect-square w-full max-w-[330px]"
         />
 
-        <p className="mt-5 text-xl font-semibold">
+        <p className="mt-5 text-lg font-semibold">
           gidtechnologies.com/graduation
+        </p>
+
+        <p className="mt-3 max-w-sm text-xs leading-5 text-neutral-500">
+          Personal names and private submission details are never projected
+          publicly.
         </p>
       </div>
     </section>

@@ -10,7 +10,6 @@ import {
   Code2,
   Eye,
   Handshake,
-  House,
   ExternalLink,
   Mail,
   Sparkles,
@@ -36,49 +35,58 @@ type ConnectionPath = {
 
 const connectionPaths: ConnectionPath[] = [
   {
-    title: "Hire GID",
+    title: "I Need a Digital Solution",
     label: "Businesses & Organizations",
     description:
-      "Discuss a business website, digital showroom, visibility system, custom platform, automation workflow, or ongoing digital-support need.",
+      "Discuss a website, digital showroom, visibility system, custom platform, automation workflow, or ongoing digital-support need.",
     href: "/contact?service=consultation#contact-form",
-    cta: "Discuss a Business Project",
+    cta: "Discuss a Business Need",
     icon: BriefcaseBusiness,
   },
   {
-    title: "Build With GID",
-    label: "Builders & Contributors",
-    description:
-      "Explore ways to contribute through development, design, research, marketing, product thinking, operations, testing, or other practical skills.",
-    href: "/build-with-gid",
-    cta: "Explore Build With GID",
-    icon: Code2,
-  },
-  {
-    title: "Partner With GID",
-    label: "Companies & Institutions",
-    description:
-      "Start a conversation around technology, distribution, media, data, product testing, institutional access, referrals, or shared opportunities.",
-    href: "/contact?service=partnership#contact-form",
-    cta: "Discuss a Partnership",
-    icon: Handshake,
-  },
-  {
-    title: "Support GID",
+    title: "I Want to Support GID",
     label: "Sponsors & Strategic Supporters",
     description:
-      "Explore sponsorship, investment conversations, mentorship, strategic guidance, infrastructure support, or useful introductions.",
+      "Explore sponsorship, mentorship, strategic guidance, infrastructure support, useful resources, or other practical forms of support.",
     href: "/contact?service=build-with-gid&path=strategic-support#contact-form",
     cta: "Explore Support",
     icon: ShieldCheck,
   },
   {
-    title: "Explore the Products",
-    label: "Products & Early Users",
+    title: "I Can Contribute a Skill",
+    label: "Builders & Contributors",
     description:
-      "View StatBet, follow PaperTalk’s development, understand the mechanic and property concepts, and explore future testing opportunities.",
-    href: "/products",
-    cta: "View the Product Roadmap",
+      "Contribute through development, design, research, product thinking, operations, marketing, testing, documentation, or another useful skill.",
+    href: "/contact?service=build-with-gid&path=builder#contact-form",
+    cta: "Contribute a Skill",
+    icon: Code2,
+  },
+  {
+    title: "I Can Make an Introduction",
+    label: "Connectors & Partners",
+    description:
+      "Introduce GID Technologies to a business, institution, technical expert, sponsor, mentor, distribution partner, or useful opportunity.",
+    href: "/contact?service=build-with-gid&path=introduction#contact-form",
+    cta: "Offer an Introduction",
+    icon: Handshake,
+  },
+  {
+    title: "I Want to Test a Product",
+    label: "Early Users & Pilot Participants",
+    description:
+      "Express interest in testing PaperTalk, following GID Platform development, joining future pilots, or providing structured product feedback.",
+    href: "/contact?service=build-with-gid&path=early-user#contact-form",
+    cta: "Join Product Testing",
     icon: Eye,
+  },
+  {
+    title: "I Want to Follow the Journey",
+    label: "Updates & Future Opportunities",
+    description:
+      "Stay connected to GID Technologies as StatBet operates, GID Platform Core develops, PaperTalk progresses, and future systems take shape.",
+    href: "/contact?service=build-with-gid&path=follow-journey#contact-form",
+    cta: "Follow GID’s Development",
+    icon: Users,
   },
 ];
 
@@ -87,29 +95,36 @@ const presentationProducts = [
     name: "StatBet",
     status: "Live",
     description:
-      "GID Technologies’ live football-intelligence product and strongest public proof of execution.",
+      "GID Technologies’ publicly deployed football-intelligence product and strongest proof of live product execution.",
     icon: BarChart3,
   },
   {
-    name: "PaperTalk",
-    status: "Active Development",
+    name: "GID Platform Core",
+    status: "Active Backend Development",
     description:
-      "An accessibility-focused product being developed to interpret printed material and make it available through audio.",
+      "A modular business-infrastructure backend being developed around customers, products, inventory, orders, invoices, and future operational services.",
+    icon: Network,
+  },
+  {
+    name: "PaperTalk",
+    status: "Working Software Prototype",
+    description:
+      "An accessibility-focused product in active development that explores how printed and digital information can become readable and audible through software.",
     icon: Accessibility,
   },
   {
-    name: "Mechanic Connection",
-    status: "Concept Validation",
+    name: "GID Track Ecosystem",
+    status: "Roadmap",
     description:
-      "A connection concept being researched before its users, trust systems, and operating model are locked.",
+      "A future platform layer covering shipment tracking, operational notifications, delivery intelligence, and external logistics integrations.",
     icon: Car,
   },
   {
-    name: "Property Connection",
-    status: "Concept Validation",
+    name: "Exploring Further",
+    status: "Long-Term Validation",
     description:
-      "A housing and property-discovery concept still undergoing research and validation before development.",
-    icon: House,
+      "Mechanic Connection, Property Connection, and GID Car Tracker remain research and validation directions rather than current active builds.",
+    icon: Eye,
   },
 ];
 
@@ -302,15 +317,17 @@ export default async function GraduationPage({
                 </h2>
 
                 <p className="mt-6 text-lg leading-8 text-neutral-400">
-                  GID Technologies is a proof-led technology company building
-                  practical business solutions and its own digital products.
+                  GID Technologies is an early-stage technology company building
+                  practical business solutions, reusable infrastructure, and
+                  proof-led digital products.
                 </p>
 
                 <p className="mt-5 leading-8 text-neutral-400">
                   One side of the company helps businesses solve practical
                   digital, visibility, communication, and workflow problems. The
-                  other develops GID-owned products around problems we believe
-                  deserve serious, scalable solutions.
+                  other develops GID-owned products and infrastructure—from
+                  StatBet and GID Platform Core to PaperTalk and future tracking
+                  and logistics services.
                 </p>
 
                 <div className="mt-8 rounded-2xl border border-white/10 bg-black/50 p-5">
@@ -363,7 +380,11 @@ export default async function GraduationPage({
                   return (
                     <article
                       key={product.name}
-                      className="rounded-[1.5rem] border border-white/10 bg-black/50 p-6"
+                      className={`rounded-[1.5rem] border border-white/10 bg-black/50 p-6 ${
+                        product.name === "Exploring Further"
+                          ? "md:col-span-2"
+                          : ""
+                      }`}
                     >
                       <div className="flex items-start justify-between gap-4">
                         <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
@@ -392,16 +413,16 @@ export default async function GraduationPage({
         <section id="connection-paths" className="mt-24 scroll-mt-28">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500">
-              Connection paths
+              GID Pulse
             </p>
 
             <h2 className="text-balance text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
-              Hire. Build. Partner. Support. Explore.
+              Where do you fit?
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-neutral-400 md:text-lg">
-              Choose the path that best describes what you need, what you can
-              contribute, or what you want to explore after the presentation.
+              Choose one path so GID Technologies can categorise your interest,
+              preserve the graduation source, and route the right follow-up.
             </p>
           </div>
 
