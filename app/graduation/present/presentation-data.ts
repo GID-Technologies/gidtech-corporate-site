@@ -51,11 +51,12 @@ export const presentationScenes: PresentationScene[] = [
   {
     id: "gid-platform-core",
     number: "05",
-    label: "Proof 002",
+    label: "Business Infrastructure",
     title:
-      "GID Platform Core — reusable business infrastructure under active development.",
+      "GID Platform — direct applications, configured systems and embedded services.",
     shortcut: "4",
   },
+
   {
     id: "papertalk-proof",
     number: "06",

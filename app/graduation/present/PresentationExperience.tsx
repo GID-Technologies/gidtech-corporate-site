@@ -3,7 +3,7 @@
 import Image from "next/image";
 import StatBetProofSequence from "./_components/StatBetProofSequence";
 import PaperTalkProofSequence from "./_components/PaperTalkProofSequence";
-import GidPlatformCoreProofSequence from "./_components/GidPlatformCoreProofSequence";
+import GidBusinessPlatformSequence from "./_components/GidBusinessPlatformSequence";
 import PlatformRoadmapScene from "./_components/PlatformRoadmapScene";
 import {
   ArrowLeft,
@@ -78,7 +78,15 @@ function getSceneFragmentCount(
   }
 
   if (sceneId === "gid-platform-core") {
-    return mode === "core" ? 4 : 6;
+    if (mode === "core") {
+      return 4;
+    }
+
+    if (mode === "extended") {
+      return 7;
+    }
+
+    return 6;
   }
 
   if (sceneId === "papertalk-proof") {
@@ -698,7 +706,7 @@ function renderScene(
 
     case "gid-platform-core":
       return (
-        <GidPlatformCoreProofSequence activeStep={fragmentIndex} mode={mode} />
+        <GidBusinessPlatformSequence activeStep={fragmentIndex} mode={mode} />
       );
 
     case "platform-roadmap":
