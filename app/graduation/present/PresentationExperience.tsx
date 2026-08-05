@@ -3,7 +3,7 @@
 import Image from "next/image";
 import StatBetProofSequence from "./_components/StatBetProofSequence";
 import PaperTalkProofSequence from "./_components/PaperTalkProofSequence";
-import GidPlatformCoreScene from "./_components/GidPlatformCoreScene";
+import GidPlatformCoreProofSequence from "./_components/GidPlatformCoreProofSequence";
 import PlatformRoadmapScene from "./_components/PlatformRoadmapScene";
 import {
   ArrowLeft,
@@ -16,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import PresenterLaunchScreen from "./_components/PresenterLaunchScreen";
 import {
   presentationModeDetails,
   presentationScenes,
@@ -25,6 +26,7 @@ import {
 
 type PresentationExperienceProps = {
   initialMode: PresentationMode;
+  autoStart: boolean;
 };
 
 const shortcutSceneIndexes: Record<string, number> = {
@@ -75,6 +77,10 @@ function getSceneFragmentCount(
     return mode === "core" ? 3 : 6;
   }
 
+  if (sceneId === "gid-platform-core") {
+    return mode === "core" ? 4 : 6;
+  }
+
   if (sceneId === "papertalk-proof") {
     return mode === "core" ? 3 : 4;
   }
@@ -84,6 +90,7 @@ function getSceneFragmentCount(
 
 export default function PresentationExperience({
   initialMode,
+  autoStart,
 }: PresentationExperienceProps) {
   const presentationRootRef = useRef<HTMLDivElement | null>(null);
 
@@ -93,6 +100,11 @@ export default function PresentationExperience({
   const [menuOpen, setMenuOpen] = useState(false);
   const [mode, setMode] = useState<PresentationMode>(initialMode);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [hasStarted, setHasStarted] = useState(autoStart);
+
+  const [isOnline, setIsOnline] = useState(true);
+
+  const [isBlackout, setIsBlackout] = useState(false);
 
   const scene = presentationScenes[sceneIndex];
   const finalSceneIndex = presentationScenes.length - 1;
@@ -170,12 +182,47 @@ export default function PresentationExperience({
     }
   }, []);
 
-  //not sure position
+  const startPresentation = useCallback(async (fullscreen: boolean) => {
+    setSceneIndex(0);
+    setFragmentIndex(0);
+    setSceneRevision((current) => current + 1);
+    setMenuOpen(false);
+    setIsBlackout(false);
+
+    if (fullscreen && !document.fullscreenElement) {
+      try {
+        await presentationRootRef.current?.requestFullscreen();
+      } catch {
+        // The presentation still starts if fullscreen is blocked.
+      }
+    }
+
+    setHasStarted(true);
+  }, []);
+
   useEffect(() => {
     const fragmentCount = getSceneFragmentCount(scene.id, mode);
 
     setFragmentIndex((current) => Math.min(current, fragmentCount - 1));
   }, [mode, scene.id]);
+
+  useEffect(() => {
+    function updateConnectionState() {
+      setIsOnline(navigator.onLine);
+    }
+
+    updateConnectionState();
+
+    window.addEventListener("online", updateConnectionState);
+
+    window.addEventListener("offline", updateConnectionState);
+
+    return () => {
+      window.removeEventListener("online", updateConnectionState);
+
+      window.removeEventListener("offline", updateConnectionState);
+    };
+  }, []);
 
   useEffect(() => {
     const previousBodyOverflow = document.body.style.overflow;
@@ -216,6 +263,20 @@ export default function PresentationExperience({
       }
 
       const key = event.key.toLowerCase();
+
+      if (!hasStarted) {
+        return;
+      }
+
+      if (key === "b") {
+        event.preventDefault();
+        setIsBlackout((current) => !current);
+        return;
+      }
+
+      if (isBlackout) {
+        return;
+      }
 
       if (key === "escape") {
         setMenuOpen((current) => !current);
@@ -280,6 +341,8 @@ export default function PresentationExperience({
   }, [
     finalSceneIndex,
     goToScene,
+    hasStarted,
+    isBlackout,
     menuOpen,
     nextScene,
     previousScene,
@@ -320,6 +383,15 @@ export default function PresentationExperience({
       </div>
 
       <div className="pointer-events-none absolute right-8 top-7 z-30 hidden items-center gap-3 xl:flex">
+        <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-neutral-500">
+          <span
+            className={`h-1.5 w-1.5 rounded-full ${
+              isOnline ? "bg-emerald-300" : "bg-amber-300"
+            }`}
+          />
+
+          {isOnline ? "Online" : "No Connection"}
+        </span>
         <span className="rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
           {presentationModeDetails[mode].label}
         </span>
@@ -515,6 +587,47 @@ export default function PresentationExperience({
 
                   <button
                     type="button"
+                    onClick={() => {
+                      setIsBlackout(true);
+                      setMenuOpen(false);
+                    }}
+                    className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm font-semibold transition hover:bg-white/[0.07]"
+                  >
+                    Blackout Projector
+                    <span className="rounded-lg border border-white/10 px-2 py-1 text-[9px] text-neutral-500">
+                      B
+                    </span>
+                  </button>
+
+                  <a
+                    href="/graduation/present/backup"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm font-semibold transition hover:bg-white/[0.07]"
+                  >
+                    Open Static Backup
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setIsBlackout(false);
+                      setHasStarted(false);
+
+                      if (document.fullscreenElement) {
+                        void document.exitFullscreen();
+                      }
+                    }}
+                    className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm font-semibold transition hover:bg-white/[0.07]"
+                  >
+                    Return to Presenter Launch
+                    <Home className="h-4 w-4" />
+                  </button>
+
+                  <button
+                    type="button"
                     onClick={() => void toggleFullscreen()}
                     className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm font-semibold transition hover:bg-white/[0.07]"
                   >
@@ -535,13 +648,31 @@ export default function PresentationExperience({
 
                   <p className="mt-3 text-xs leading-6 text-neutral-500">
                     ← previous · → or space next · Esc menu · F fullscreen · R
-                    restart · 0 final screen
+                    restart · B blackout · 0 final screen
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      ) : null}
+
+      {!hasStarted ? (
+        <PresenterLaunchScreen
+          mode={mode}
+          isOnline={isOnline}
+          onModeChange={setMode}
+          onStart={startPresentation}
+        />
+      ) : null}
+
+      {isBlackout ? (
+        <button
+          type="button"
+          aria-label="Resume presentation from blackout"
+          onClick={() => setIsBlackout(false)}
+          className="absolute inset-0 z-[120] cursor-none bg-black"
+        />
       ) : null}
     </div>
   );
@@ -566,7 +697,9 @@ function renderScene(
       return <StatBetProofSequence activeStep={fragmentIndex} mode={mode} />;
 
     case "gid-platform-core":
-      return <GidPlatformCoreScene />;
+      return (
+        <GidPlatformCoreProofSequence activeStep={fragmentIndex} mode={mode} />
+      );
 
     case "platform-roadmap":
       return <PlatformRoadmapScene />;

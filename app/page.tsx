@@ -221,33 +221,40 @@ const roadmap: {
 }[] = [
   {
     name: "StatBet",
-    category: "Live football intelligence platform",
+    category: "Live football-intelligence platform",
     status: "Live",
     href: "/statbet",
     icon: BarChart3,
   },
   {
+    name: "GID Platform Core",
+    category: "Reusable backend infrastructure for business operations",
+    status: "Active Backend Development",
+    href: "/products#gid-platform-core",
+    icon: Layers3,
+  },
+  {
     name: "PaperTalk",
-    category:
-      "Assistive document-reading technology — working title under review",
-    status: "Active development",
-    href: "/products",
+    category: "Accessibility-focused document-reading software",
+    status: "Working Software Prototype",
+    href: "/products#papertalk",
     icon: Accessibility,
   },
   {
-    name: "Mechanic Connection",
+    name: "GID Track Ecosystem",
     category:
-      "Nearby mechanic, roadside support, and car-parts connection concept",
-    status: "Concept validation",
-    href: "/products",
-    icon: Car,
+      "Future tracking, notification, delivery-intelligence, and logistics services",
+    status: "Roadmap",
+    href: "/products#gid-track",
+    icon: Network,
   },
   {
-    name: "Property Connection",
-    category: "Housing discovery and property-enquiry connection concept",
-    status: "Concept validation",
-    href: "/products",
-    icon: House,
+    name: "Exploring Further",
+    category:
+      "Mechanic, property, and vehicle-tracking directions undergoing validation",
+    status: "Long-Term Validation",
+    href: "/products#long-term-validation",
+    icon: Rocket,
   },
 ];
 
@@ -974,17 +981,176 @@ function BusinessVisibility() {
   );
 }
 
+function CurrentlyBuilding() {
+  const engineeringAreas: {
+    title: string;
+    description: string;
+    icon: LucideIcon;
+  }[] = [
+    {
+      title: "System Architecture",
+      description:
+        "A modular Java Spring Boot foundation for current business modules and future operational services.",
+      icon: Layers3,
+    },
+    {
+      title: "Data Models",
+      description:
+        "Structured entities and relationships covering real business information and operations.",
+      icon: Network,
+    },
+    {
+      title: "Business Logic & APIs",
+      description:
+        "Reusable backend services and endpoints being implemented before the customer-facing interface.",
+      icon: Workflow,
+    },
+  ];
+
+  const currentModules = [
+    "Customers",
+    "Products",
+    "Inventory",
+    "Orders",
+    "Invoices",
+  ];
+
+  return (
+    <section
+      id="currently-building"
+      className="section-shell px-5 py-24 md:px-8"
+    >
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          eyebrow="Currently Building"
+          title="The next GID system is already under engineering."
+          copy="GID Platform Core is a modular backend foundation being developed for business operations and future operational services."
+        />
+
+        <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr]">
+          <article className="relative overflow-hidden rounded-[2rem] border border-cyan-200/20 bg-cyan-200/[0.035] p-7 md:p-9">
+            <div className="absolute right-0 top-0 h-56 w-56 rounded-full bg-cyan-200/[0.06] blur-3xl" />
+
+            <div className="relative">
+              <div className="flex flex-wrap items-start justify-between gap-5">
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-200/20 bg-cyan-200/[0.055]">
+                  <Layers3 className="h-6 w-6 text-cyan-100/80" />
+                </span>
+
+                <span className="rounded-full border border-cyan-200/20 bg-black/30 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-100/70">
+                  Active Backend Development
+                </span>
+              </div>
+
+              <p className="mt-9 text-xs font-semibold uppercase tracking-[0.25em] text-cyan-100/50">
+                GID Platform Core
+              </p>
+
+              <h3 className="mt-4 text-4xl font-semibold leading-tight tracking-[-0.05em] text-white md:text-5xl">
+                Reusable infrastructure for business operations.
+              </h3>
+
+              <p className="mt-6 text-lg leading-8 text-neutral-400">
+                A modular backend foundation being developed around customers,
+                products, inventory, orders, invoices, and future operational
+                services.
+              </p>
+
+              <div className="mt-7 flex flex-wrap gap-2">
+                {currentModules.map((module) => (
+                  <span
+                    key={module}
+                    className="rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs font-semibold text-neutral-300"
+                  >
+                    {module}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <PrimaryButton href="/products#gid-platform-core">
+                  View Platform Direction
+                </PrimaryButton>
+
+                <SecondaryButton href="/contact?service=build-with-gid&path=follow-journey#contact-form">
+                  Follow Development
+                </SecondaryButton>
+              </div>
+            </div>
+          </article>
+
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.025] p-6 md:p-8">
+            <div className="flex flex-wrap items-start justify-between gap-5">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-600">
+                  Current engineering focus
+                </p>
+
+                <h3 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
+                  Backend before interface.
+                </h3>
+              </div>
+
+              <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500">
+                Java · Spring Boot
+              </span>
+            </div>
+
+            <div className="mt-7 grid gap-3 md:grid-cols-3">
+              {engineeringAreas.map((area) => {
+                const Icon = area.icon;
+
+                return (
+                  <article
+                    key={area.title}
+                    className="rounded-[1.5rem] border border-white/10 bg-black/50 p-5"
+                  >
+                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                      <Icon className="h-5 w-5 text-white" />
+                    </span>
+
+                    <h4 className="mt-6 text-lg font-semibold text-white">
+                      {area.title}
+                    </h4>
+
+                    <p className="mt-3 text-sm leading-6 text-neutral-500">
+                      {area.description}
+                    </p>
+                  </article>
+                );
+              })}
+            </div>
+
+            <div className="mt-5 rounded-2xl border border-amber-300/15 bg-amber-300/[0.035] p-5">
+              <p className="text-sm font-semibold text-neutral-300">
+                The customer-facing product experience is not yet publicly
+                available.
+              </p>
+
+              <p className="mt-2 text-xs leading-6 text-neutral-500">
+                Current work focuses on backend architecture, data models,
+                business logic, and reusable APIs. GID Platform Core is not
+                being presented as a completed ERP or finished multi-tenant
+                platform.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Roadmap() {
   return (
     <section id="products" className="section-shell px-5 py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="Product ecosystem"
-          title="Live proof today. Active development next. Future platforms validated carefully."
-          copy="StatBet is live, PaperTalk is in active development, and the mechanic and property platforms remain under concept validation."
+          eyebrow="Products & Infrastructure"
+          title="Live proof. Active engineering. Careful expansion."
+          copy="StatBet is live. GID Platform Core and PaperTalk are actively developing. The GID Track ecosystem remains on the roadmap, while wider concepts stay under long-term validation."
         />
-
-        <div className="grid gap-4 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           {roadmap.map((item) => {
             const Icon = item.icon;
 
@@ -1208,6 +1374,7 @@ export default function Home() {
       <FeaturedSolutions />
       <BrandProof />
       <StatBetProof />
+      <CurrentlyBuilding />
       <WhoWeHelp />
       <BusinessVisibility />
       <Roadmap />

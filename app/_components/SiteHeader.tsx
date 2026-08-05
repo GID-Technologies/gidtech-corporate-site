@@ -64,7 +64,7 @@ const navigationGroups: NavigationGroup[] = [
     id: "products",
     label: "Products",
     href: "/products",
-    overviewLabel: "View Product Roadmap",
+    overviewLabel: "View Products & Infrastructure",
     items: [
       {
         label: "StatBet",
@@ -74,25 +74,32 @@ const navigationGroups: NavigationGroup[] = [
         meta: "Live",
       },
       {
+        label: "GID Platform Core",
+        href: "/products#gid-platform-core",
+        description:
+          "Reusable backend infrastructure being developed around customers, products, inventory, orders, and invoices.",
+        meta: "Active Backend",
+      },
+      {
         label: "PaperTalk",
         href: "/products#papertalk",
         description:
-          "Assistive document-reading technology designed to make printed material available through audio.",
-        meta: "Active Development",
+          "Working accessibility-focused software prototype for making documents readable and audible.",
+        meta: "Prototype",
       },
       {
-        label: "Mechanic Connection",
-        href: "/products#mechanic-connection-platform",
+        label: "GID Track Ecosystem",
+        href: "/products#gid-track",
         description:
-          "A roadside and local vehicle-support connection platform currently being researched.",
-        meta: "Concept Validation",
+          "Future shipment tracking, notification, delivery-intelligence, and logistics-integration layers.",
+        meta: "Roadmap",
       },
       {
-        label: "Property Connection",
-        href: "/products#property-connection-platform",
+        label: "Exploring Further",
+        href: "/products#long-term-validation",
         description:
-          "A housing and property-opportunity connection concept undergoing validation.",
-        meta: "Concept Validation",
+          "Mechanic Connection, Property Connection, and GID Car Tracker remain under long-term validation.",
+        meta: "Validation",
       },
     ],
   },
@@ -150,14 +157,20 @@ export default function SiteHeader() {
 
   useEffect(() => {
     if (!mobileOpen) {
-      document.body.style.overflow = "";
       return;
     }
 
+    const previousBodyOverflow = document.body.style.overflow;
+
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousBodyOverflow;
+
+      document.documentElement.style.overflow = previousHtmlOverflow;
     };
   }, [mobileOpen]);
 
@@ -430,17 +443,22 @@ export default function SiteHeader() {
       </header>
 
       {mobileOpen ? (
-        <>
+        <div
+          className="fixed inset-x-0 bottom-0 top-[77px] z-[9998] lg:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+        >
           <button
             type="button"
             aria-label="Close navigation menu"
             onClick={closeMobileNavigation}
-            className="fixed inset-x-0 bottom-0 top-[77px] z-[9997] bg-black/70 lg:hidden"
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
           />
 
           <div
             id="mobile-navigation"
-            className="fixed inset-x-0 top-[77px] z-[9998] max-h-[calc(100dvh-77px)] overflow-y-auto border-t border-white/10 bg-black px-5 py-6 shadow-[0_30px_80px_rgba(0,0,0,0.95)] lg:hidden"
+            className="relative z-10 max-h-full overflow-y-auto border-t border-white/10 bg-black px-5 py-6 shadow-[0_30px_100px_rgba(0,0,0,0.98)]"
           >
             <nav
               aria-label="Mobile navigation"
@@ -452,7 +470,7 @@ export default function SiteHeader() {
                 className={`rounded-2xl px-4 py-4 text-sm font-semibold transition ${
                   isActive("/")
                     ? "bg-white text-black"
-                    : "text-neutral-300 hover:bg-white/[0.08] hover:text-white"
+                    : "border border-white/10 bg-white/[0.025] text-neutral-300"
                 }`}
               >
                 Home
@@ -465,40 +483,44 @@ export default function SiteHeader() {
                 return (
                   <div
                     key={group.id}
-                    className="overflow-hidden rounded-2xl border border-white/10"
+                    className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.015]"
                   >
                     <button
                       type="button"
                       aria-expanded={expanded}
-                      onClick={() =>
+                      aria-controls={`mobile-group-${group.id}`}
+                      onClick={() => {
                         setMobileGroup((current) =>
                           current === group.id ? null : group.id,
-                        )
-                      }
-                      className={`flex w-full items-center justify-between px-4 py-4 text-left text-sm font-semibold transition ${
+                        );
+                      }}
+                      className={`flex w-full items-center justify-between gap-4 px-4 py-4 text-left text-sm font-semibold transition ${
                         active
                           ? "bg-white text-black"
-                          : "bg-white/[0.025] text-neutral-300 hover:bg-white/[0.07] hover:text-white"
+                          : "bg-white/[0.025] text-neutral-300"
                       }`}
                     >
-                      {group.label}
+                      <span>{group.label}</span>
 
                       <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${
+                        className={`h-4 w-4 shrink-0 transition-transform duration-200 ${
                           expanded ? "rotate-180" : ""
                         }`}
                       />
                     </button>
 
                     {expanded ? (
-                      <div className="border-t border-white/10 bg-black p-2">
+                      <div
+                        id={`mobile-group-${group.id}`}
+                        className="border-t border-white/10 bg-black p-2"
+                      >
                         <Link
                           href={group.href}
                           onClick={closeMobileNavigation}
-                          className="flex items-center justify-between rounded-xl bg-white/[0.06] px-4 py-3 text-sm font-semibold text-white"
+                          className="flex items-center justify-between gap-4 rounded-xl bg-white/[0.07] px-4 py-3.5 text-sm font-semibold text-white"
                         >
-                          {group.overviewLabel}
-                          <ArrowRight className="h-4 w-4" />
+                          <span>{group.overviewLabel}</span>
+                          <ArrowRight className="h-4 w-4 shrink-0" />
                         </Link>
 
                         <div className="mt-2 grid gap-1">
@@ -507,19 +529,25 @@ export default function SiteHeader() {
                               key={`${group.id}-mobile-${item.label}`}
                               href={item.href}
                               onClick={closeMobileNavigation}
-                              className="flex items-center justify-between gap-4 rounded-xl px-4 py-3.5 transition hover:bg-white/[0.06]"
+                              className="rounded-xl px-4 py-3.5 transition active:bg-white/[0.08]"
                             >
-                              <span className="text-sm font-semibold text-neutral-200">
-                                {item.label}
-                              </span>
-
-                              {item.meta ? (
-                                <span className="max-w-[42%] text-right text-[9px] font-semibold uppercase leading-4 tracking-[0.12em] text-neutral-600">
-                                  {item.meta}
+                              <div className="flex items-start justify-between gap-4">
+                                <span className="text-sm font-semibold text-neutral-200">
+                                  {item.label}
                                 </span>
-                              ) : (
-                                <ArrowRight className="h-3.5 w-3.5 shrink-0 text-neutral-600" />
-                              )}
+
+                                {item.meta ? (
+                                  <span className="max-w-[42%] shrink-0 text-right text-[9px] font-semibold uppercase leading-4 tracking-[0.1em] text-neutral-600">
+                                    {item.meta}
+                                  </span>
+                                ) : (
+                                  <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-neutral-600" />
+                                )}
+                              </div>
+
+                              <p className="mt-2 text-xs leading-5 text-neutral-600">
+                                {item.description}
+                              </p>
                             </Link>
                           ))}
                         </div>
@@ -532,10 +560,10 @@ export default function SiteHeader() {
               <Link
                 href="/statbet"
                 onClick={closeMobileNavigation}
-                className={`rounded-2xl px-4 py-4 text-sm font-semibold transition ${
+                className={`rounded-2xl border px-4 py-4 text-sm font-semibold transition ${
                   isActive("/statbet")
-                    ? "bg-white text-black"
-                    : "text-neutral-300 hover:bg-white/[0.08] hover:text-white"
+                    ? "border-white bg-white text-black"
+                    : "border-white/10 bg-white/[0.025] text-neutral-300"
                 }`}
               >
                 StatBet
@@ -544,14 +572,14 @@ export default function SiteHeader() {
               <Link
                 href="/contact?service=consultation"
                 onClick={closeMobileNavigation}
-                className="mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-black"
+                className="mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3.5 text-sm font-semibold text-black"
               >
                 Start a Project
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </nav>
           </div>
-        </>
+        </div>
       ) : null}
     </>
   );

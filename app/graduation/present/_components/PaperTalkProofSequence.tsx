@@ -133,7 +133,7 @@ export default function PaperTalkProofSequence({
             </span>
 
             <p className="text-xs font-semibold uppercase tracking-[0.34em] text-cyan-200/60">
-              Proof 002 — PaperTalk
+              Proof 003 — PaperTalk
             </p>
           </div>
 

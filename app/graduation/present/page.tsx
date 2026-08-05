@@ -26,14 +26,21 @@ function resolveMode(value: string | undefined): PresentationMode {
   return "recommended";
 }
 
+function resolveAutoStart(value: string | undefined) {
+  return value === "1" || value === "true" || value === "yes";
+}
+
 export default async function PresentationPage({
   searchParams,
 }: {
   searchParams: Promise<PresentationSearchParams>;
 }) {
   const params = await searchParams;
-
   const initialMode = resolveMode(getFirstValue(params.mode));
 
-  return <PresentationExperience initialMode={initialMode} />;
+  const autoStart = resolveAutoStart(getFirstValue(params.autostart));
+
+  return (
+    <PresentationExperience initialMode={initialMode} autoStart={autoStart} />
+  );
 }
