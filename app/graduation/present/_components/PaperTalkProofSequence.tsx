@@ -2,10 +2,7 @@ import {
   Accessibility,
   CheckCircle2,
   FileText,
-  Monitor,
-  Play,
   ScanText,
-  ShieldCheck,
   Upload,
   Volume2,
 } from "lucide-react";
@@ -51,14 +48,6 @@ const proofSteps: PaperTalkStep[] = [
     evidence: "Working Software Prototype · Active Development",
     icon: CheckCircle2,
   },
-  {
-    label: "Demonstration Safety",
-    title: "The stage demonstration will not depend on one fragile moment.",
-    description:
-      "The presentation will support a live prototype, a prerecorded walkthrough, screenshots of each stage, saved extracted text and local audio. If one layer fails, the product story can continue immediately.",
-    evidence: "Live · Recorded · Static · Audio fallback",
-    icon: ShieldCheck,
-  },
 ];
 
 const workflow = [
@@ -88,34 +77,34 @@ const workflow = [
   },
 ];
 
-const fallbackLayers = [
-  {
-    label: "Live Prototype",
-    text: "The intended demonstration running locally.",
-    icon: Monitor,
-  },
-  {
-    label: "Recorded Demo",
-    text: "A controlled walkthrough stored on the laptop.",
-    icon: Play,
-  },
-  {
-    label: "Static Steps",
-    text: "Screenshots showing every important stage.",
-    icon: FileText,
-  },
-  {
-    label: "Saved Output",
-    text: "Extracted text and audio available locally.",
-    icon: Volume2,
-  },
-];
+// const fallbackLayers = [
+//   // {
+//   //   label: "Live Prototype",
+//   //   text: "The intended demonstration running locally.",
+//   //   icon: Monitor,
+//   // },
+//   // {
+//   //   label: "Recorded Demo",
+//   //   text: "A controlled walkthrough stored on the laptop.",
+//   //   icon: Play,
+//   // },
+//   // {
+//   //   label: "Static Steps",
+//   //   text: "Screenshots showing every important stage.",
+//   //   icon: FileText,
+//   // },
+//   // {
+//   //   label: "Saved Output",
+//   //   text: "Extracted text and audio available locally.",
+//   //   icon: Volume2,
+//   // },
+// ];
 
 export default function PaperTalkProofSequence({
   activeStep,
   mode,
 }: PaperTalkProofSequenceProps) {
-  const stepOrder = mode === "core" ? [0, 1, 2] : [0, 1, 2, 3];
+  const stepOrder = [0, 1, 2];
 
   const safeActiveStep = Math.min(activeStep, stepOrder.length - 1);
 
@@ -166,16 +155,10 @@ export default function PaperTalkProofSequence({
           {actualStepIndex === 1 ? <WorkflowVisual /> : null}
 
           {actualStepIndex === 2 ? <StatusVisual /> : null}
-
-          {actualStepIndex === 3 ? <FallbackVisual /> : null}
         </div>
       </div>
 
-      <div
-        className={`mt-8 grid gap-2 ${
-          stepOrder.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-4"
-        }`}
-      >
+      <div className="mt-8 grid gap-2 sm:grid-cols-3">
         {stepOrder.map((stepIndex, sequenceIndex) => {
           const sequenceStep = proofSteps[stepIndex];
           const active = sequenceIndex === safeActiveStep;
@@ -368,49 +351,49 @@ function StatusVisual() {
   );
 }
 
-function FallbackVisual() {
-  return (
-    <div className="rounded-[2rem] border border-white/15 bg-[#05080b] p-7 shadow-[0_35px_120px_rgba(0,0,0,0.82)]">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-neutral-600">
-          Stage reliability system
-        </p>
+// function FallbackVisual() {
+//   return (
+//     <div className="rounded-[2rem] border border-white/15 bg-[#05080b] p-7 shadow-[0_35px_120px_rgba(0,0,0,0.82)]">
+//       <div>
+//         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-neutral-600">
+//           Stage reliability system
+//         </p>
 
-        <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
-          The product story survives a technical failure.
-        </h2>
-      </div>
+//         <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
+//           The product story survives a technical failure.
+//         </h2>
+//       </div>
 
-      <div className="mt-7 grid gap-3 sm:grid-cols-2">
-        {fallbackLayers.map((layer, index) => {
-          const Icon = layer.icon;
+//       <div className="mt-7 grid gap-3 sm:grid-cols-2">
+//         {fallbackLayers.map((layer, index) => {
+//           const Icon = layer.icon;
 
-          return (
-            <article
-              key={layer.label}
-              className="rounded-[1.5rem] border border-white/10 bg-black/55 p-5"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
-                  <Icon className="h-5 w-5 text-white" />
-                </span>
+//           return (
+//             <article
+//               key={layer.label}
+//               className="rounded-[1.5rem] border border-white/10 bg-black/55 p-5"
+//             >
+//               <div className="flex items-start justify-between gap-4">
+//                 <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+//                   <Icon className="h-5 w-5 text-white" />
+//                 </span>
 
-                <span className="text-xs font-semibold text-neutral-700">
-                  Layer {index + 1}
-                </span>
-              </div>
+//                 <span className="text-xs font-semibold text-neutral-700">
+//                   Layer {index + 1}
+//                 </span>
+//               </div>
 
-              <h3 className="mt-6 text-xl font-semibold text-white">
-                {layer.label}
-              </h3>
+//               <h3 className="mt-6 text-xl font-semibold text-white">
+//                 {layer.label}
+//               </h3>
 
-              <p className="mt-3 text-sm leading-6 text-neutral-500">
-                {layer.text}
-              </p>
-            </article>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
+//               <p className="mt-3 text-sm leading-6 text-neutral-500">
+//                 {layer.text}
+//               </p>
+//             </article>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// }

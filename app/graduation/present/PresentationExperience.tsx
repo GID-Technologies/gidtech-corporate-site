@@ -4,13 +4,18 @@ import Image from "next/image";
 import StatBetProofSequence from "./_components/StatBetProofSequence";
 import PaperTalkProofSequence from "./_components/PaperTalkProofSequence";
 import GidBusinessPlatformSequence from "./_components/GidBusinessPlatformSequence";
+import CommercialHelpScene from "./_components/CommercialHelpScene";
+import CommercialPulseScene from "./_components/CommercialPulseScene";
+import CommercialClosingScene from "./_components/CommercialClosingScene";
 import PlatformRoadmapScene from "./_components/PlatformRoadmapScene";
 import {
   ArrowLeft,
   ArrowRight,
+  Briefcase,
   Command,
   Expand,
   Home,
+  Layers3,
   Minimize2,
   RotateCcw,
   X,
@@ -42,32 +47,32 @@ const shortcutSceneIndexes: Record<string, number> = {
   "0": 9,
 };
 
-const participationOptions = [
-  {
-    label: "I need a digital solution",
-    category: "Business enquiry",
-  },
-  {
-    label: "I want to support GID",
-    category: "Strategic support",
-  },
-  {
-    label: "I can contribute a skill",
-    category: "Contributor interest",
-  },
-  {
-    label: "I can make an introduction",
-    category: "Useful connection",
-  },
-  {
-    label: "I want to test a product",
-    category: "Product testing",
-  },
-  {
-    label: "I want to follow the journey",
-    category: "Future updates",
-  },
-];
+// const participationOptions = [
+//   {
+//     label: "I need a digital solution",
+//     category: "Business enquiry",
+//   },
+//   {
+//     label: "I want to support GID",
+//     category: "Strategic support",
+//   },
+//   {
+//     label: "I can contribute a skill",
+//     category: "Contributor interest",
+//   },
+//   {
+//     label: "I can make an introduction",
+//     category: "Useful connection",
+//   },
+//   {
+//     label: "I want to test a product",
+//     category: "Product testing",
+//   },
+//   {
+//     label: "I want to follow the journey",
+//     category: "Future updates",
+//   },
+// ];
 
 function getSceneFragmentCount(
   sceneId: PresentationSceneId,
@@ -90,7 +95,7 @@ function getSceneFragmentCount(
   }
 
   if (sceneId === "papertalk-proof") {
-    return mode === "core" ? 3 : 4;
+    return 3;
   }
 
   return 1;
@@ -116,6 +121,11 @@ export default function PresentationExperience({
 
   const scene = presentationScenes[sceneIndex];
   const finalSceneIndex = presentationScenes.length - 1;
+
+  const isDenseScene =
+    scene.id === "statbet-proof" ||
+    scene.id === "gid-platform-core" ||
+    scene.id === "papertalk-proof";
 
   const goToScene = useCallback((index: number) => {
     const safeIndex = Math.max(
@@ -412,9 +422,15 @@ export default function PresentationExperience({
       <main
         key={`${scene.id}-${sceneRevision}`}
         aria-live="polite"
-        className="presentation-enter relative z-10 flex h-full w-full items-center justify-center px-[clamp(1.5rem,5vw,6rem)] pb-24 pt-20"
+        className="presentation-enter relative z-10 flex h-full w-full items-center justify-center overflow-hidden px-[clamp(1.5rem,5vw,6rem)] pb-24 pt-20"
       >
-        {renderScene(scene.id, fragmentIndex, mode)}
+        <div
+          className={`flex h-full w-full items-center justify-center ${
+            isDenseScene ? "presentation-dense-scene" : ""
+          }`}
+        >
+          {renderScene(scene.id, fragmentIndex, mode)}
+        </div>
       </main>
 
       <button
@@ -716,13 +732,13 @@ function renderScene(
       return <PaperTalkProofSequence activeStep={fragmentIndex} mode={mode} />;
 
     case "company-position":
-      return <CompanyPositionScene />;
+      return <CommercialHelpScene />;
 
     case "gid-pulse":
-      return <PulseScene />;
+      return <CommercialPulseScene />;
 
     case "closing":
-      return <ClosingScene />;
+      return <CommercialClosingScene />;
   }
 }
 
@@ -730,23 +746,37 @@ function SceneHeading({
   eyebrow,
   title,
   description,
+  compact = false,
 }: {
   eyebrow: string;
   title: string;
   description?: string;
+  compact?: boolean;
 }) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.34em] text-cyan-200/60">
+      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200/60">
         {eyebrow}
       </p>
 
-      <h1 className="mt-5 max-w-6xl text-balance text-[clamp(2.7rem,5.7vw,6.8rem)] font-semibold leading-[0.95] tracking-[-0.06em]">
+      <h1
+        className={`text-balance font-semibold leading-[0.95] tracking-[-0.06em] text-white ${
+          compact
+            ? "mt-4 max-w-6xl text-[clamp(2.35rem,4.25vw,5rem)]"
+            : "mt-5 max-w-6xl text-[clamp(2.7rem,5.7vw,6.8rem)]"
+        }`}
+      >
         {title}
       </h1>
 
       {description ? (
-        <p className="mt-7 max-w-3xl text-[clamp(1rem,1.45vw,1.5rem)] leading-8 text-neutral-400">
+        <p
+          className={`max-w-4xl text-neutral-400 ${
+            compact
+              ? "mt-4 text-[clamp(0.9rem,1.1vw,1.15rem)] leading-7"
+              : "mt-7 text-[clamp(1rem,1.45vw,1.5rem)] leading-8"
+          }`}
+        >
           {description}
         </p>
       ) : null}
@@ -755,124 +785,259 @@ function SceneHeading({
 }
 
 function OpeningScene() {
+  const outcomes = [
+    "Attract Opportunities",
+    "Organise Operations",
+    "Serve People Better",
+    "Prepare for Growth",
+  ];
+
   return (
     <section className="flex w-full max-w-7xl flex-col items-center text-center">
-      <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-[2rem] border border-white/15 bg-white/[0.04] shadow-[0_0_80px_rgba(45,212,255,0.08)]">
-        <Image
-          src="/brand/GID Logo white.svg"
-          alt="GID Technologies"
-          width={96}
-          height={96}
-          priority
-          className="h-20 w-20 scale-[1.8] object-contain"
-        />
+      <div className="flex items-center gap-4">
+        <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-[1.75rem] border border-white/15 bg-white/[0.04] shadow-[0_0_80px_rgba(45,212,255,0.08)]">
+          <Image
+            src="/brand/GID Logo white.svg"
+            alt="GID Technologies"
+            width={80}
+            height={80}
+            priority
+            className="h-16 w-16 scale-[1.8] object-contain"
+          />
+        </div>
+
+        <div className="text-left">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cyan-200/55">
+            GID Technologies
+          </p>
+
+          <p className="mt-2 text-sm text-neutral-500">
+            Practical technology for growth
+          </p>
+        </div>
       </div>
 
-      <p className="mt-10 text-[clamp(1rem,1.6vw,1.45rem)] font-medium text-neutral-500">
-        What are we building with what we learned?
-      </p>
-
-      <h1 className="mt-7 text-[clamp(4rem,10vw,10rem)] font-semibold leading-none tracking-[-0.075em]">
-        GID Technologies
+      <h1 className="mt-12 max-w-6xl text-balance text-[clamp(3.4rem,7.2vw,8rem)] font-semibold leading-[0.94] tracking-[-0.07em] text-white">
+        Growth becomes difficult when the systems behind the business are weak.
       </h1>
 
-      <p className="mt-8 max-w-4xl text-[clamp(1rem,1.55vw,1.5rem)] leading-8 text-neutral-400">
-        An early-stage technology startup building practical digital solutions,
-        reusable infrastructure and proof-led products.
+      <p className="mt-8 max-w-4xl text-[clamp(1rem,1.5vw,1.45rem)] leading-8 text-neutral-400">
+        GID Technologies builds digital solutions that help organisations
+        attract opportunities, organise operations, serve people better and
+        prepare for growth.
       </p>
+
+      <div className="mt-10 flex flex-wrap justify-center gap-3">
+        {outcomes.map((outcome, index) => (
+          <div
+            key={outcome}
+            className="flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-5 py-3"
+          >
+            <span className="text-[9px] font-semibold text-neutral-700">
+              0{index + 1}
+            </span>
+
+            <span className="text-xs font-semibold text-neutral-300">
+              {outcome}
+            </span>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
 
 function ProblemScene() {
   const problems = [
-    ["Businesses", "need visibility."],
-    ["People", "need access."],
-    ["Ideas", "need structure."],
-    ["Work", "needs better systems."],
+    {
+      problem: "Enquiries disappear inside chats.",
+      consequence: "Potential customers are lost before proper follow-up.",
+    },
+    {
+      problem: "Customer records are scattered.",
+      consequence: "Staff search repeatedly through messages and notebooks.",
+    },
+    {
+      problem: "Stock figures are uncertain.",
+      consequence: "The business cannot confidently track what is moving.",
+    },
+    {
+      problem: "Orders and payments are tracked manually.",
+      consequence: "Errors, delays and incomplete records become more likely.",
+    },
+    {
+      problem: "Operations depend on memory.",
+      consequence: "Work slows down when the right person is unavailable.",
+    },
+    {
+      problem: "Owners lack a clear operational view.",
+      consequence: "Important decisions depend on assumptions.",
+    },
   ];
 
   return (
     <section className="w-full max-w-7xl">
       <SceneHeading
-        eyebrow="The opportunity"
-        title="Value exists. Systems are missing."
+        compact
+        eyebrow="The business reality"
+        title="Many businesses lose money through problems that look ordinary."
+        description="Small operational gaps quietly affect revenue, customer trust, staff performance and growth."
       />
 
-      <div className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {problems.map(([subject, need], index) => (
+      <div className="mt-7 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        {problems.map((item, index) => (
           <article
-            key={subject}
-            className="rounded-[2rem] border border-white/10 bg-white/[0.025] p-7"
+            key={item.problem}
+            className="rounded-[1.45rem] border border-white/10 bg-white/[0.025] p-5"
           >
-            <span className="text-xs font-semibold text-neutral-700">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-black/40 text-[9px] font-semibold text-neutral-600">
               0{index + 1}
             </span>
 
-            <p className="mt-10 text-2xl font-semibold">{subject}</p>
+            <h2 className="mt-5 text-lg font-semibold leading-6 text-white">
+              {item.problem}
+            </h2>
 
-            <p className="mt-3 text-xl text-neutral-500">{need}</p>
+            <p className="mt-3 text-xs leading-5 text-neutral-500">
+              {item.consequence}
+            </p>
           </article>
         ))}
+      </div>
+
+      <div className="mt-3 rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.03] px-5 py-4 text-center">
+        <p className="text-xs font-semibold text-cyan-50">
+          These gaps affect money, customer experience and the ability to grow.
+        </p>
       </div>
     </section>
   );
 }
 
 function GidModelScene() {
-  const process = ["Discover", "Plan", "Build", "Launch", "Monitor", "Improve"];
+  const arms = [
+    {
+      number: "01",
+      badge: "Hire GID",
+      title: "Business Solutions",
+      description:
+        "Organisations hire GID to solve immediate visibility, technology and operational problems.",
+      capabilities: [
+        "Digital presence",
+        "Visibility and enquiries",
+        "Custom business systems",
+        "Automation and support",
+      ],
+      flow: ["Business Problem", "Assessment", "Implementation", "Support"],
+      icon: Briefcase,
+      accent: false,
+    },
+    {
+      number: "02",
+      badge: "GID-Owned",
+      title: "Products & Infrastructure",
+      description:
+        "GID identifies wider problems and builds products, applications and infrastructure for broader markets.",
+      capabilities: [
+        "StatBet",
+        "GID Platform",
+        "PaperTalk",
+        "Tracking and API direction",
+      ],
+      flow: ["Wider Problem", "Product Direction", "Public Use", "Scale"],
+      icon: Layers3,
+      accent: true,
+    },
+  ];
 
   return (
     <section className="w-full max-w-7xl">
       <SceneHeading
+        compact
         eyebrow="How GID operates"
-        title="One company. Two connected operating arms."
+        title="Solve immediate problems. Build long-term products."
+        description="One arm serves organisations directly. The other builds GID-owned products and infrastructure for wider markets."
       />
 
-      <div className="mt-12 grid gap-5 lg:grid-cols-2">
-        <article className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-500">
-            Arm 01
-          </p>
+      <div className="mt-7 grid gap-4 lg:grid-cols-2">
+        {arms.map((arm) => {
+          const Icon = arm.icon;
 
-          <h2 className="mt-5 text-4xl font-semibold tracking-[-0.04em]">
-            Practical Business Solutions
-          </h2>
+          return (
+            <article
+              key={arm.number}
+              className={`rounded-[1.7rem] border p-6 ${
+                arm.accent
+                  ? "border-cyan-200/20 bg-cyan-200/[0.035]"
+                  : "border-white/10 bg-white/[0.03]"
+              }`}
+            >
+              <div className="flex items-start justify-between gap-4">
+                <span
+                  className={`flex h-11 w-11 items-center justify-center rounded-2xl border ${
+                    arm.accent
+                      ? "border-cyan-200/20 bg-cyan-200/[0.05]"
+                      : "border-white/10 bg-white/[0.04]"
+                  }`}
+                >
+                  <Icon
+                    className={`h-5 w-5 ${
+                      arm.accent ? "text-cyan-100/75" : "text-white"
+                    }`}
+                  />
+                </span>
 
-          <p className="mt-5 text-lg leading-8 text-neutral-400">
-            Websites, visibility systems, custom platforms, automation and
-            ongoing digital care.
-          </p>
-        </article>
+                <span className="rounded-full border border-white/10 bg-black/35 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-neutral-500">
+                  {arm.badge}
+                </span>
+              </div>
 
-        <article className="rounded-[2rem] border border-cyan-200/20 bg-cyan-200/[0.035] p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-200/50">
-            Arm 02
-          </p>
+              <p className="mt-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-600">
+                Arm {arm.number}
+              </p>
 
-          <h2 className="mt-5 text-4xl font-semibold tracking-[-0.04em]">
-            GID-Owned Products and Infrastructure
-          </h2>
+              <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-white">
+                {arm.title}
+              </h2>
 
-          <p className="mt-5 text-lg leading-8 text-neutral-400">
-            StatBet, GID Platform Core, PaperTalk and future tracking and
-            logistics services.
-          </p>
-        </article>
+              <p className="mt-3 text-sm leading-6 text-neutral-400">
+                {arm.description}
+              </p>
+
+              <div className="mt-5 grid grid-cols-2 gap-2">
+                {arm.capabilities.map((capability) => (
+                  <div
+                    key={capability}
+                    className="rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-xs font-semibold text-neutral-300"
+                  >
+                    {capability}
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 flex flex-wrap items-center gap-2">
+                {arm.flow.map((step, index) => (
+                  <div key={step} className="flex items-center gap-2">
+                    <span className="rounded-full border border-white/10 bg-white/[0.025] px-3 py-1.5 text-[8px] font-semibold uppercase tracking-[0.08em] text-neutral-500">
+                      {step}
+                    </span>
+
+                    {index < arm.flow.length - 1 ? (
+                      <ArrowRight className="h-3 w-3 text-neutral-700" />
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </article>
+          );
+        })}
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-3 rounded-[2rem] border border-white/10 bg-black/40 p-6">
-        {process.map((step, index) => (
-          <div key={step} className="flex items-center gap-3">
-            <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-neutral-300">
-              {step}
-            </span>
-
-            {index < process.length - 1 ? (
-              <ArrowRight className="h-4 w-4 text-neutral-700" />
-            ) : null}
-          </div>
-        ))}
+      <div className="mt-3 rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-center">
+        <p className="text-xs font-semibold text-neutral-300">
+          Businesses can hire GID now while GID continues building products for
+          wider markets.
+        </p>
       </div>
     </section>
   );
@@ -958,224 +1123,224 @@ function PaperTalkScene() {
   );
 }
 
-function CompanyPositionScene() {
-  const statuses = [
-    {
-      level: "Live",
-      title: "StatBet",
-      description: "Publicly deployed and actively operated.",
-      prominence: "primary",
-    },
-    {
-      level: "Active Backend Development",
-      title: "GID Platform Core",
-      description:
-        "Backend architecture, models, business logic and reusable APIs under construction.",
-      prominence: "primary",
-    },
-    {
-      level: "Working Prototype · Active Development",
-      title: "PaperTalk",
-      description:
-        "Accessibility-focused software progressing through functional development.",
-      prominence: "primary",
-    },
-    {
-      level: "Available Now",
-      title: "GID Business Solutions",
-      description:
-        "Websites, visibility systems, custom platforms, automation and digital support.",
-      prominence: "secondary",
-    },
-    {
-      level: "Roadmap",
-      title: "GID Track Ecosystem",
-      description:
-        "Tracking, notifications, delivery intelligence and future logistics integrations.",
-      prominence: "secondary",
-    },
-    {
-      level: "Long-Term Validation",
-      title: "Mechanic Connection · Property Connection · GID Car Tracker",
-      description:
-        "Future directions that remain under research and validation.",
-      prominence: "quiet",
-    },
-  ];
+// function CompanyPositionScene() {
+//   const statuses = [
+//     {
+//       level: "Live",
+//       title: "StatBet",
+//       description: "Publicly deployed and actively operated.",
+//       prominence: "primary",
+//     },
+//     {
+//       level: "Active Backend Development",
+//       title: "GID Platform Core",
+//       description:
+//         "Backend architecture, models, business logic and reusable APIs under construction.",
+//       prominence: "primary",
+//     },
+//     {
+//       level: "Working Prototype · Active Development",
+//       title: "PaperTalk",
+//       description:
+//         "Accessibility-focused software progressing through functional development.",
+//       prominence: "primary",
+//     },
+//     {
+//       level: "Available Now",
+//       title: "GID Business Solutions",
+//       description:
+//         "Websites, visibility systems, custom platforms, automation and digital support.",
+//       prominence: "secondary",
+//     },
+//     {
+//       level: "Roadmap",
+//       title: "GID Track Ecosystem",
+//       description:
+//         "Tracking, notifications, delivery intelligence and future logistics integrations.",
+//       prominence: "secondary",
+//     },
+//     {
+//       level: "Long-Term Validation",
+//       title: "Mechanic Connection · Property Connection · GID Car Tracker",
+//       description:
+//         "Future directions that remain under research and validation.",
+//       prominence: "quiet",
+//     },
+//   ];
 
-  return (
-    <section className="w-full max-w-7xl">
-      <SceneHeading
-        eyebrow="Where GID stands today"
-        title="Early—but not imaginary."
-        description="Every system is presented according to its real stage: live, actively developing, available, on the roadmap, or still being validated."
-      />
+//   return (
+//     <section className="w-full max-w-7xl">
+//       <SceneHeading
+//         eyebrow="Where GID stands today"
+//         title="Early—but not imaginary."
+//         description="Every system is presented according to its real stage: live, actively developing, available, on the roadmap, or still being validated."
+//       />
 
-      <div className="mt-10 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-        {statuses.map((status) => (
-          <article
-            key={status.level}
-            className={`rounded-[1.75rem] border p-6 ${
-              status.prominence === "primary"
-                ? "border-cyan-200/20 bg-cyan-200/[0.04]"
-                : status.prominence === "secondary"
-                  ? "border-white/10 bg-white/[0.025]"
-                  : "border-white/[0.07] bg-black/25"
-            }`}
-          >
-            <p
-              className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${
-                status.prominence === "primary"
-                  ? "text-cyan-100/50"
-                  : "text-neutral-600"
-              }`}
-            >
-              {status.level}
-            </p>
+//       <div className="mt-10 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+//         {statuses.map((status) => (
+//           <article
+//             key={status.level}
+//             className={`rounded-[1.75rem] border p-6 ${
+//               status.prominence === "primary"
+//                 ? "border-cyan-200/20 bg-cyan-200/[0.04]"
+//                 : status.prominence === "secondary"
+//                   ? "border-white/10 bg-white/[0.025]"
+//                   : "border-white/[0.07] bg-black/25"
+//             }`}
+//           >
+//             <p
+//               className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${
+//                 status.prominence === "primary"
+//                   ? "text-cyan-100/50"
+//                   : "text-neutral-600"
+//               }`}
+//             >
+//               {status.level}
+//             </p>
 
-            <h2
-              className={`mt-5 font-semibold tracking-[-0.04em] ${
-                status.prominence === "primary"
-                  ? "text-3xl text-white"
-                  : "text-2xl text-neutral-200"
-              }`}
-            >
-              {status.title}
-            </h2>
+//             <h2
+//               className={`mt-5 font-semibold tracking-[-0.04em] ${
+//                 status.prominence === "primary"
+//                   ? "text-3xl text-white"
+//                   : "text-2xl text-neutral-200"
+//               }`}
+//             >
+//               {status.title}
+//             </h2>
 
-            <p className="mt-4 text-sm leading-6 text-neutral-500">
-              {status.description}
-            </p>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
+//             <p className="mt-4 text-sm leading-6 text-neutral-500">
+//               {status.description}
+//             </p>
+//           </article>
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
 
-function PulseScene() {
-  const systemFlow = [
-    "Choose a path",
-    "Record the event source",
-    "Categorise the opportunity",
-    "Route the follow-up",
-  ];
+// function PulseScene() {
+//   const systemFlow = [
+//     "Choose a path",
+//     "Record the event source",
+//     "Categorise the opportunity",
+//     "Route the follow-up",
+//   ];
 
-  return (
-    <section className="grid w-full max-w-7xl gap-9 lg:grid-cols-[1.18fr_0.82fr] lg:items-center">
-      <div>
-        <SceneHeading
-          eyebrow="Proof 004 — GID Pulse"
-          title="Scan. Choose. Connect."
-          description="GID Pulse turns attention from this room into structured opportunities and useful follow-up."
-        />
+//   return (
+//     <section className="grid w-full max-w-7xl gap-9 lg:grid-cols-[1.18fr_0.82fr] lg:items-center">
+//       <div>
+//         <SceneHeading
+//           eyebrow="Proof 004 — GID Pulse"
+//           title="Scan. Choose. Connect."
+//           description="GID Pulse turns attention from this room into structured opportunities and useful follow-up."
+//         />
 
-        <div className="mt-8 grid gap-3 sm:grid-cols-2">
-          {participationOptions.map((option, index) => (
-            <article
-              key={option.label}
-              className="rounded-[1.35rem] border border-white/10 bg-white/[0.025] px-5 py-4"
-            >
-              <div className="flex items-start gap-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-black/50 text-[10px] font-semibold text-neutral-600">
-                  0{index + 1}
-                </span>
+//         <div className="mt-8 grid gap-3 sm:grid-cols-2">
+//           {participationOptions.map((option, index) => (
+//             <article
+//               key={option.label}
+//               className="rounded-[1.35rem] border border-white/10 bg-white/[0.025] px-5 py-4"
+//             >
+//               <div className="flex items-start gap-4">
+//                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-black/50 text-[10px] font-semibold text-neutral-600">
+//                   0{index + 1}
+//                 </span>
 
-                <div>
-                  <p className="text-sm font-semibold text-neutral-200">
-                    {option.label}
-                  </p>
+//                 <div>
+//                   <p className="text-sm font-semibold text-neutral-200">
+//                     {option.label}
+//                   </p>
 
-                  <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-600">
-                    {option.category}
-                  </p>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+//                   <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+//                     {option.category}
+//                   </p>
+//                 </div>
+//               </div>
+//             </article>
+//           ))}
+//         </div>
 
-        <div className="mt-5 flex flex-wrap items-center gap-2 rounded-[1.5rem] border border-white/10 bg-black/40 p-4">
-          {systemFlow.map((step, index) => (
-            <div key={step} className="flex items-center gap-2">
-              <span className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
-                {step}
-              </span>
+//         <div className="mt-5 flex flex-wrap items-center gap-2 rounded-[1.5rem] border border-white/10 bg-black/40 p-4">
+//           {systemFlow.map((step, index) => (
+//             <div key={step} className="flex items-center gap-2">
+//               <span className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
+//                 {step}
+//               </span>
 
-              {index < systemFlow.length - 1 ? (
-                <ArrowRight className="h-3.5 w-3.5 text-neutral-700" />
-              ) : null}
-            </div>
-          ))}
-        </div>
-      </div>
+//               {index < systemFlow.length - 1 ? (
+//                 <ArrowRight className="h-3.5 w-3.5 text-neutral-700" />
+//               ) : null}
+//             </div>
+//           ))}
+//         </div>
+//       </div>
 
-      <div className="flex flex-col items-center rounded-[2rem] border border-white/10 bg-white p-7 text-center text-black shadow-[0_35px_120px_rgba(0,0,0,0.7)]">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">
-          GID Pulse
-        </p>
+//       <div className="flex flex-col items-center rounded-[2rem] border border-white/10 bg-white p-7 text-center text-black shadow-[0_35px_120px_rgba(0,0,0,0.7)]">
+//         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">
+//           GID Pulse
+//         </p>
 
-        <h2 className="mt-3 text-2xl font-semibold tracking-[-0.04em]">
-          Where do you fit?
-        </h2>
+//         <h2 className="mt-3 text-2xl font-semibold tracking-[-0.04em]">
+//           Where do you fit?
+//         </h2>
 
-        <Image
-          src="/qr/graduation-qr.png"
-          alt="Graduation connection QR code"
-          width={420}
-          height={420}
-          priority
-          className="mt-5 aspect-square w-full max-w-[330px]"
-        />
+//         <Image
+//           src="/qr/graduation-qr.png"
+//           alt="Graduation connection QR code"
+//           width={420}
+//           height={420}
+//           priority
+//           className="mt-5 aspect-square w-full max-w-[330px]"
+//         />
 
-        <p className="mt-5 text-lg font-semibold">
-          gidtechnologies.com/graduation
-        </p>
+//         <p className="mt-5 text-lg font-semibold">
+//           gidtechnologies.com/graduation
+//         </p>
 
-        <p className="mt-3 max-w-sm text-xs leading-5 text-neutral-500">
-          Personal names and private submission details are never projected
-          publicly.
-        </p>
-      </div>
-    </section>
-  );
-}
+//         <p className="mt-3 max-w-sm text-xs leading-5 text-neutral-500">
+//           Personal names and private submission details are never projected
+//           publicly.
+//         </p>
+//       </div>
+//     </section>
+//   );
+// }
 
-function ClosingScene() {
-  return (
-    <section className="grid w-full max-w-7xl gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.34em] text-cyan-200/60">
-          GID Technologies
-        </p>
+// function ClosingScene() {
+//   return (
+//     <section className="grid w-full max-w-7xl gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+//       <div>
+//         <p className="text-xs font-semibold uppercase tracking-[0.34em] text-cyan-200/60">
+//           GID Technologies
+//         </p>
 
-        <h1 className="mt-7 text-balance text-[clamp(3.5rem,7vw,8rem)] font-semibold leading-[0.92] tracking-[-0.07em]">
-          We are not presenting a finished company.
-        </h1>
+//         <h1 className="mt-7 text-balance text-[clamp(3.5rem,7vw,8rem)] font-semibold leading-[0.92] tracking-[-0.07em]">
+//           We are not presenting a finished company.
+//         </h1>
 
-        <p className="mt-8 max-w-4xl text-[clamp(1.5rem,2.5vw,3rem)] font-medium leading-tight text-neutral-400">
-          We are presenting a startup that has started proving itself.
-        </p>
+//         <p className="mt-8 max-w-4xl text-[clamp(1.5rem,2.5vw,3rem)] font-medium leading-tight text-neutral-400">
+//           We are presenting a startup that has started proving itself.
+//         </p>
 
-        <p className="mt-10 text-2xl font-semibold">
-          Build with us. Support the journey.
-        </p>
-      </div>
+//         <p className="mt-10 text-2xl font-semibold">
+//           Build with us. Support the journey.
+//         </p>
+//       </div>
 
-      <div className="flex flex-col items-center rounded-[2rem] border border-white/10 bg-white p-7 text-center text-black">
-        <Image
-          src="/qr/graduation-qr.png"
-          alt="Connect with GID Technologies"
-          width={440}
-          height={440}
-          priority
-          className="aspect-square w-full max-w-[380px]"
-        />
+//       <div className="flex flex-col items-center rounded-[2rem] border border-white/10 bg-white p-7 text-center text-black">
+//         <Image
+//           src="/qr/graduation-qr.png"
+//           alt="Connect with GID Technologies"
+//           width={440}
+//           height={440}
+//           priority
+//           className="aspect-square w-full max-w-[380px]"
+//         />
 
-        <p className="mt-5 text-lg font-semibold">
-          gidtechnologies.com/graduation
-        </p>
-      </div>
-    </section>
-  );
-}
+//         <p className="mt-5 text-lg font-semibold">
+//           gidtechnologies.com/graduation
+//         </p>
+//       </div>
+//     </section>
+//   );
+// }

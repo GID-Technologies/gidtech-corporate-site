@@ -210,3 +210,19 @@ body {
     animation: none;
   }
 }
+
+.presentation-dense-scene {
+  transform-origin: center;
+}
+
+@media (min-width: 1024px) and (max-height: 960px) {
+  .presentation-dense-scene {
+    transform: scale(0.9);
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 840px) {
+  .presentation-dense-scene {
+    transform: scale(0.82);
+  }
+}

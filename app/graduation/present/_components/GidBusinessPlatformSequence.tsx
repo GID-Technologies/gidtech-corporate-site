@@ -238,8 +238,8 @@ export default function GidBusinessPlatformSequence({
   const StepIcon = step.icon;
 
   return (
-    <section className="w-full max-w-7xl">
-      <div className="grid gap-8 lg:grid-cols-[0.57fr_1.43fr] lg:items-center xl:gap-12">
+    <section className="w-full max-w-[1450px]">
+      <div className="grid gap-7 lg:grid-cols-[0.52fr_1.48fr] lg:items-center xl:gap-10">
         <div>
           <div className="flex items-center gap-3">
             <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.04]">
@@ -251,19 +251,19 @@ export default function GidBusinessPlatformSequence({
             </p>
           </div>
 
-          <p className="mt-8 text-xs font-semibold uppercase tracking-[0.22em] text-neutral-600">
+          <p className="mt-5 text-xs font-semibold uppercase tracking-[0.22em] text-neutral-600">
             {step.label}
           </p>
 
-          <h1 className="mt-5 text-balance text-[clamp(2.35rem,4.25vw,5.15rem)] font-semibold leading-[0.96] tracking-[-0.06em] text-white">
+          <h1 className="mt-4 text-balance text-[clamp(2.15rem,3.75vw,4.4rem)] font-semibold leading-[0.96] tracking-[-0.06em] text-white">
             {step.title}
           </h1>
 
-          <p className="mt-6 max-w-2xl text-[clamp(0.95rem,1.15vw,1.2rem)] leading-8 text-neutral-400">
+          <p className="mt-4 max-w-2xl text-[clamp(0.88rem,1vw,1.08rem)] leading-7 text-neutral-400">
             {step.description}
           </p>
 
-          <div className="mt-7 rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.035] p-5">
+          <div className="mt-5 rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.035] p-4">
             <p className="text-sm font-semibold leading-6 text-cyan-50">
               {step.outcome}
             </p>
@@ -278,7 +278,7 @@ export default function GidBusinessPlatformSequence({
       </div>
 
       <div
-        className={`mt-7 grid gap-2 ${
+        className={`mt-4 grid gap-2 ${
           stepOrder.length === 4
             ? "sm:grid-cols-4"
             : stepOrder.length === 7
@@ -294,7 +294,7 @@ export default function GidBusinessPlatformSequence({
           return (
             <div
               key={sequenceStep.label}
-              className={`rounded-2xl border px-3 py-3 ${
+              className={`min-w-0 rounded-xl border px-3 py-2 ${
                 active
                   ? "border-cyan-200/30 bg-cyan-200/[0.07]"
                   : passed
@@ -311,7 +311,7 @@ export default function GidBusinessPlatformSequence({
               </p>
 
               <p
-                className={`mt-2 text-[10px] font-semibold leading-4 ${
+                className={`mt-1 truncate text-[9px] font-semibold leading-4 ${
                   active ? "text-neutral-200" : "text-neutral-700"
                 }`}
               >
@@ -379,8 +379,8 @@ function EcosystemVisual() {
   ];
 
   return (
-    <div className="rounded-[2rem] border border-white/15 bg-[#05080b] p-7 shadow-[0_35px_120px_rgba(0,0,0,0.82)]">
-      <div className="rounded-[1.5rem] border border-cyan-200/20 bg-cyan-200/[0.045] p-6 text-center">
+    <div className="rounded-[2rem] border border-white/15 bg-[#05080b] p-5 shadow-[0_35px_120px_rgba(0,0,0,0.82)]">
+      <div className="rounded-[1.5rem] border border-cyan-200/20 bg-cyan-200/[0.045] p-5 text-center">
         <Layers3 className="mx-auto h-7 w-7 text-cyan-100/70" />
 
         <p className="mt-4 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100/50">
@@ -408,7 +408,7 @@ function EcosystemVisual() {
           return (
             <article
               key={model.title}
-              className="rounded-[1.4rem] border border-white/10 bg-black/55 p-5"
+              className="rounded-[1.4rem] border border-white/10 bg-black/55 p-4"
             >
               <Icon className="h-5 w-5 text-white" />
 
@@ -416,11 +416,11 @@ function EcosystemVisual() {
                 {model.status}
               </p>
 
-              <h3 className="mt-3 text-xl font-semibold text-white">
+              <h3 className="mt-2 text-lg font-semibold text-white">
                 {model.title}
               </h3>
 
-              <p className="mt-3 text-sm leading-6 text-neutral-500">
+              <p className="mt-2 text-xs leading-5 text-neutral-500">
                 {model.description}
               </p>
             </article>

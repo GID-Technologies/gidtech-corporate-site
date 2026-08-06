@@ -26,6 +26,7 @@ type ProofStep = {
   src?: string;
   alt?: string;
   imageClassName?: string;
+  compact?: boolean;
   icon: LucideIcon;
 };
 
@@ -76,6 +77,7 @@ const proofSteps: ProofStep[] = [
     src: "/presentation/statbet/historical/outcomereview.png",
     alt: "StatBet Outcome Review for Portugal versus Croatia",
     imageClassName: "object-contain scale-[1.06]",
+    compact: true,
     icon: CheckCircle2,
   },
   {
@@ -136,10 +138,15 @@ export default function StatBetProofSequence({
   const actualStepIndex = stepOrder[safeActiveStep];
   const step = proofSteps[actualStepIndex];
   const StepIcon = step.icon;
+  const compact = Boolean(step.compact);
 
   return (
     <section className="w-full max-w-7xl">
-      <div className="grid gap-8 lg:grid-cols-[0.58fr_1.42fr] lg:items-center xl:gap-12">
+      <div
+        className={`grid lg:grid-cols-[0.58fr_1.42fr] lg:items-center ${
+          compact ? "gap-6 xl:gap-9" : "gap-8 xl:gap-12"
+        }`}
+      >
         <div>
           <div className="flex items-center gap-3">
             <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.04]">
@@ -151,19 +158,39 @@ export default function StatBetProofSequence({
             </p>
           </div>
 
-          <p className="mt-8 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-600">
+          <p
+            className={`text-xs font-semibold uppercase tracking-[0.24em] text-neutral-600 ${
+              compact ? "mt-5" : "mt-8"
+            }`}
+          >
             {step.label}
           </p>
 
-          <h1 className="mt-5 text-balance text-[clamp(2.4rem,4.4vw,5.25rem)] font-semibold leading-[0.96] tracking-[-0.06em] text-white">
+          <h1
+            className={`text-balance font-semibold leading-[0.96] tracking-[-0.06em] text-white ${
+              compact
+                ? "mt-4 text-[clamp(2.15rem,3.85vw,4.5rem)]"
+                : "mt-5 text-[clamp(2.4rem,4.4vw,5.25rem)]"
+            }`}
+          >
             {step.title}
           </h1>
 
-          <p className="mt-6 max-w-2xl text-[clamp(0.95rem,1.15vw,1.2rem)] leading-8 text-neutral-400">
+          <p
+            className={`max-w-2xl text-neutral-400 ${
+              compact
+                ? "mt-4 text-[clamp(0.88rem,1vw,1.08rem)] leading-7"
+                : "mt-6 text-[clamp(0.95rem,1.15vw,1.2rem)] leading-8"
+            }`}
+          >
             {step.description}
           </p>
 
-          <div className="mt-7 rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.035] p-5">
+          <div
+            className={`rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.035] ${
+              compact ? "mt-5 p-4" : "mt-7 p-5"
+            }`}
+          >
             <div className="flex items-start gap-3">
               <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-cyan-200" />
 
@@ -278,7 +305,7 @@ export default function StatBetProofSequence({
       </div>
 
       <div
-        className={`mt-8 grid gap-2 ${
+        className={`${compact ? "mt-5" : "mt-8"} grid gap-2 ${
           stepOrder.length === 3
             ? "sm:grid-cols-3"
             : "sm:grid-cols-3 xl:grid-cols-6"
@@ -324,7 +351,11 @@ export default function StatBetProofSequence({
         })}
       </div>
 
-      <p className="mt-4 text-center text-[9px] font-semibold uppercase tracking-[0.2em] text-neutral-700">
+      <p
+        className={`text-center text-[9px] font-semibold uppercase tracking-[0.2em] text-neutral-700 ${
+          compact ? "mt-2" : "mt-4"
+        }`}
+      >
         Space or right arrow advances the evidence chain
       </p>
     </section>

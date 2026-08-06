@@ -25,20 +25,21 @@ export const presentationScenes: PresentationScene[] = [
     id: "opening",
     number: "01",
     label: "Opening",
-    title: "What are we building with what we learned?",
+    title:
+      "Growth becomes difficult when the systems behind the business are weak.",
     shortcut: "1",
   },
   {
     id: "problem",
     number: "02",
-    label: "Problem Space",
-    title: "Value exists. Systems are missing.",
+    label: "Business Reality",
+    title: "Many businesses lose money through problems that look ordinary.",
   },
   {
     id: "gid-model",
     number: "03",
-    label: "GID Model",
-    title: "One company. Two connected operating arms.",
+    label: "How GID Operates",
+    title: "Solve immediate problems. Build long-term products.",
     shortcut: "2",
   },
   {
@@ -67,29 +68,31 @@ export const presentationScenes: PresentationScene[] = [
   {
     id: "platform-roadmap",
     number: "07",
-    label: "Platform Roadmap",
-    title: "Build the core once. Extend it carefully.",
+    label: "Product Roadmap",
+    title:
+      "What GID plans to build next across movement, communication, intelligence and integration.",
     shortcut: "6",
   },
   {
     id: "company-position",
     number: "08",
-    label: "Company Position",
-    title: "Where GID Technologies stands today.",
+    label: "Hire GID",
+    title: "Match the organisation’s problem with the right GID solution.",
     shortcut: "7",
   },
   {
     id: "gid-pulse",
     number: "09",
-    label: "Proof 004",
-    title: "GID Pulse — where do you fit?",
+    label: "GID Pulse",
+    title: "Scan once, choose the problem and start the right conversation.",
     shortcut: "8",
   },
   {
     id: "closing",
     number: "10",
     label: "Closing",
-    title: "A startup that has started proving itself.",
+    title:
+      "Bring GID one problem worth solving and start the right conversation.",
     shortcut: "9",
   },
 ];
@@ -104,20 +107,20 @@ export const presentationModeDetails: Record<
 > = {
   core: {
     label: "Core",
-    timing: "5 minutes",
+    timing: "5–6 minutes",
     description:
-      "The complete company story with compressed product and engineering proof.",
+      "A focused commercial overview covering GID’s operating model, strongest proof, business platform and immediate service opportunities.",
   },
   recommended: {
     label: "Recommended",
-    timing: "8–10 minutes",
+    timing: "9–11 minutes",
     description:
-      "The rehearsed route with controlled StatBet, GID Platform and PaperTalk proof.",
+      "The rehearsed graduation route with business problems, company capabilities, products, platform opportunities and audience conversion.",
   },
   extended: {
     label: "Extended",
-    timing: "12–15 minutes",
+    timing: "13–16 minutes",
     description:
-      "The complete route with selected technical and product branches.",
+      "The complete commercial presentation with additional product detail, integration direction and selected technical foundation.",
   },
 };
