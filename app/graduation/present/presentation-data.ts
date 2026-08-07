@@ -2,13 +2,13 @@ export type PresentationMode = "core" | "recommended" | "extended";
 
 export type PresentationSceneId =
   | "opening"
+  | "follow-live"
   | "problem"
   | "gid-model"
   | "statbet-proof"
   | "gid-platform-core"
+  | "gid-business-ai"
   | "papertalk-proof"
-  | "platform-roadmap"
-  | "company-position"
   | "gid-pulse"
   | "closing";
 
@@ -25,75 +25,71 @@ export const presentationScenes: PresentationScene[] = [
     id: "opening",
     number: "01",
     label: "Opening",
-    title:
-      "Growth becomes difficult when the systems behind the business are weak.",
+    title: "Strong growth needs stronger systems.",
     shortcut: "1",
   },
   {
-    id: "problem",
+    id: "follow-live",
     number: "02",
-    label: "Business Reality",
-    title: "Many businesses lose money through problems that look ordinary.",
-  },
-  {
-    id: "gid-model",
-    number: "03",
-    label: "How GID Operates",
-    title: "Solve immediate problems. Build long-term products.",
+    label: "Follow Live",
+    title: "Everything being presented connects to something live.",
     shortcut: "2",
   },
   {
-    id: "statbet-proof",
-    number: "04",
-    label: "Proof 001",
-    title: "StatBet — from idea to live public product.",
+    id: "problem",
+    number: "03",
+    label: "Business Reality",
+    title: "Ordinary operational gaps eventually become financial problems.",
     shortcut: "3",
   },
   {
-    id: "gid-platform-core",
-    number: "05",
-    label: "Business Infrastructure",
-    title:
-      "GID Platform — direct applications, configured systems and embedded services.",
+    id: "gid-model",
+    number: "04",
+    label: "How GID Operates",
+    title: "Business Solutions and GID-owned products.",
     shortcut: "4",
   },
-
   {
-    id: "papertalk-proof",
-    number: "06",
-    label: "Proof 003",
-    title: "PaperTalk — printed information, made audible.",
+    id: "statbet-proof",
+    number: "05",
+    label: "StatBet",
+    title: "From an idea to a live public product.",
     shortcut: "5",
   },
   {
-    id: "platform-roadmap",
-    number: "07",
-    label: "Product Roadmap",
-    title:
-      "What GID plans to build next across movement, communication, intelligence and integration.",
+    id: "gid-platform-core",
+    number: "06",
+    label: "GID Platform",
+    title: "A reusable business foundation for different organisations.",
     shortcut: "6",
   },
   {
-    id: "company-position",
-    number: "08",
-    label: "Hire GID",
-    title: "Match the organisation’s problem with the right GID solution.",
+    id: "gid-business-ai",
+    number: "07",
+    label: "GID Business AI",
+    title: "From business information to executive intelligence.",
     shortcut: "7",
+  },
+  {
+    id: "papertalk-proof",
+    number: "08",
+    label: "PaperTalk",
+    title: "Documents transformed into readable and audible information.",
+    shortcut: "8",
   },
   {
     id: "gid-pulse",
     number: "09",
-    label: "GID Pulse",
-    title: "Scan once, choose the problem and start the right conversation.",
-    shortcut: "8",
+    label: "Work With GID",
+    title: "Choose the problem, opportunity or conversation that fits.",
+    shortcut: "9",
   },
   {
     id: "closing",
     number: "10",
     label: "Closing",
-    title:
-      "Bring GID one problem worth solving and start the right conversation.",
-    shortcut: "9",
+    title: "Bring GID one problem worth solving.",
+    shortcut: "0",
   },
 ];
 

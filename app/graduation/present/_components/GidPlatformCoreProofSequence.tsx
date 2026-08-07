@@ -174,7 +174,7 @@ export default function GidPlatformCoreProofSequence({
             </span>
 
             <p className="text-xs font-semibold uppercase tracking-[0.34em] text-cyan-200/60">
-              Proof 002 — GID Platform Core
+              Proof 002 — GID Platform
             </p>
           </div>
 

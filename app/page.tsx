@@ -6,6 +6,7 @@ import {
   ArrowRight,
   Accessibility,
   BarChart3,
+  BrainCircuit,
   Briefcase,
   Building2,
   Car,
@@ -61,6 +62,24 @@ const businessProblems: {
     icon: Search,
   },
   {
+    problem:
+      "The business has records and reports, but important decisions still depend on guesswork.",
+    solution: "GID Business AI",
+    outcome:
+      "Interpret operational information, identify risks and opportunities, and turn business activity into clearer recommended action.",
+    href: "/products/gid-business-ai",
+    icon: BrainCircuit,
+  },
+  {
+    problem:
+      "Customers, orders, inventory and invoices are difficult to track across scattered tools.",
+    solution: "GID Platform",
+    outcome:
+      "Bring essential business operations into a clearer system configured around how the organisation actually works.",
+    href: "/contact?service=business-system#contact-form",
+    icon: Briefcase,
+  },
+  {
     problem: "Manual and repetitive work slows the team down.",
     solution: "Automation",
     outcome:
@@ -110,12 +129,29 @@ const featuredSolutions: {
     icon: Monitor,
   },
   {
+    title: "Configured Business Systems",
+    description:
+      "Business systems designed around customers, orders, inventory, invoices, communication and the organisation’s actual daily workflow.",
+    outcome:
+      "Better organisation, clearer records and stronger operational control.",
+    href: "/contact?service=business-system#contact-form",
+    icon: Briefcase,
+  },
+  {
     title: "Automation & Intelligent Workflows",
     description:
       "Forms, enquiry routing, follow-up systems, notifications, and intelligent assistance for repetitive business processes.",
     outcome: "Less manual work and more operational consistency.",
     href: "/solutions#automation",
     icon: Workflow,
+  },
+  {
+    title: "AI Business Intelligence",
+    description:
+      "Executive intelligence designed to identify risks, explain performance, reveal opportunities, and prioritise useful business actions.",
+    outcome: "Faster decisions and earlier visibility into costly problems.",
+    href: "/products/gid-business-ai",
+    icon: BrainCircuit,
   },
   {
     title: "Ongoing Digital Care",
@@ -227,11 +263,20 @@ const roadmap: {
     icon: BarChart3,
   },
   {
-    name: "GID Platform Core",
-    category: "Reusable backend infrastructure for business operations",
-    status: "Active Backend Development",
+    name: "GID Platform",
+    category:
+      "Configurable business systems for customers, orders, inventory, invoices and daily operations",
+    status: "Active Product Development",
     href: "/products#gid-platform-core",
-    icon: Layers3,
+    icon: Briefcase,
+  },
+  {
+    name: "GID Business AI",
+    category:
+      "Executive intelligence for business risks, opportunities, performance, and recommended action",
+    status: "Active AI Development",
+    href: "/products/gid-business-ai",
+    icon: BrainCircuit,
   },
   {
     name: "PaperTalk",
@@ -452,14 +497,15 @@ function Hero() {
           </div>
 
           <h1 className="text-balance max-w-5xl text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            Practical digital solutions that help businesses earn trust, improve
-            visibility, and operate better.
+            Practical digital solutions that help businesses earn trust,
+            organise operations, make better decisions, and grow.
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg leading-8 text-neutral-400 md:mt-8 md:text-xl">
             GID Technologies builds business websites, visibility systems,
-            custom platforms, automation workflows, and digital products around
-            real business problems and measurable outcomes.
+            configured business systems, AI business intelligence, automation
+            workflows, and digital products around real business problems and
+            measurable outcomes.
           </p>
 
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">

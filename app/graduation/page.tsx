@@ -16,6 +16,10 @@ import {
   Network,
   ShieldCheck,
   Users,
+  Workflow,
+  BrainCircuit,
+  Globe2,
+  SearchCheck,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -35,58 +39,58 @@ type ConnectionPath = {
 
 const connectionPaths: ConnectionPath[] = [
   {
-    title: "I Need a Digital Solution",
-    label: "Businesses & Organizations",
+    title: "I Need a Business System",
+    label: "Operations & Business Management",
     description:
-      "Discuss a website, digital showroom, visibility system, custom platform, automation workflow, or ongoing digital-support need.",
-    href: "/contact?service=consultation#contact-form",
-    cta: "Discuss a Business Need",
+      "Discuss a configured system for customers, records, orders, inventory, invoices, communication, or another operational workflow.",
+    href: "/contact?service=business-system#contact-form",
+    cta: "Discuss a Business System",
     icon: BriefcaseBusiness,
   },
   {
-    title: "I Want to Support GID",
-    label: "Sponsors & Strategic Supporters",
+    title: "I Need a Website or Visibility Solution",
+    label: "Presence, Discovery & Enquiries",
     description:
-      "Explore sponsorship, mentorship, strategic guidance, infrastructure support, useful resources, or other practical forms of support.",
-    href: "/contact?service=build-with-gid&path=strategic-support#contact-form",
-    cta: "Explore Support",
-    icon: ShieldCheck,
+      "Improve how people find, understand, trust, and contact the business through a professional website or visibility system.",
+    href: "/contact?service=business-website#contact-form",
+    cta: "Improve Business Visibility",
+    icon: Globe2,
   },
   {
-    title: "I Can Contribute a Skill",
-    label: "Builders & Contributors",
+    title: "I Want AI Business Intelligence",
+    label: "Executive Intelligence",
     description:
-      "Contribute through development, design, research, product thinking, operations, marketing, testing, documentation, or another useful skill.",
-    href: "/contact?service=build-with-gid&path=builder#contact-form",
-    cta: "Contribute a Skill",
-    icon: Code2,
+      "Explore how business information could be interpreted to identify risks, find opportunities, and support clearer decisions.",
+    href: "/contact?service=business-ai#contact-form",
+    cta: "Discuss GID Business AI",
+    icon: BrainCircuit,
   },
   {
-    title: "I Can Make an Introduction",
-    label: "Connectors & Partners",
+    title: "I Want a Workflow or Technology Audit",
+    label: "Operational Review",
     description:
-      "Introduce GID Technologies to a business, institution, technical expert, sponsor, mentor, distribution partner, or useful opportunity.",
-    href: "/contact?service=build-with-gid&path=introduction#contact-form",
-    cta: "Offer an Introduction",
+      "Identify repeated work, disconnected information, weak processes, technology gaps, and areas where the organisation may be losing time or money.",
+    href: "/contact?service=workflow-audit#contact-form",
+    cta: "Request an Audit",
+    icon: SearchCheck,
+  },
+  {
+    title: "I Need a Custom Platform",
+    label: "Specialised Digital Solution",
+    description:
+      "Discuss a portal, dashboard, internal tool, MVP, automation system, or platform built around a specific requirement.",
+    href: "/contact?service=custom-platform#contact-form",
+    cta: "Discuss a Custom Platform",
+    icon: Workflow,
+  },
+  {
+    title: "I Can Introduce, Support, or Partner With GID",
+    label: "Strategic Opportunity",
+    description:
+      "Create a useful connection with a business, institution, sponsor, technical expert, distribution partner, or strategic opportunity.",
+    href: "/contact?service=partnership#contact-form",
+    cta: "Open a Strategic Conversation",
     icon: Handshake,
-  },
-  {
-    title: "I Want to Test a Product",
-    label: "Early Users & Pilot Participants",
-    description:
-      "Express interest in testing PaperTalk, following GID Platform development, joining future pilots, or providing structured product feedback.",
-    href: "/contact?service=build-with-gid&path=early-user#contact-form",
-    cta: "Join Product Testing",
-    icon: Eye,
-  },
-  {
-    title: "I Want to Follow the Journey",
-    label: "Updates & Future Opportunities",
-    description:
-      "Stay connected to GID Technologies as StatBet operates, GID Platform Core develops, PaperTalk progresses, and future systems take shape.",
-    href: "/contact?service=build-with-gid&path=follow-journey#contact-form",
-    cta: "Follow GID’s Development",
-    icon: Users,
   },
 ];
 
@@ -99,11 +103,11 @@ const presentationProducts = [
     icon: BarChart3,
   },
   {
-    name: "GID Platform Core",
-    status: "Active Backend Development",
+    name: "GID Platform",
+    status: "Active Product Development",
     description:
-      "A modular business-infrastructure backend being developed around customers, products, inventory, orders, invoices, and future operational services.",
-    icon: Network,
+      "A configurable business system designed to organise customers, orders, inventory, invoices, communication and daily operations.",
+    icon: BriefcaseBusiness,
   },
   {
     name: "PaperTalk",
@@ -113,11 +117,11 @@ const presentationProducts = [
     icon: Accessibility,
   },
   {
-    name: "GID Track Ecosystem",
-    status: "Roadmap",
+    name: "GID Business AI",
+    status: "Active AI Development",
     description:
-      "A future platform layer covering shipment tracking, operational notifications, delivery intelligence, and external logistics integrations.",
-    icon: Car,
+      "An executive-intelligence system being developed to identify business risks, find opportunities, explain performance and recommend useful action.",
+    icon: BrainCircuit,
   },
   {
     name: "Exploring Further",
@@ -318,16 +322,16 @@ export default async function GraduationPage({
 
                 <p className="mt-6 text-lg leading-8 text-neutral-400">
                   GID Technologies is an early-stage technology company building
-                  practical business solutions, reusable infrastructure, and
-                  proof-led digital products.
+                  practical business solutions, configurable systems,
+                  intelligent products and reusable foundations.
                 </p>
 
                 <p className="mt-5 leading-8 text-neutral-400">
                   One side of the company helps businesses solve practical
                   digital, visibility, communication, and workflow problems. The
-                  other develops GID-owned products and infrastructure—from
-                  StatBet and GID Platform Core to PaperTalk and future tracking
-                  and logistics services.
+                  other develops GID-owned products and business systems—from
+                  StatBet and GID Platform to GID Business AI, PaperTalk and
+                  future services.
                 </p>
 
                 <div className="mt-8 rounded-2xl border border-white/10 bg-black/50 p-5">

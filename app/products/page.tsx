@@ -6,6 +6,8 @@ import {
   ArrowRight,
   BadgeCheck,
   Bell,
+  BrainCircuit,
+  BriefcaseBusiness,
   Bot,
   Car,
   CheckCircle2,
@@ -81,20 +83,37 @@ const productGroups: ProductGroup[] = [
     products: [
       {
         id: "gid-platform-core",
-        name: "GID Platform Core",
-        status: "Active Backend Development",
-        role: "Reusable business-infrastructure backend",
+        name: "GID Platform",
+        status: "Active Product Development",
+        role: "Configurable business operations system",
         description:
-          "A modular Java Spring Boot backend being developed around customers, products, inventory, orders, invoices, and future operational services.",
+          "A flexible business system designed to help organisations manage customers, orders, inventory, invoices, communication and daily operations through one clearer workflow.",
         direction: [
-          "Backend endpoints and reusable APIs",
-          "Database entities and models",
-          "Business logic and service modules",
-          "Future multi-organisation direction",
+          "Organised customer and business records",
+          "Connected orders, inventory and invoices",
+          "Workflows configured around the organisation",
+          "Clearer operational visibility and control",
         ],
-        href: "/contact?service=build-with-gid&path=follow-journey#contact-form",
-        cta: "Follow Platform Development",
-        icon: ServerCog,
+        href: "/contact?service=business-system#contact-form",
+        cta: "Discuss a Business System",
+        icon: BriefcaseBusiness,
+      },
+      {
+        id: "gid-business-ai",
+        name: "GID Business AI",
+        status: "Active AI Development",
+        role: "Executive business-intelligence system",
+        description:
+          "An AI system being developed to interpret business activity, identify risks, find opportunities, explain performance, and recommend useful executive action.",
+        direction: [
+          "Executive morning briefings",
+          "Risk and opportunity detection",
+          "Department-level intelligence",
+          "Prioritised recommended actions",
+        ],
+        href: "/products/gid-business-ai",
+        cta: "Explore GID Business AI",
+        icon: BrainCircuit,
       },
       {
         id: "papertalk",
@@ -109,8 +128,8 @@ const productGroups: ProductGroup[] = [
           "Readable text output",
           "Read Aloud workflow",
         ],
-        href: "/contact?service=build-with-gid&path=early-user#contact-form",
-        cta: "Express Testing Interest",
+        href: "/contact?service=papertalk#contact-form",
+        cta: "Discuss PaperTalk",
         icon: Accessibility,
       },
     ],
@@ -262,8 +281,8 @@ const roadmapLogic = [
     icon: CheckCircle2,
   },
   {
-    title: "Build reusable foundations",
-    text: "GID Platform Core and PaperTalk represent active engineering and functional product development.",
+    title: "Build solutions organisations can use",
+    text: "GID Platform, GID Business AI, and PaperTalk turn operational, decision-making, and accessibility problems into practical products.",
     icon: Database,
   },
   {
@@ -279,9 +298,14 @@ const statusGuide = [
     meaning: "Publicly accessible and available for people to inspect or use.",
   },
   {
-    status: "Active Backend Development",
+    status: "Active Product Development",
     meaning:
-      "Real backend architecture, data models, logic, and APIs are currently under construction.",
+      "A real product is being developed around practical business workflows and organisational needs.",
+  },
+  {
+    status: "Active AI Development",
+    meaning:
+      "Core AI foundations exist and additional executive-intelligence capabilities are actively being developed.",
   },
   {
     status: "Working Software Prototype",
@@ -322,10 +346,10 @@ export default function ProductsPage() {
             </h1>
 
             <p className="mt-8 text-lg leading-8 text-neutral-400 md:text-xl">
-              StatBet is live. GID Platform Core is under active backend
-              development. PaperTalk is a working software prototype. Tracking
-              and logistics services remain on the roadmap, while wider concepts
-              stay under long-term validation.
+              StatBet is live. GID Platform and GID Business AI are under active
+              product development. PaperTalk is a working software prototype.
+              Tracking and logistics services remain on the roadmap, while wider
+              concepts stay under long-term validation.
             </p>
           </div>
 
@@ -341,7 +365,7 @@ export default function ProductsPage() {
                 </p>
 
                 <p className="mt-1 text-2xl font-semibold text-white">
-                  1 live · 2 active · 4 roadmap · 3 validating
+                  1 live · 3 active · 4 roadmap · 3 validating
                 </p>
               </div>
             </div>
@@ -388,7 +412,8 @@ export default function ProductsPage() {
                   quiet={group.quiet}
                   featured={
                     product.id === "statbet" ||
-                    product.id === "gid-platform-core"
+                    product.id === "gid-platform-core" ||
+                    product.id === "gid-business-ai"
                   }
                 />
               ))}

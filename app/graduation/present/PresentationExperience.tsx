@@ -4,10 +4,10 @@ import Image from "next/image";
 import StatBetProofSequence from "./_components/StatBetProofSequence";
 import PaperTalkProofSequence from "./_components/PaperTalkProofSequence";
 import GidBusinessPlatformSequence from "./_components/GidBusinessPlatformSequence";
-import CommercialHelpScene from "./_components/CommercialHelpScene";
 import CommercialPulseScene from "./_components/CommercialPulseScene";
 import CommercialClosingScene from "./_components/CommercialClosingScene";
-import PlatformRoadmapScene from "./_components/PlatformRoadmapScene";
+import FollowLiveScene from "./_components/FollowLiveScene";
+import GidBusinessAiSequence from "./_components/GidBusinessAiSequence";
 import {
   ArrowLeft,
   ArrowRight,
@@ -36,17 +36,16 @@ type PresentationExperienceProps = {
 
 const shortcutSceneIndexes: Record<string, number> = {
   "1": 0,
-  "2": 2,
-  "3": 3,
-  "4": 4,
-  "5": 5,
-  "6": 6,
-  "7": 7,
-  "8": 8,
-  "9": 9,
+  "2": 1,
+  "3": 2,
+  "4": 3,
+  "5": 4,
+  "6": 5,
+  "7": 6,
+  "8": 7,
+  "9": 8,
   "0": 9,
 };
-
 // const participationOptions = [
 //   {
 //     label: "I need a digital solution",
@@ -94,6 +93,10 @@ function getSceneFragmentCount(
     return 6;
   }
 
+  if (sceneId === "gid-business-ai") {
+    return mode === "core" ? 3 : 4;
+  }
+
   if (sceneId === "papertalk-proof") {
     return 3;
   }
@@ -125,6 +128,7 @@ export default function PresentationExperience({
   const isDenseScene =
     scene.id === "statbet-proof" ||
     scene.id === "gid-platform-core" ||
+    scene.id === "gid-business-ai" ||
     scene.id === "papertalk-proof";
 
   const goToScene = useCallback((index: number) => {
@@ -711,6 +715,9 @@ function renderScene(
     case "opening":
       return <OpeningScene />;
 
+    case "follow-live":
+      return <FollowLiveScene />;
+
     case "problem":
       return <ProblemScene />;
 
@@ -725,14 +732,11 @@ function renderScene(
         <GidBusinessPlatformSequence activeStep={fragmentIndex} mode={mode} />
       );
 
-    case "platform-roadmap":
-      return <PlatformRoadmapScene />;
+    case "gid-business-ai":
+      return <GidBusinessAiSequence activeStep={fragmentIndex} mode={mode} />;
 
     case "papertalk-proof":
       return <PaperTalkProofSequence activeStep={fragmentIndex} mode={mode} />;
-
-    case "company-position":
-      return <CommercialHelpScene />;
 
     case "gid-pulse":
       return <CommercialPulseScene />;

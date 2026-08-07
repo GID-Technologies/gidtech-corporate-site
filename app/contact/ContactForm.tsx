@@ -20,6 +20,18 @@ const serviceOptions = [
     label: "Business website or digital showroom",
   },
   {
+    value: "business-system",
+    label: "Configured business system",
+  },
+  {
+    value: "business-ai",
+    label: "AI business intelligence or executive decision support",
+  },
+  {
+    value: "workflow-audit",
+    label: "Workflow or technology audit",
+  },
+  {
     value: "custom-platform",
     label: "Custom platform or business tool",
   },
@@ -34,6 +46,10 @@ const serviceOptions = [
   {
     value: "build-with-gid",
     label: "Build With GID opportunity",
+  },
+  {
+    value: "papertalk",
+    label: "PaperTalk accessibility solution",
   },
   {
     value: "partnership",
@@ -77,6 +93,10 @@ const validPaths = new Set(opportunityPaths.map((option) => option.value));
 
 type SubmissionStatus = "idle" | "submitting" | "success" | "error";
 
+type FieldName = "fullName" | "email" | "service" | "path" | "message";
+
+type FieldErrors = Partial<Record<FieldName, string>>;
+
 export default function ContactForm() {
   const searchParams = useSearchParams();
 
@@ -84,6 +104,7 @@ export default function ContactForm() {
   const [path, setPath] = useState("");
   const [status, setStatus] = useState<SubmissionStatus>("idle");
   const [feedback, setFeedback] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   //Detect Graduation submissions
   const source = searchParams.get("source") ?? "";
@@ -121,28 +142,171 @@ export default function ContactForm() {
     }
   }, [searchParams]);
 
+  function validateEmail(email: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function clearFieldError(field: FieldName) {
+    if (!fieldErrors[field]) {
+      return;
+    }
+
+    setFieldErrors((current) => {
+      const next = { ...current };
+      delete next[field];
+      return next;
+    });
+
+    setStatus("idle");
+    setFeedback("");
+  }
+
+  // async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  //   event.preventDefault();
+
+  //   const form = event.currentTarget;
+  //   const formData = new FormData(form);
+
+  //   setStatus("submitting");
+  //   setFeedback("");
+
+  //   const payload = {
+  //     fullName: String(formData.get("fullName") ?? ""),
+  //     businessName: String(formData.get("businessName") ?? ""),
+  //     email: String(formData.get("email") ?? ""),
+  //     phone: String(formData.get("phone") ?? ""),
+  //     service,
+  //     path,
+  //     businessLink: String(formData.get("businessLink") ?? ""),
+  //     contactMethod: String(formData.get("contactMethod") ?? ""),
+  //     message: String(formData.get("message") ?? ""),
+  //     website: String(formData.get("website") ?? ""),
+  //     source: window.location.href,
+  //   };
+
+  //   try {
+  //     const response = await fetch("/api/contact", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(payload),
+  //     });
+
+  //     const result = await response.json().catch(() => null);
+
+  //     if (!response.ok) {
+  //       throw new Error(
+  //         result?.error ?? "Your enquiry could not be sent. Please try again.",
+  //       );
+  //     }
+
+  //     setStatus("success");
+
+  //     setFeedback(
+  //       isGraduationSubmission
+  //         ? "We have received your submission and will review the path you selected."
+  //         : "Your enquiry has been sent to GID Technologies. We will review it and respond through your preferred contact route.",
+  //     );
+
+  //     form.reset();
+
+  //     // Keep the service chosen from the URL after the other fields reset.
+  //     const requestedService = searchParams.get("service");
+  //     const requestedPath = searchParams.get("path");
+
+  //     setService(
+  //       requestedService && validServices.has(requestedService)
+  //         ? requestedService
+  //         : "consultation",
+  //     );
+
+  //     setPath(
+  //       requestedPath && validPaths.has(requestedPath) ? requestedPath : "",
+  //     );
+  //   } catch (error) {
+  //     setStatus("error");
+  //     setFeedback(
+  //       error instanceof Error
+  //         ? error.message
+  //         : "Something went wrong. Please try again.",
+  //     );
+  //   }
+  // }
+
+  // replace the above commented-out handleSubmit function with this one to enable form submission
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    setStatus("submitting");
-    setFeedback("");
-
     const payload = {
-      fullName: String(formData.get("fullName") ?? ""),
-      businessName: String(formData.get("businessName") ?? ""),
-      email: String(formData.get("email") ?? ""),
-      phone: String(formData.get("phone") ?? ""),
+      fullName: String(formData.get("fullName") ?? "").trim(),
+      businessName: String(formData.get("businessName") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      phone: String(formData.get("phone") ?? "").trim(),
       service,
       path,
-      businessLink: String(formData.get("businessLink") ?? ""),
-      contactMethod: String(formData.get("contactMethod") ?? ""),
-      message: String(formData.get("message") ?? ""),
-      website: String(formData.get("website") ?? ""),
+      businessLink: String(formData.get("businessLink") ?? "").trim(),
+      contactMethod: String(formData.get("contactMethod") ?? "").trim(),
+      message: String(formData.get("message") ?? "").trim(),
+      website: String(formData.get("website") ?? "").trim(),
       source: window.location.href,
     };
+
+    const validationErrors: FieldErrors = {};
+
+    if (payload.fullName.length < 2) {
+      validationErrors.fullName = "Please enter your full name.";
+    }
+
+    if (!payload.email) {
+      validationErrors.email = "Please enter your email address.";
+    } else if (!validateEmail(payload.email)) {
+      validationErrors.email = "Please enter a valid email address.";
+    }
+
+    if (!validServices.has(payload.service)) {
+      validationErrors.service =
+        "Please select what you would like to discuss.";
+    }
+
+    if (payload.service === "build-with-gid" && !validPaths.has(payload.path)) {
+      validationErrors.path = "Please select how you would like to connect.";
+    }
+
+    if (!payload.message) {
+      validationErrors.message =
+        "Please tell us about the problem, opportunity, or project.";
+    } else if (payload.message.length < 20) {
+      validationErrors.message =
+        "Please provide a little more detail—at least 20 characters.";
+    }
+
+    const firstInvalidField = Object.keys(validationErrors)[0] as
+      | FieldName
+      | undefined;
+
+    if (firstInvalidField) {
+      setFieldErrors(validationErrors);
+      setStatus("error");
+      setFeedback("Please check the highlighted fields and try again.");
+
+      requestAnimationFrame(() => {
+        const field = form.elements.namedItem(firstInvalidField);
+
+        if (field instanceof HTMLElement) {
+          field.focus();
+        }
+      });
+
+      return;
+    }
+
+    setFieldErrors({});
+    setStatus("submitting");
+    setFeedback("");
 
     try {
       const response = await fetch("/api/contact", {
@@ -171,7 +335,6 @@ export default function ContactForm() {
 
       form.reset();
 
-      // Keep the service chosen from the URL after the other fields reset.
       const requestedService = searchParams.get("service");
       const requestedPath = searchParams.get("path");
 
@@ -186,16 +349,39 @@ export default function ContactForm() {
       );
     } catch (error) {
       setStatus("error");
+
+      if (!navigator.onLine) {
+        setFeedback(
+          "You appear to be offline. Reconnect to the internet and try again.",
+        );
+        return;
+      }
+
+      if (error instanceof TypeError) {
+        setFeedback(
+          "We could not connect to the GID contact service. Check your connection and try again.",
+        );
+        return;
+      }
+
       setFeedback(
         error instanceof Error
           ? error.message
-          : "Something went wrong. Please try again.",
+          : "Something went wrong while sending your enquiry. Please try again.",
       );
     }
   }
 
   const inputClassName =
     "mt-2 w-full rounded-2xl border border-white/10 bg-black/60 px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-neutral-700 focus:border-white/30 focus:bg-black";
+
+  function getInputClassName(field: FieldName) {
+    return `${inputClassName} ${
+      fieldErrors[field]
+        ? "border-red-400/50 bg-red-400/[0.035] focus:border-red-300/70"
+        : ""
+    }`;
+  }
 
   if (status === "success") {
     return (
@@ -297,6 +483,7 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
+      noValidate
       className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-6 md:p-8"
     >
       <div className="grid gap-5 md:grid-cols-2">
@@ -310,8 +497,21 @@ export default function ContactForm() {
             maxLength={100}
             autoComplete="name"
             placeholder="Your full name"
-            className={inputClassName}
+            aria-invalid={Boolean(fieldErrors.fullName)}
+            aria-describedby={
+              fieldErrors.fullName ? "fullName-error" : undefined
+            }
+            onChange={() => clearFieldError("fullName")}
+            className={getInputClassName("fullName")}
           />
+          {fieldErrors.fullName ? (
+            <span
+              id="fullName-error"
+              className="mt-2 block text-xs leading-5 text-red-200"
+            >
+              {fieldErrors.fullName}
+            </span>
+          ) : null}
         </label>
 
         <label className="text-sm font-medium text-neutral-300">
@@ -335,8 +535,19 @@ export default function ContactForm() {
             maxLength={160}
             autoComplete="email"
             placeholder="you@example.com"
-            className={inputClassName}
+            aria-invalid={Boolean(fieldErrors.email)}
+            aria-describedby={fieldErrors.email ? "email-error" : undefined}
+            onChange={() => clearFieldError("email")}
+            className={getInputClassName("email")}
           />
+          {fieldErrors.email ? (
+            <span
+              id="email-error"
+              className="mt-2 block text-xs leading-5 text-red-200"
+            >
+              {fieldErrors.email}
+            </span>
+          ) : null}
         </label>
 
         <label className="text-sm font-medium text-neutral-300">
@@ -359,12 +570,16 @@ export default function ContactForm() {
             value={service}
             onChange={(event) => {
               setService(event.target.value);
+              clearFieldError("service");
 
               if (event.target.value !== "build-with-gid") {
                 setPath("");
+                clearFieldError("path");
               }
             }}
-            className={inputClassName}
+            aria-invalid={Boolean(fieldErrors.service)}
+            aria-describedby={fieldErrors.service ? "service-error" : undefined}
+            className={getInputClassName("service")}
           >
             {serviceOptions.map((option) => (
               <option
@@ -376,6 +591,14 @@ export default function ContactForm() {
               </option>
             ))}
           </select>
+          {fieldErrors.service ? (
+            <span
+              id="service-error"
+              className="mt-2 block text-xs leading-5 text-red-200"
+            >
+              {fieldErrors.service}
+            </span>
+          ) : null}
         </label>
 
         <label className="text-sm font-medium text-neutral-300">
@@ -405,8 +628,13 @@ export default function ContactForm() {
               name="path"
               required
               value={path}
-              onChange={(event) => setPath(event.target.value)}
-              className={inputClassName}
+              onChange={(event) => {
+                setPath(event.target.value);
+                clearFieldError("path");
+              }}
+              aria-invalid={Boolean(fieldErrors.path)}
+              aria-describedby={fieldErrors.path ? "path-error" : undefined}
+              className={getInputClassName("path")}
             >
               <option value="" className="bg-black">
                 Select a connection path
@@ -422,6 +650,14 @@ export default function ContactForm() {
                 </option>
               ))}
             </select>
+            {fieldErrors.path ? (
+              <span
+                id="path-error"
+                className="mt-2 block text-xs leading-5 text-red-200"
+              >
+                {fieldErrors.path}
+              </span>
+            ) : null}
           </label>
         ) : null}
 
@@ -445,8 +681,23 @@ export default function ContactForm() {
             maxLength={3000}
             rows={7}
             placeholder="What are you trying to improve, build, solve, or contribute?"
-            className={`${inputClassName} resize-y`}
+            aria-invalid={Boolean(fieldErrors.message)}
+            aria-describedby={fieldErrors.message ? "message-error" : undefined}
+            onChange={() => clearFieldError("message")}
+            className={`${getInputClassName("message")} resize-y`}
           />
+          {fieldErrors.message ? (
+            <span
+              id="message-error"
+              className="mt-2 block text-xs leading-5 text-red-200"
+            >
+              {fieldErrors.message}
+            </span>
+          ) : (
+            <span className="mt-2 block text-xs leading-5 text-neutral-600">
+              Please provide at least 20 characters.
+            </span>
+          )}
         </label>
       </div>
 
