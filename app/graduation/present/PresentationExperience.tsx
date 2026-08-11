@@ -414,7 +414,7 @@ export default function PresentationExperience({
             GID Live Experience
           </p>
           <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-neutral-600">
-            Aptech Graduation 2026
+            Career Quest 2026
           </p>
         </div>
       </div>
