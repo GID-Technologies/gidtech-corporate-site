@@ -259,6 +259,21 @@ export default function PresentationExperience({
     };
   }, []);
 
+  //automatic scroll reset
+  useEffect(() => {
+    const root = presentationRootRef.current;
+
+    if (!root) {
+      return;
+    }
+
+    root.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  }, [sceneIndex, fragmentIndex, sceneRevision]);
+
   useEffect(() => {
     function handleFullscreenChange() {
       setIsFullscreen(Boolean(document.fullscreenElement));
@@ -377,7 +392,7 @@ export default function PresentationExperience({
   return (
     <div
       ref={presentationRootRef}
-      className="presentation-root fixed inset-0 z-[20000] overflow-hidden bg-[#020307] text-white"
+      className="presentation-root fixed inset-0 z-[20000] overflow-x-hidden overflow-y-auto bg-[#020307] text-white"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(18,214,255,0.11),transparent_31%),radial-gradient(circle_at_82%_84%,rgba(255,255,255,0.07),transparent_30%)]" />
 
@@ -426,10 +441,10 @@ export default function PresentationExperience({
       <main
         key={`${scene.id}-${sceneRevision}`}
         aria-live="polite"
-        className="presentation-enter relative z-10 flex h-full w-full items-center justify-center overflow-hidden px-[clamp(1.5rem,5vw,6rem)] pb-24 pt-20"
+        className="presentation-enter relative z-10 flex min-h-dvh w-full flex-col overflow-visible px-4 pb-28 pt-6 sm:px-6 md:px-[clamp(1.5rem,5vw,6rem)] md:pb-24 md:pt-20"
       >
         <div
-          className={`flex h-full w-full items-center justify-center ${
+          className={`my-auto flex w-full justify-center ${
             isDenseScene ? "presentation-dense-scene" : ""
           }`}
         >
@@ -442,7 +457,7 @@ export default function PresentationExperience({
         aria-label="Previous scene"
         disabled={sceneIndex === 0}
         onClick={previousScene}
-        className="absolute bottom-9 left-7 z-30 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/60 text-neutral-400 transition hover:border-white/25 hover:text-white disabled:cursor-not-allowed disabled:opacity-20 md:left-10"
+        className="fixed bottom-4 left-4 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/80 text-neutral-400 shadow-2xl backdrop-blur-xl transition hover:border-white/25 hover:text-white disabled:cursor-not-allowed disabled:opacity-20 md:bottom-9 md:left-10 md:h-11 md:w-11"
       >
         <ArrowLeft className="h-4 w-4" />
       </button>
@@ -451,7 +466,7 @@ export default function PresentationExperience({
         type="button"
         aria-label="Open presentation controls"
         onClick={() => setMenuOpen(true)}
-        className="absolute bottom-9 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-black/65 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-400 transition hover:border-white/25 hover:text-white"
+        className="fixed bottom-4 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-black/80 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-400 shadow-2xl backdrop-blur-xl transition hover:border-white/25 hover:text-white md:bottom-9 md:py-2.5"
       >
         <Command className="h-3.5 w-3.5" />
         Controls
@@ -462,12 +477,12 @@ export default function PresentationExperience({
         aria-label="Next scene"
         disabled={sceneIndex === finalSceneIndex}
         onClick={nextScene}
-        className="absolute bottom-9 right-7 z-30 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/60 text-neutral-400 transition hover:border-white/25 hover:text-white disabled:cursor-not-allowed disabled:opacity-20 md:right-10"
+        className="fixed bottom-4 right-4 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/80 text-neutral-400 shadow-2xl backdrop-blur-xl transition hover:border-white/25 hover:text-white disabled:cursor-not-allowed disabled:opacity-20 md:bottom-9 md:right-10 md:h-11 md:w-11"
       >
         <ArrowRight className="h-4 w-4" />
       </button>
 
-      <div className="absolute inset-x-0 bottom-0 z-30 h-1 bg-white/[0.04]">
+      <div className="fixed inset-x-0 bottom-0 z-30 h-1 bg-white/[0.04]">
         <div
           className="h-full bg-white transition-[width] duration-500"
           style={{ width: `${progress}%` }}
@@ -481,8 +496,8 @@ export default function PresentationExperience({
       </div>
 
       {menuOpen ? (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 p-5 backdrop-blur-xl">
-          <div className="w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/15 bg-[#050608] shadow-[0_40px_140px_rgba(0,0,0,0.95)]">
+        <div className="fixed inset-0 z-50 flex min-h-full items-start justify-center overflow-y-auto bg-black/80 p-4 backdrop-blur-xl md:items-center md:p-5">
+          <div className="my-4 w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/15 bg-[#050608] shadow-[0_40px_140px_rgba(0,0,0,0.95)] md:my-0">
             <div className="flex items-start justify-between border-b border-white/10 p-6 md:p-8">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
@@ -699,7 +714,7 @@ export default function PresentationExperience({
           type="button"
           aria-label="Resume presentation from blackout"
           onClick={() => setIsBlackout(false)}
-          className="absolute inset-0 z-[120] cursor-none bg-black"
+          className="fixed inset-0 z-[120] cursor-none bg-black"
         />
       ) : null}
     </div>
@@ -821,17 +836,17 @@ function OpeningScene() {
         </div>
       </div>
 
-      <h1 className="mt-12 max-w-6xl text-balance text-[clamp(3.4rem,7.2vw,8rem)] font-semibold leading-[0.94] tracking-[-0.07em] text-white">
+      <h1 className="mt-8 max-w-6xl text-balance text-[clamp(2.35rem,8.8vw,8rem)] font-semibold leading-[0.94] tracking-[-0.07em] text-white md:mt-12">
         Growth becomes difficult when the systems behind the business are weak.
       </h1>
 
-      <p className="mt-8 max-w-4xl text-[clamp(1rem,1.5vw,1.45rem)] leading-8 text-neutral-400">
+      <p className="mt-5 md:mt-8 max-w-4xl text-[clamp(1rem,1.5vw,1.45rem)] leading-8 text-neutral-400">
         GID Technologies builds digital solutions that help organisations
         attract opportunities, organise operations, serve people better and
         prepare for growth.
       </p>
 
-      <div className="mt-10 flex flex-wrap justify-center gap-3">
+      <div className="mt-7 flex flex-wrap justify-center gap-2 md:mt-10 md:gap-3">
         {outcomes.map((outcome, index) => (
           <div
             key={outcome}
