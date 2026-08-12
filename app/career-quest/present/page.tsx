@@ -1,0 +1,46 @@
+import type { Metadata } from "next";
+import PresentationExperience from "./PresentationExperience";
+import type { PresentationMode } from "./presentation-data";
+
+export const metadata: Metadata = {
+  title: "GID Technologies — Career Quest 2026",
+  description:
+    "The GID Technologies Career Quest 2026 live presentation experience.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+type PresentationSearchParams = Record<string, string | string[] | undefined>;
+
+function getFirstValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function resolveMode(value: string | undefined): PresentationMode {
+  if (value === "core" || value === "recommended" || value === "extended") {
+    return value;
+  }
+
+  return "recommended";
+}
+
+function resolveAutoStart(value: string | undefined) {
+  return value === "1" || value === "true" || value === "yes";
+}
+
+export default async function PresentationPage({
+  searchParams,
+}: {
+  searchParams: Promise<PresentationSearchParams>;
+}) {
+  const params = await searchParams;
+  const initialMode = resolveMode(getFirstValue(params.mode));
+
+  const autoStart = resolveAutoStart(getFirstValue(params.autostart));
+
+  return (
+    <PresentationExperience initialMode={initialMode} autoStart={autoStart} />
+  );
+}

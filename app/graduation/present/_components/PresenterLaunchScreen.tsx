@@ -30,10 +30,10 @@ export default function PresenterLaunchScreen({
   onStart,
 }: PresenterLaunchScreenProps) {
   return (
-    <div className="absolute inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-[#020307] p-5 text-white">
+    <div className="fixed inset-0 z-[100] flex min-h-full items-start justify-center overflow-y-auto bg-[#020307] p-4 text-white md:items-center md:p-5">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(18,214,255,0.12),transparent_32%),radial-gradient(circle_at_85%_85%,rgba(255,255,255,0.06),transparent_28%)]" />
 
-      <div className="relative w-full max-w-6xl rounded-[2.25rem] border border-white/15 bg-[#050608] p-6 shadow-[0_45px_160px_rgba(0,0,0,0.95)] md:p-9">
+      <div className="relative my-4 w-full max-w-6xl rounded-[2.25rem] border border-white/15 bg-[#050608] p-6 shadow-[0_45px_160px_rgba(0,0,0,0.95)] md:my-0 md:p-9">
         <div className="grid gap-9 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-cyan-200/60">
