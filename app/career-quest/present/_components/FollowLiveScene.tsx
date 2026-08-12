@@ -37,7 +37,7 @@ export default function FollowLiveScene() {
           <div className="relative mx-auto aspect-square w-full max-w-[520px] overflow-hidden rounded-[1.5rem] bg-white">
             {/* TODO: replace with career-quest QR code */}
             <Image
-              src="/qr/graduation-live-qr.png"
+              src="/qr/career-quest-live-qr.png"
               alt="Scan to follow the GID live presentation"
               fill
               priority

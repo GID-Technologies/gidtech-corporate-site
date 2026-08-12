@@ -141,7 +141,7 @@ function QrPanel() {
       <div className="relative mx-auto mt-5 aspect-square w-full max-w-[470px] overflow-hidden rounded-[1.6rem] bg-white">
         {/* TODO: replace with final Career Quest QR */}
         <Image
-          src="/qr/graduation-qr.png"
+          src="/qr/career-quest-work-qr.png"
           alt="Scan to start a conversation with GID Technologies"
           fill
           priority
