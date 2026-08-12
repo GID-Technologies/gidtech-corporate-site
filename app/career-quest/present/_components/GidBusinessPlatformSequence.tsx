@@ -47,13 +47,14 @@ type PlatformStep = {
 const platformSteps: PlatformStep[] = [
   {
     label: "The Platform Model",
-    title: "One platform. Three ways businesses can use it.",
+    title:
+      "Turn scattered business activity into one clearer operating system.",
     description:
-      "GID Platform is being designed so organisations can use GID applications directly, combine selected capabilities into a configured business system, or eventually embed GID services inside platforms they already operate.",
+      "Instead of customers, orders, inventory, invoices and communication living across disconnected tools, GID Platform is being developed around connected business capabilities that can work together.",
     outcome:
-      "Use directly · Configure for your workflow · Integrate through APIs",
+      "Customers · Orders · Inventory · Invoices · Communication · Management View",
     context:
-      "GID Platform Core is the shared technical foundation beneath these delivery models.",
+      "The goal is not more software. The goal is clearer control over how the organisation operates.",
     icon: Network,
     visual: "ecosystem",
   },
@@ -71,13 +72,14 @@ const platformSteps: PlatformStep[] = [
   },
   {
     label: "Configured Business Systems",
-    title: "Connect the important parts of your operation into one system.",
+    title:
+      "Different businesses need different systems built around how they work.",
     description:
-      "GID can select and configure relevant capabilities around how a business actually works—from its first customer enquiry to service delivery, billing, communication and management review.",
+      "A school, retailer and logistics company may need many of the same underlying capabilities, but the workflow, interface and priorities should reflect the organisation itself.",
     outcome:
-      "One connected operating flow instead of scattered records and repeated explanations",
+      "Understand the workflow → Connect the right capabilities → Give the organisation one clearer system",
     context:
-      "This is the strongest near-term commercial offer: understand the workflow, build the right system, launch it and support its growth.",
+      "This is one of GID’s strongest near-term commercial opportunities.",
     icon: Blocks,
     visual: "configured",
   },
@@ -94,7 +96,8 @@ const platformSteps: PlatformStep[] = [
   },
   {
     label: "Industry Possibilities",
-    title: "Different organisations can use the same foundation differently.",
+    title:
+      "The foundation can adapt without pretending every business is the same.",
     description:
       "The platform is not limited to one industry. GID can study an organisation’s workflow and configure the relevant customer, operational, financial, communication and access-control capabilities.",
     outcome:
@@ -106,10 +109,11 @@ const platformSteps: PlatformStep[] = [
   },
   {
     label: "Commercial Entry Point",
-    title: "Start with the problem costing the business the most.",
+    title:
+      "You do not need to replace everything. Start with the problem costing you the most.",
     description:
       "A business does not need to replace everything at once. GID can begin with one expensive workflow problem, implement the first useful system and extend it as the organisation becomes ready.",
-    outcome: "Audit → First module → Pilot → Launch → Support → Expansion",
+    outcome: "One problem → First useful system → Prove value → Expand",
     context:
       "The first conversation should identify the operational problem, affected people, existing tools and expected business outcome.",
     icon: Workflow,
@@ -226,10 +230,10 @@ export default function GidBusinessPlatformSequence({
 }: GidBusinessPlatformSequenceProps) {
   const stepOrder =
     mode === "core"
-      ? [0, 2, 4, 5]
+      ? [0, 2, 5]
       : mode === "extended"
-        ? [0, 1, 2, 3, 4, 5, 6]
-        : [0, 1, 2, 3, 4, 5];
+        ? [0, 1, 2, 3, 4, 5]
+        : [0, 2, 4, 5];
 
   const safeActiveStep = Math.min(activeStep, stepOrder.length - 1);
 

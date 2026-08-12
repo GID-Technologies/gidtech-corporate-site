@@ -1,30 +1,47 @@
 import Image from "next/image";
-import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
-export const metadata: Metadata = {
-  title: "GID Graduation Presentation Backup",
+export const metadata = {
+  title: "GID Technologies — Career Quest Backup",
   robots: {
     index: false,
     follow: false,
   },
 };
 
-const companyStatuses = [
-  ["Live", "StatBet"],
-  ["Active Backend Development", "GID Platform Core"],
-  ["Working Software Prototype", "PaperTalk"],
-  ["Available Now", "GID Business Solutions"],
-  ["Roadmap", "GID Track Ecosystem"],
-  [
-    "Long-Term Validation",
-    "Mechanic Connection · Property Connection · GID Car Tracker",
-  ],
+const businessProblems = [
+  ["Enquiries", "Lost inside chats"],
+  ["Customers", "Records scattered"],
+  ["Orders", "Tracked manually"],
+  ["Inventory", "Stock uncertain"],
+  ["Payments", "Records fragmented"],
+  ["Decisions", "Based on assumptions"],
 ];
 
-export default function PresentationBackupPage() {
+const businessSolutions = [
+  "Websites & Digital Presence",
+  "Visibility & Enquiry Systems",
+  "Configured Business Systems",
+  "Automation",
+  "Custom Platforms",
+  "Digital Support",
+];
+
+const products = ["StatBet", "GID Platform", "GID Business AI", "PaperTalk"];
+
+const workWithGid = [
+  ["People are not finding the business.", "Visibility & Digital Presence"],
+  ["Daily operations are scattered.", "Business Systems"],
+  ["Too much work repeats manually.", "Automation & Workflow"],
+  ["The business has data but lacks clarity.", "Business Intelligence"],
+  ["The organisation needs something specific.", "Custom Digital Solution"],
+  ["There is an opportunity to explore together.", "Partnership"],
+];
+
+export default function CareerQuestBackupPage() {
   return (
-    <main className="bg-[#020307] text-white">
-      <BackupScene number="01" label="Opening">
+    <main className="min-h-screen bg-[#020307] text-white">
+      <BackupScene number="01" label="GID Technologies">
         <div className="text-center">
           <Image
             src="/brand/GID Logo white.svg"
@@ -35,296 +52,275 @@ export default function PresentationBackupPage() {
             className="mx-auto h-24 w-24 scale-[1.7] object-contain"
           />
 
-          <p className="mt-10 text-xl text-neutral-500">
-            What are we building with what we learned?
+          <p className="mt-8 text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200/60">
+            Aptech Career Quest 2026
           </p>
 
-          <h1 className="mt-6 text-6xl font-semibold tracking-[-0.06em] md:text-8xl">
-            GID Technologies
+          <h1 className="mx-auto mt-6 max-w-6xl text-5xl font-semibold leading-[0.94] tracking-[-0.06em] md:text-8xl">
+            Technology should change what a business can do.
           </h1>
 
-          <p className="mx-auto mt-7 max-w-4xl text-xl leading-8 text-neutral-400">
-            An early-stage technology startup building practical digital
-            solutions, reusable infrastructure and proof-led products.
+          <p className="mx-auto mt-7 max-w-4xl text-lg leading-8 text-neutral-400 md:text-xl">
+            GID Technologies builds practical digital solutions around
+            visibility, operations, intelligence, accessibility and growth.
           </p>
         </div>
       </BackupScene>
 
       <BackupScene
         number="02"
-        label="The Problem"
-        title="Value exists. Systems are missing."
+        label="Live Experience"
+        title="Explore GID while the presentation continues."
       >
-        <div className="grid gap-4 md:grid-cols-2">
-          {[
-            "Businesses need visibility.",
-            "People need access.",
-            "Ideas need structure.",
-            "Operations need better systems.",
-          ].map((item) => (
-            <div
-              key={item}
-              className="rounded-3xl border border-white/10 bg-white/[0.03] p-7 text-2xl font-semibold"
-            >
-              {item}
-            </div>
-          ))}
+        <div className="rounded-[2rem] border border-cyan-200/15 bg-cyan-200/[0.035] p-7 text-center">
+          <p className="text-xl font-semibold text-white">
+            gidtechnologies.com/career-quest/live
+          </p>
+
+          <p className="mt-4 text-neutral-400">
+            Company · Products · Business opportunities · Contact routes
+          </p>
         </div>
       </BackupScene>
 
       <BackupScene
         number="03"
-        label="How GID Operates"
-        title="One company. Two connected operating arms."
+        label="Business Reality"
+        title="Small operational gaps become expensive business problems."
       >
-        <div className="grid gap-5 md:grid-cols-2">
-          <BackupCard
-            status="Business Solutions"
-            title="Solve practical digital problems."
-            text="Websites, visibility systems, custom platforms, automation and ongoing digital support."
-          />
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          {businessProblems.map(([area, problem]) => (
+            <article
+              key={area}
+              className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-600">
+                {area}
+              </p>
 
-          <BackupCard
-            status="Products & Infrastructure"
-            title="Build systems owned by GID."
-            text="StatBet, GID Platform Core, PaperTalk and future tracking and logistics services."
-          />
+              <h2 className="mt-4 text-2xl font-semibold">{problem}</h2>
+            </article>
+          ))}
         </div>
+
+        <p className="mt-6 rounded-2xl border border-amber-300/15 bg-amber-300/[0.035] p-5 text-center text-lg font-semibold">
+          Lost customers · Wasted time · Slow decisions · Lost money
+        </p>
       </BackupScene>
 
       <BackupScene
         number="04"
-        label="Proof 001 — StatBet"
-        title="From idea to live public product."
+        label="How GID Operates"
+        title="One company. Two ways technology creates value."
       >
-        <div className="grid gap-4 md:grid-cols-2">
-          {[
-            [
-              "/presentation/statbet/historical/portugal-croatia-analysis.png",
-              "Original analysis",
-            ],
-            [
-              "/presentation/statbet/historical/portugal-croatia-result.png",
-              "Completed result",
-            ],
-            [
-              "/presentation/statbet/historical/portugal-croatia-outcome-review.png",
-              "Outcome Review",
-            ],
-            [
-              "/presentation/statbet/historical/july-2-performance-review.png",
-              "Daily Performance Review",
-            ],
-          ].map(([src, label]) => (
-            <div
-              key={src}
-              className="overflow-hidden rounded-3xl border border-white/10 bg-black"
-            >
-              <p className="border-b border-white/10 px-5 py-4 text-sm font-semibold">
-                {label}
-              </p>
-
-              <div className="relative aspect-[16/9]">
-                <Image src={src} alt={label} fill className="object-contain" />
-              </div>
+        <div className="grid gap-5 lg:grid-cols-2">
+          <BackupPanel eyebrow="Hire GID" title="Business Solutions">
+            <div className="grid gap-2 sm:grid-cols-2">
+              {businessSolutions.map((item) => (
+                <BackupChip key={item}>{item}</BackupChip>
+              ))}
             </div>
-          ))}
+
+            <p className="mt-6 font-semibold text-neutral-300">
+              Problem → Assessment → Solution → Launch → Support
+            </p>
+          </BackupPanel>
+
+          <BackupPanel eyebrow="GID-Owned" title="Products & Infrastructure">
+            <div className="grid gap-2 sm:grid-cols-2">
+              {products.map((item) => (
+                <BackupChip key={item}>{item}</BackupChip>
+              ))}
+            </div>
+
+            <p className="mt-6 font-semibold text-neutral-300">
+              Problem → Product → Public Use → Learn → Scale
+            </p>
+          </BackupPanel>
         </div>
       </BackupScene>
 
       <BackupScene
         number="05"
-        label="Proof 002 — GID Platform Core"
-        title="A real backend foundation is already under engineering."
+        label="StatBet"
+        title="From idea to a live public product."
       >
-        <div className="grid gap-5 md:grid-cols-2">
-          <BackupEvidenceImage
-            title="Structured Spring Boot Project"
-            src="/presentation/platform-core/project-overview.png"
-            alt="GID Platform Core project structure in IntelliJ"
-          />
+        <div className="grid gap-4 md:grid-cols-4">
+          {["Identify", "Build", "Launch", "Operate & Improve"].map(
+            (step, index) => (
+              <article
+                key={step}
+                className="rounded-3xl border border-white/10 bg-white/[0.03] p-7 text-center"
+              >
+                <p className="text-xs text-neutral-600">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
 
-          <BackupEvidenceImage
-            title="Documented API Surface"
-            src="/presentation/platform-core/swagger-api-overview.png"
-            alt="Swagger API documentation for GID Platform Core"
-          />
-
-          <BackupEvidenceImage
-            title="Operational Database Schema"
-            src="/presentation/platform-core/database-schema.png"
-            alt="TiDB schema containing GID Platform Core tables"
-          />
-
-          <BackupEvidenceImage
-            title="Persisted Database Records"
-            src="/presentation/platform-core/database-query-redacted.png"
-            alt="Redacted database query returning stored records"
-          />
+                <h2 className="mt-8 text-2xl font-semibold">{step}</h2>
+              </article>
+            ),
+          )}
         </div>
 
-        <div className="mt-7 grid gap-4 md:grid-cols-3">
-          {[
-            {
-              title: "Layered Backend",
-              text: "Controllers, services, repositories, entities, security structure and application configuration.",
-            },
-            {
-              title: "Business Domains",
-              text: "Customers, products, orders, invoices, organisations, inventory movements, roles, permissions and other operational structures.",
-            },
-            {
-              title: "Persistent Data",
-              text: "The backend is connected to the gid_platform database and contains stored operational records.",
-            },
-          ].map((item) => (
-            <article
-              key={item.title}
-              className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
-            >
-              <h2 className="text-xl font-semibold text-white">{item.title}</h2>
-
-              <p className="mt-4 text-sm leading-7 text-neutral-500">
-                {item.text}
-              </p>
-            </article>
-          ))}
-        </div>
-
-        <p className="mt-7 rounded-2xl border border-amber-300/15 bg-amber-300/[0.035] p-5 leading-7 text-neutral-400">
-          GID Platform Core is not being presented as a completed ERP or
-          customer-ready dashboard. The current proof is the connected backend
-          foundation: domain models, database persistence, application logic,
-          REST controllers and documented API contracts.
+        <p className="mt-7 text-center text-lg font-semibold text-neutral-300">
+          StatBet demonstrates that GID can take a product beyond the idea stage
+          and continue operating it after launch.
         </p>
       </BackupScene>
 
       <BackupScene
         number="06"
-        label="Proof 003 — PaperTalk"
-        title="Printed information, made audible."
+        label="GID Platform"
+        title="Turn scattered activity into a clearer operating system."
       >
-        <div className="grid gap-4 md:grid-cols-4">
-          {[
-            "Document Input",
-            "Text Recognition",
-            "Readable Output",
-            "Read Aloud",
-          ].map((step, index) => (
-            <div
-              key={step}
-              className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
-            >
-              <p className="text-xs text-neutral-600">0{index + 1}</p>
-
-              <p className="mt-8 text-xl font-semibold">{step}</p>
+        <div className="grid gap-6 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+          <BackupPanel eyebrow="Before" title="Disconnected">
+            <div className="grid gap-2">
+              {[
+                "WhatsApp conversations",
+                "Paper records",
+                "Spreadsheets",
+                "Different staff phones",
+                "Staff memory",
+              ].map((item) => (
+                <BackupChip key={item}>{item}</BackupChip>
+              ))}
             </div>
-          ))}
+          </BackupPanel>
+
+          <div className="text-center text-4xl text-neutral-700">→</div>
+
+          <BackupPanel eyebrow="With GID" title="Connected">
+            <div className="grid gap-2">
+              {[
+                "Customers",
+                "Orders",
+                "Inventory",
+                "Invoices",
+                "Communication",
+                "Management view",
+              ].map((item) => (
+                <BackupChip key={item}>{item}</BackupChip>
+              ))}
+            </div>
+          </BackupPanel>
         </div>
 
-        <p className="mt-7 text-xl font-semibold text-neutral-300">
-          Working software prototype · Active development
+        <p className="mt-7 rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.035] p-5 text-center font-semibold">
+          Start with the problem costing the organisation the most.
         </p>
       </BackupScene>
 
       <BackupScene
         number="07"
-        label="Platform Roadmap"
-        title="Build the core once. Extend it carefully."
+        label="GID Business AI"
+        title="Turn business information into decisions that deserve attention."
       >
-        <div className="space-y-3">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {[
-            "GID Platform Core — Active backend development",
-            "GID Track — Roadmap",
-            "GID Notify — Roadmap",
-            "GID AI Delivery Assistant — Roadmap",
-            "Public GID Logistics API — Long-term roadmap",
+            "Four invoices are overdue.",
+            "Inventory may finish in six days.",
+            "Five shipments need attention.",
+            "Returning customers are increasing.",
+            "A campaign produced no conversions.",
+            "Today's priorities can be ranked.",
           ].map((item) => (
             <div
               key={item}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-5 text-lg font-semibold"
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-lg font-semibold"
             >
               {item}
             </div>
           ))}
         </div>
+
+        <p className="mt-7 text-center text-neutral-400">
+          Risks earlier · Opportunities sooner · Priorities clearer · Decisions
+          faster
+        </p>
       </BackupScene>
 
       <BackupScene
         number="08"
-        label="Company Position"
-        title="Early—but not imaginary."
+        label="PaperTalk"
+        title="One document can become information a person can read or hear."
       >
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {companyStatuses.map(([status, product]) => (
-            <BackupCard key={status} status={status} title={product} text="" />
+        <div className="grid gap-4 md:grid-cols-4">
+          {["Document", "Extract", "Read", "Listen"].map((step, index) => (
+            <article
+              key={step}
+              className="rounded-3xl border border-white/10 bg-white/[0.03] p-7 text-center"
+            >
+              <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-xs text-neutral-500">
+                0{index + 1}
+              </span>
+
+              <h2 className="mt-6 text-2xl font-semibold">{step}</h2>
+            </article>
           ))}
         </div>
+
+        <p className="mt-7 text-center text-neutral-400">
+          Schools · Workplaces · Institutions · Organisations · Accessibility
+          programmes
+        </p>
       </BackupScene>
 
       <BackupScene
         number="09"
-        label="Proof 004 — GID Pulse"
-        title="Where do you fit?"
+        label="Work With GID"
+        title="You do not need to know what software you need."
       >
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.7fr] lg:items-center">
-          <div className="grid gap-3 md:grid-cols-2">
-            {[
-              "I need a digital solution",
-              "I want to support GID",
-              "I can contribute a skill",
-              "I can make an introduction",
-              "I want to test a product",
-              "I want to follow the journey",
-            ].map((path) => (
-              <div
-                key={path}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 font-semibold"
-              >
-                {path}
-              </div>
-            ))}
-          </div>
+        <div className="grid gap-3 md:grid-cols-2">
+          {workWithGid.map(([problem, route]) => (
+            <article
+              key={problem}
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+            >
+              <p className="text-lg font-semibold">{problem}</p>
 
-          <div className="rounded-3xl bg-white p-6 text-center text-black">
-            <Image
-              src="/qr/graduation-qr.png"
-              alt="Connect with GID Technologies"
-              width={420}
-              height={420}
-              className="mx-auto aspect-square w-full max-w-[330px]"
-            />
+              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-cyan-100/55">
+                {route}
+              </p>
+            </article>
+          ))}
+        </div>
 
-            <p className="mt-4 font-semibold">gidtechnologies.com/graduation</p>
-          </div>
+        <div className="mt-7 rounded-3xl border border-cyan-200/15 bg-cyan-200/[0.035] p-7 text-center">
+          <p className="text-2xl font-semibold">
+            Start with the problem. We just need a clear starting point.
+          </p>
+
+          <p className="mt-4 text-neutral-400">
+            gidtechnologies.com/career-quest/live
+          </p>
         </div>
       </BackupScene>
 
       <BackupScene number="10" label="Closing">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-          <div>
-            <h1 className="text-5xl font-semibold leading-[0.95] tracking-[-0.06em] md:text-7xl">
-              We are not presenting a finished company.
-            </h1>
+        <div className="text-center">
+          <Image
+            src="/brand/GID Logo white.svg"
+            alt="GID Technologies"
+            width={90}
+            height={90}
+            className="mx-auto h-20 w-20 scale-[1.7] object-contain"
+          />
 
-            <p className="mt-8 text-3xl font-medium text-neutral-400">
-              We are presenting a startup that has started proving itself.
-            </p>
+          <p className="mt-8 text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200/55">
+            GID Technologies
+          </p>
 
-            <p className="mt-9 text-2xl font-semibold">
-              Build with us. Support the journey.
-            </p>
-          </div>
+          <h1 className="mx-auto mt-8 max-w-6xl text-5xl font-semibold leading-[0.92] tracking-[-0.065em] md:text-8xl">
+            Bring us one problem worth solving.
+          </h1>
 
-          <div className="rounded-3xl bg-white p-6 text-center text-black">
-            <Image
-              src="/qr/graduation-qr.png"
-              alt="Connect with GID Technologies"
-              width={420}
-              height={420}
-              className="mx-auto aspect-square w-full"
-            />
-          </div>
+          <p className="mx-auto mt-7 max-w-3xl text-xl leading-8 text-neutral-400">
+            You do not need to arrive with the technology figured out. Start
+            with what needs to change.
+          </p>
+
+          <p className="mt-9 font-semibold">gidtechnologies.com</p>
         </div>
       </BackupScene>
     </main>
@@ -340,17 +336,17 @@ function BackupScene({
   number: string;
   label: string;
   title?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    <section className="flex min-h-screen break-after-page items-center border-b border-white/10 px-6 py-20 print:min-h-[100vh] md:px-12">
+    <section className="flex min-h-screen items-center border-b border-white/10 px-5 py-20 md:px-10">
       <div className="mx-auto w-full max-w-7xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200/60">
+        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/55">
           {number} · {label}
         </p>
 
         {title ? (
-          <h1 className="mt-5 max-w-6xl text-4xl font-semibold leading-[0.96] tracking-[-0.055em] md:text-6xl">
+          <h1 className="mt-5 max-w-6xl text-4xl font-semibold leading-[0.96] tracking-[-0.05em] md:text-6xl">
             {title}
           </h1>
         ) : null}
@@ -361,56 +357,32 @@ function BackupScene({
   );
 }
 
-function BackupEvidenceImage({
+function BackupPanel({
+  eyebrow,
   title,
-  src,
-  alt,
+  children,
 }: {
+  eyebrow: string;
   title: string;
-  src: string;
-  alt: string;
+  children: ReactNode;
 }) {
   return (
-    <article className="overflow-hidden rounded-3xl border border-white/10 bg-black">
-      <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4">
-        <p className="text-sm font-semibold text-white">{title}</p>
+    <article className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-7">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-600">
+        {eyebrow}
+      </p>
 
-        <span className="rounded-full border border-cyan-200/15 bg-cyan-200/[0.05] px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-cyan-100/60">
-          Real Evidence
-        </span>
-      </div>
+      <h2 className="mt-4 text-3xl font-semibold">{title}</h2>
 
-      <div className="relative aspect-[16/9] overflow-hidden bg-[#05080b]">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-contain"
-        />
-      </div>
+      <div className="mt-6">{children}</div>
     </article>
   );
 }
 
-function BackupCard({
-  status,
-  title,
-  text,
-}: {
-  status: string;
-  title: string;
-  text: string;
-}) {
+function BackupChip({ children }: { children: ReactNode }) {
   return (
-    <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-7">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-600">
-        {status}
-      </p>
-
-      <h2 className="mt-5 text-2xl font-semibold">{title}</h2>
-
-      {text ? <p className="mt-4 leading-7 text-neutral-500">{text}</p> : null}
-    </article>
+    <div className="rounded-xl border border-white/10 bg-black/45 px-4 py-3 text-sm font-semibold text-neutral-300">
+      {children}
+    </div>
   );
 }

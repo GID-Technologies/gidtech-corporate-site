@@ -31,7 +31,8 @@ type PaperTalkStep = {
 const paperTalkSteps: PaperTalkStep[] = [
   {
     label: "The Accessibility Gap",
-    title: "Information only creates value when people can access it.",
+    title:
+      "A document can exist and still leave someone without access to its information.",
     description:
       "Not every printed notice, letter, form, learning material or digital document is easy for every person to read and understand.",
     takeaway:
@@ -40,7 +41,7 @@ const paperTalkSteps: PaperTalkStep[] = [
   },
   {
     label: "The PaperTalk Solution",
-    title: "PaperTalk turns documents into readable and audible information.",
+    title: "One document can become information a person can read or hear.",
     description:
       "The software receives a printed or digital document, extracts its content, presents the text clearly and makes it available through spoken audio.",
     takeaway: "Document → Extracted text → Readable output → Spoken audio",
@@ -48,11 +49,10 @@ const paperTalkSteps: PaperTalkStep[] = [
   },
   {
     label: "Where It Can Matter",
-    title: "One accessibility layer can support many real environments.",
+    title: "Start with one real accessibility problem, then prove the value.",
     description:
       "PaperTalk can create value wherever people need important written information to become easier to read, hear and understand.",
-    takeaway:
-      "Schools, workplaces, institutions and accessibility programmes can begin with one practical use case.",
+    takeaway: "One document type · One user group · One real environment",
     icon: Sparkles,
   },
 ];
@@ -148,7 +148,7 @@ export default function PaperTalkProofSequence({
             {step.label}
           </p>
 
-          <h1 className="mt-4 max-w-[11ch] text-balance text-[clamp(2.6rem,4.5vw,5.4rem)] font-semibold leading-[0.94] tracking-[-0.065em] text-white">
+          <h1 className="mt-4 max-w-[11ch] text-balance text-[clamp(2.15rem,7.5vw,5.6rem)] font-semibold leading-[0.94] tracking-[-0.065em] text-white">
             {step.title}
           </h1>
 

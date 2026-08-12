@@ -88,13 +88,13 @@ export default function GidBusinessAiSequence({
             GID Business AI
           </p>
 
-          <h1 className="mt-5 max-w-[10ch] text-balance text-[clamp(2.8rem,4.8vw,5.6rem)] font-semibold leading-[0.94] tracking-[-0.065em] text-white">
-            An AI that understands how a business works.
+          <h1 className="mt-5 max-w-[10ch] text-balance text-[clamp(2.15rem,7.5vw,5.6rem)] font-semibold leading-[0.94] tracking-[-0.065em] text-white">
+            Turn business information into decisions that deserve attention.
           </h1>
 
           <p className="mt-6 max-w-lg text-[clamp(0.9rem,1.05vw,1.12rem)] leading-7 text-neutral-400">
-            Not another chatbot. An executive-intelligence system designed to
-            identify risks, explain performance and recommend useful action.
+            GID Business AI is being developed to help owners understand what is
+            changing, why it matters and what may deserve action next.
           </p>
 
           <div className="mt-7 rounded-2xl border border-white/10 bg-white/[0.025] p-4">

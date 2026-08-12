@@ -33,73 +33,50 @@ type ProofStep = {
 const proofSteps: ProofStep[] = [
   {
     label: "Live Public Product",
-    title: "The product exists beyond this presentation.",
+    title: "GID has already taken a product beyond the idea stage.",
     description:
-      "StatBet is a publicly deployed football-intelligence platform with its own product experience, custom domain, structured pages, and ongoing operation.",
-    evidence: "Build · Deploy · Position",
-    context: "Publicly accessible under the GID Technologies ecosystem",
+      "StatBet is a publicly deployed football-intelligence platform with its own product experience, domain, structured pages and continuing operation.",
+    evidence: "Idea → Product → Public Launch",
+    context: "A real product operating under the GID Technologies ecosystem",
     src: "/work/image.png",
     alt: "StatBet live football intelligence platform",
     imageClassName: "object-cover object-top",
     icon: Globe2,
   },
   {
-    label: "Original Analysis",
-    title: "The signal existed before the result.",
+    label: "Structured Intelligence",
+    title: "The product publishes its thinking before the outcome is known.",
     description:
-      "For Portugal against Croatia, StatBet identified Over 2.5 goals as the strongest signal with 73% confidence. The analysis also classified the match as a high-goal environment.",
-    evidence: "Over 2.5 Goals · 73% Confidence",
-    context: "Portugal vs Croatia · FIFA World Cup · July 2, 2026",
+      "StatBet was designed around structured football analysis, context and recorded reasoning rather than presenting outcomes without the thinking that came before them.",
+    evidence: "Analysis first · Outcome later",
+    context:
+      "The important proof here is the product workflow, not one individual result",
     src: "/presentation/statbet/historical/Analysis.png",
-    alt: "StatBet pre-match analysis for Portugal versus Croatia",
+    alt: "Example of structured StatBet pre-match analysis",
     imageClassName: "object-contain scale-[1.04]",
     icon: FileSearch,
   },
   {
-    label: "Completed Result",
-    title: "The match produced the required goal range.",
-    description:
-      "Portugal defeated Croatia 2–1. The three-goal result moved the original Over 2.5 signal from pre-match analysis into a completed, reviewable outcome.",
-    evidence: "Portugal 2–1 Croatia · Three Total Goals",
-    context: "The result is evidence only after the match is completed",
-    src: "/presentation/statbet/historical/LiveResult.png",
-    alt: "StatBet result display for Portugal versus Croatia",
-    imageClassName: "object-contain scale-[1.42] -translate-y-[9%]",
-    icon: Trophy,
-  },
-  {
     label: "Outcome Review",
-    title: "The outcome was reviewed instead of quietly forgotten.",
+    title: "Completed outcomes return into the product for review.",
     description:
-      "StatBet’s Outcome Review recorded the signal as won, displayed the 2–1 score, preserved the original 73% confidence, and explained that the final score confirmed the goal direction.",
-    evidence: "WON · Goal Signal Confirmed",
-    context: "Original signal, result and review remain connected",
+      "Once an analysed event is completed, StatBet can connect the original analysis with what actually happened and preserve that review as part of the product record.",
+    evidence: "Publish → Complete → Review",
+    context:
+      "The product is designed around accountability and continued learning",
     src: "/presentation/statbet/historical/outcomereview.png",
-    alt: "StatBet Outcome Review for Portugal versus Croatia",
+    alt: "Example of a StatBet outcome review",
     imageClassName: "object-contain scale-[1.06]",
     compact: true,
     icon: CheckCircle2,
   },
   {
-    label: "Performance Review",
-    title: "Reviewed outcomes enter a wider accountability system.",
-    description:
-      "The July 2 daily Performance Review recorded three tracked insights, three settled outcomes and three correct reads. This is a one-day review snapshot—not an all-time performance claim.",
-    evidence: "3 Settled · 3 Won · July 2 Daily Review",
-    context:
-      "Daily sample coverage: 100% · Settled accuracy for this selected period: 100%",
-    src: "/presentation/statbet/historical/tracker.png",
-    alt: "StatBet daily Performance Review for July 2 2026",
-    imageClassName: "object-contain scale-[1.08]",
-    icon: BarChart3,
-  },
-  {
     label: "Execution Proof",
-    title: "The evidence is the complete operating cycle.",
+    title: "For GID, the biggest proof is the complete operating cycle.",
     description:
-      "StatBet demonstrates that GID Technologies can identify a problem, build and deploy a product, publish structured analysis, review completed outcomes, preserve public records, and improve through operation.",
-    evidence: "Identify → Build → Launch → Analyse → Review → Improve",
-    context: "One live product demonstrating repeatable company execution",
+      "StatBet demonstrates that GID Technologies can identify a problem, design a product, build it, launch publicly, operate it and continue improving after launch.",
+    evidence: "Identify → Build → Launch → Operate → Learn → Improve",
+    context: "One public product demonstrating repeatable company execution",
     icon: Layers3,
   },
 ];
@@ -131,7 +108,7 @@ export default function StatBetProofSequence({
   activeStep,
   mode,
 }: StatBetProofSequenceProps) {
-  const stepOrder = mode === "core" ? [0, 1, 3] : [0, 1, 2, 3, 4, 5];
+  const stepOrder = mode === "core" ? [0, 3] : [0, 1, 2, 3];
 
   const safeActiveStep = Math.min(activeStep, stepOrder.length - 1);
 
@@ -169,7 +146,7 @@ export default function StatBetProofSequence({
           <h1
             className={`text-balance font-semibold leading-[0.96] tracking-[-0.06em] text-white ${
               compact
-                ? "mt-4 text-[clamp(2.15rem,3.85vw,4.5rem)]"
+                ? "text-[clamp(2.15rem,7vw,5.25rem)]"
                 : "mt-5 text-[clamp(2.4rem,4.4vw,5.25rem)]"
             }`}
           >
@@ -306,9 +283,9 @@ export default function StatBetProofSequence({
 
       <div
         className={`${compact ? "mt-5" : "mt-8"} grid gap-2 ${
-          stepOrder.length === 3
-            ? "sm:grid-cols-3"
-            : "sm:grid-cols-3 xl:grid-cols-6"
+          stepOrder.length === 2
+            ? "sm:grid-cols-2"
+            : "sm:grid-cols-2 xl:grid-cols-4"
         }`}
       >
         {stepOrder.map((stepIndex, sequenceIndex) => {
@@ -356,7 +333,7 @@ export default function StatBetProofSequence({
           compact ? "mt-2" : "mt-4"
         }`}
       >
-        Space or right arrow advances the evidence chain
+        Advance to move through the product lifecycle
       </p>
     </section>
   );

@@ -78,19 +78,19 @@ function getSceneFragmentCount(
   mode: PresentationMode,
 ) {
   if (sceneId === "statbet-proof") {
-    return mode === "core" ? 3 : 6;
+    return mode === "core" ? 2 : 4;
   }
 
   if (sceneId === "gid-platform-core") {
     if (mode === "core") {
-      return 4;
+      return 3;
     }
 
     if (mode === "extended") {
-      return 7;
+      return 6;
     }
 
-    return 6;
+    return 4;
   }
 
   if (sceneId === "gid-business-ai") {
@@ -643,6 +643,16 @@ export default function PresentationExperience({
                   </button>
 
                   <a
+                    href="/career-quest/present/speaker"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm font-semibold transition hover:bg-white/[0.07]"
+                  >
+                    Open Speaker Mode
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+
+                  <a
                     href="/career-quest/present/backup"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -804,94 +814,143 @@ function SceneHeading({
 }
 
 function OpeningScene() {
-  const outcomes = [
-    "Attract Opportunities",
-    "Organise Operations",
-    "Serve People Better",
-    "Prepare for Growth",
+  const transformations = [
+    {
+      before: "Hard to find",
+      after: "Visible",
+    },
+    {
+      before: "Scattered work",
+      after: "Organised",
+    },
+    {
+      before: "Repeated tasks",
+      after: "Automated",
+    },
+    {
+      before: "Reactive decisions",
+      after: "Informed",
+    },
   ];
 
   return (
-    <section className="flex w-full max-w-7xl flex-col items-center text-center">
-      <div className="flex items-center gap-4">
-        <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-[1.75rem] border border-white/15 bg-white/[0.04] shadow-[0_0_80px_rgba(45,212,255,0.08)]">
-          <Image
-            src="/brand/GID Logo white.svg"
-            alt="GID Technologies"
-            width={80}
-            height={80}
-            priority
-            className="h-16 w-16 scale-[1.8] object-contain"
-          />
-        </div>
+    <section className="w-full max-w-7xl">
+      <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <div className="flex items-center gap-4">
+            <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-[1.4rem] border border-white/15 bg-white/[0.04] md:h-20 md:w-20">
+              <Image
+                src="/brand/GID Logo white.svg"
+                alt="GID Technologies"
+                width={80}
+                height={80}
+                priority
+                className="h-14 w-14 scale-[1.8] object-contain md:h-16 md:w-16"
+              />
+            </div>
 
-        <div className="text-left">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cyan-200/55">
-            GID Technologies
-          </p>
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cyan-200/55">
+                GID Technologies
+              </p>
 
-          <p className="mt-2 text-sm text-neutral-500">
-            Practical technology for growth
-          </p>
-        </div>
-      </div>
-
-      <h1 className="mt-8 max-w-6xl text-balance text-[clamp(2.35rem,8.8vw,8rem)] font-semibold leading-[0.94] tracking-[-0.07em] text-white md:mt-12">
-        Growth becomes difficult when the systems behind the business are weak.
-      </h1>
-
-      <p className="mt-5 md:mt-8 max-w-4xl text-[clamp(1rem,1.5vw,1.45rem)] leading-8 text-neutral-400">
-        GID Technologies builds digital solutions that help organisations
-        attract opportunities, organise operations, serve people better and
-        prepare for growth.
-      </p>
-
-      <div className="mt-7 flex flex-wrap justify-center gap-2 md:mt-10 md:gap-3">
-        {outcomes.map((outcome, index) => (
-          <div
-            key={outcome}
-            className="flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-5 py-3"
-          >
-            <span className="text-[9px] font-semibold text-neutral-700">
-              0{index + 1}
-            </span>
-
-            <span className="text-xs font-semibold text-neutral-300">
-              {outcome}
-            </span>
+              <p className="mt-2 text-sm text-neutral-500">
+                Practical technology for real problems
+              </p>
+            </div>
           </div>
-        ))}
+
+          <h1 className="mt-8 max-w-5xl text-balance text-[clamp(2.7rem,6vw,6.8rem)] font-semibold leading-[0.94] tracking-[-0.07em] text-white md:mt-10">
+            Technology should change what a business can do.
+          </h1>
+
+          <p className="mt-6 max-w-3xl text-[clamp(1rem,1.4vw,1.35rem)] leading-8 text-neutral-400">
+            GID Technologies builds digital solutions that help organisations
+            become easier to find, easier to operate, easier to understand and
+            better prepared to grow.
+          </p>
+        </div>
+
+        <div className="rounded-[2rem] border border-white/10 bg-white/[0.025] p-5 md:p-7">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-neutral-600">
+            What the right technology changes
+          </p>
+
+          <div className="mt-5 grid gap-3">
+            {transformations.map((item, index) => (
+              <div
+                key={item.before}
+                className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 rounded-2xl border border-white/10 bg-black/45 px-4 py-4 md:px-5"
+              >
+                <div>
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-neutral-700">
+                    Before
+                  </p>
+
+                  <p className="mt-2 text-sm font-semibold text-neutral-500 md:text-base">
+                    {item.before}
+                  </p>
+                </div>
+
+                <ArrowRight className="h-4 w-4 text-cyan-100/40" />
+
+                <div className="text-right">
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-cyan-100/40">
+                    After
+                  </p>
+
+                  <p className="mt-2 text-sm font-semibold text-white md:text-base">
+                    {item.after}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4 rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.035] px-5 py-4 text-center">
+            <p className="text-sm font-semibold text-cyan-50">
+              Visibility · Operations · Intelligence · Accessibility
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
 function ProblemScene() {
-  const problems = [
+  const operations = [
     {
-      problem: "Enquiries disappear inside chats.",
-      consequence: "Potential customers are lost before proper follow-up.",
+      area: "Enquiries",
+      problem: "Lost inside chats",
     },
     {
-      problem: "Customer records are scattered.",
-      consequence: "Staff search repeatedly through messages and notebooks.",
+      area: "Customers",
+      problem: "Records scattered",
     },
     {
-      problem: "Stock figures are uncertain.",
-      consequence: "The business cannot confidently track what is moving.",
+      area: "Orders",
+      problem: "Tracked manually",
     },
     {
-      problem: "Orders and payments are tracked manually.",
-      consequence: "Errors, delays and incomplete records become more likely.",
+      area: "Inventory",
+      problem: "Stock uncertain",
     },
     {
-      problem: "Operations depend on memory.",
-      consequence: "Work slows down when the right person is unavailable.",
+      area: "Payments",
+      problem: "Records fragmented",
     },
     {
-      problem: "Owners lack a clear operational view.",
-      consequence: "Important decisions depend on assumptions.",
+      area: "Decisions",
+      problem: "Based on assumptions",
     },
+  ];
+
+  const costs = [
+    "Lost Customers",
+    "Wasted Time",
+    "Slow Decisions",
+    "Lost Money",
   ];
 
   return (
@@ -899,74 +958,94 @@ function ProblemScene() {
       <SceneHeading
         compact
         eyebrow="The business reality"
-        title="Many businesses lose money through problems that look ordinary."
-        description="Small operational gaps quietly affect revenue, customer trust, staff performance and growth."
+        title="Small operational gaps become expensive business problems."
+        description="Many organisations do not have one dramatic technology problem. They have several ordinary problems quietly working together."
       />
 
-      <div className="mt-7 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-        {problems.map((item, index) => (
-          <article
-            key={item.problem}
-            className="rounded-[1.45rem] border border-white/10 bg-white/[0.025] p-5"
-          >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-black/40 text-[9px] font-semibold text-neutral-600">
-              0{index + 1}
-            </span>
-
-            <h2 className="mt-5 text-lg font-semibold leading-6 text-white">
-              {item.problem}
-            </h2>
-
-            <p className="mt-3 text-xs leading-5 text-neutral-500">
-              {item.consequence}
+      <div className="mt-8 grid gap-6 lg:grid-cols-[1.35fr_0.65fr] lg:items-stretch">
+        <div className="rounded-[2rem] border border-white/10 bg-white/[0.025] p-5 md:p-7">
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-neutral-600">
+              Inside the organisation
             </p>
-          </article>
-        ))}
-      </div>
 
-      <div className="mt-3 rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.03] px-5 py-4 text-center">
-        <p className="text-xs font-semibold text-cyan-50">
-          These gaps affect money, customer experience and the ability to grow.
-        </p>
+            <span className="rounded-full border border-white/10 bg-black/40 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-neutral-600">
+              Before better systems
+            </span>
+          </div>
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {operations.map((item, index) => (
+              <article
+                key={item.area}
+                className="rounded-2xl border border-white/10 bg-black/45 p-4"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-[9px] font-semibold text-neutral-700">
+                    0{index + 1}
+                  </span>
+
+                  <span className="h-2 w-2 rounded-full bg-amber-300/60" />
+                </div>
+
+                <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-neutral-600">
+                  {item.area}
+                </p>
+
+                <h2 className="mt-2 text-lg font-semibold text-white">
+                  {item.problem}
+                </h2>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col rounded-[2rem] border border-amber-300/15 bg-amber-300/[0.025] p-5 md:p-7">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-amber-100/45">
+            What eventually happens
+          </p>
+
+          <div className="my-auto space-y-3 py-6">
+            {costs.map((cost, index) => (
+              <div
+                key={cost}
+                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/40 px-5 py-4"
+              >
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 text-[9px] font-semibold text-neutral-600">
+                  0{index + 1}
+                </span>
+
+                <p className="text-base font-semibold text-white">{cost}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-sm font-semibold leading-6 text-neutral-300">
+            The problem is rarely one tool. It is the absence of a clear system
+            connecting the work.
+          </p>
+        </div>
       </div>
     </section>
   );
 }
 
 function GidModelScene() {
-  const arms = [
-    {
-      number: "01",
-      badge: "Hire GID",
-      title: "Business Solutions",
-      description:
-        "Organisations hire GID to solve immediate visibility, technology and operational problems.",
-      capabilities: [
-        "Digital presence",
-        "Visibility and enquiries",
-        "Custom business systems",
-        "Automation and support",
-      ],
-      flow: ["Business Problem", "Assessment", "Implementation", "Support"],
-      icon: Briefcase,
-      accent: false,
-    },
-    {
-      number: "02",
-      badge: "GID-Owned",
-      title: "Products & Infrastructure",
-      description:
-        "GID identifies wider problems and builds products, applications and infrastructure for broader markets.",
-      capabilities: [
-        "StatBet",
-        "GID Platform",
-        "PaperTalk",
-        "Tracking and API direction",
-      ],
-      flow: ["Wider Problem", "Product Direction", "Public Use", "Scale"],
-      icon: Layers3,
-      accent: true,
-    },
+  const businessSolutions = [
+    "Websites & Digital Presence",
+    "Visibility & Enquiry Systems",
+    "Configured Business Systems",
+    "Automation",
+    "Custom Platforms",
+    "Digital Support",
+  ];
+
+  const gidProducts = [
+    "StatBet",
+    "GID Platform",
+    "GID Business AI",
+    "PaperTalk",
+    "Future GID Services",
   ];
 
   return (
@@ -974,86 +1053,100 @@ function GidModelScene() {
       <SceneHeading
         compact
         eyebrow="How GID operates"
-        title="Solve immediate problems. Build long-term products."
-        description="One arm serves organisations directly. The other builds GID-owned products and infrastructure for wider markets."
+        title="One company. Two ways technology creates value."
+        description="GID solves immediate problems for organisations while also building products around problems that can affect wider markets."
       />
 
-      <div className="mt-7 grid gap-4 lg:grid-cols-2">
-        {arms.map((arm) => {
-          const Icon = arm.icon;
+      <div className="mt-8 grid gap-4 lg:grid-cols-[1fr_auto_1fr] lg:items-stretch">
+        <article className="rounded-[2rem] border border-white/10 bg-white/[0.025] p-6 md:p-7">
+          <div className="flex items-start justify-between gap-4">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+              <Briefcase className="h-5 w-5 text-white" />
+            </span>
 
-          return (
-            <article
-              key={arm.number}
-              className={`rounded-[1.7rem] border p-6 ${
-                arm.accent
-                  ? "border-cyan-200/20 bg-cyan-200/[0.035]"
-                  : "border-white/10 bg-white/[0.03]"
-              }`}
-            >
-              <div className="flex items-start justify-between gap-4">
-                <span
-                  className={`flex h-11 w-11 items-center justify-center rounded-2xl border ${
-                    arm.accent
-                      ? "border-cyan-200/20 bg-cyan-200/[0.05]"
-                      : "border-white/10 bg-white/[0.04]"
-                  }`}
-                >
-                  <Icon
-                    className={`h-5 w-5 ${
-                      arm.accent ? "text-cyan-100/75" : "text-white"
-                    }`}
-                  />
-                </span>
+            <span className="rounded-full border border-white/10 bg-black/40 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-neutral-500">
+              Hire GID
+            </span>
+          </div>
 
-                <span className="rounded-full border border-white/10 bg-black/35 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-neutral-500">
-                  {arm.badge}
-                </span>
+          <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-600">
+            Business Solutions
+          </p>
+
+          <h2 className="mt-3 text-3xl font-semibold tracking-[-0.045em] text-white">
+            Start with your organisation's problem.
+          </h2>
+
+          <div className="mt-6 grid gap-2 sm:grid-cols-2">
+            {businessSolutions.map((item) => (
+              <div
+                key={item}
+                className="rounded-xl border border-white/10 bg-black/45 px-4 py-3 text-xs font-semibold text-neutral-300"
+              >
+                {item}
               </div>
+            ))}
+          </div>
 
-              <p className="mt-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-600">
-                Arm {arm.number}
-              </p>
+          <div className="mt-6 rounded-2xl border border-white/10 bg-black/50 px-5 py-4">
+            <p className="text-sm font-semibold text-white">
+              Problem → Assessment → Solution → Launch → Support
+            </p>
+          </div>
+        </article>
 
-              <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-white">
-                {arm.title}
-              </h2>
+        <div className="hidden items-center justify-center lg:flex">
+          <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-cyan-200/20 bg-cyan-200/[0.04]">
+            <Image
+              src="/brand/GID Logo white.svg"
+              alt=""
+              width={64}
+              height={64}
+              className="h-12 w-12 scale-[1.8] object-contain"
+            />
+          </div>
+        </div>
 
-              <p className="mt-3 text-sm leading-6 text-neutral-400">
-                {arm.description}
-              </p>
+        <article className="rounded-[2rem] border border-cyan-200/20 bg-cyan-200/[0.03] p-6 md:p-7">
+          <div className="flex items-start justify-between gap-4">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.04]">
+              <Layers3 className="h-5 w-5 text-cyan-100/70" />
+            </span>
 
-              <div className="mt-5 grid grid-cols-2 gap-2">
-                {arm.capabilities.map((capability) => (
-                  <div
-                    key={capability}
-                    className="rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-xs font-semibold text-neutral-300"
-                  >
-                    {capability}
-                  </div>
-                ))}
+            <span className="rounded-full border border-cyan-200/15 bg-black/40 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-cyan-100/50">
+              GID-Owned
+            </span>
+          </div>
+
+          <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-100/45">
+            Products & Infrastructure
+          </p>
+
+          <h2 className="mt-3 text-3xl font-semibold tracking-[-0.045em] text-white">
+            Start with a wider problem worth building around.
+          </h2>
+
+          <div className="mt-6 grid gap-2 sm:grid-cols-2">
+            {gidProducts.map((item) => (
+              <div
+                key={item}
+                className="rounded-xl border border-white/10 bg-black/45 px-4 py-3 text-xs font-semibold text-neutral-300"
+              >
+                {item}
               </div>
+            ))}
+          </div>
 
-              <div className="mt-5 flex flex-wrap items-center gap-2">
-                {arm.flow.map((step, index) => (
-                  <div key={step} className="flex items-center gap-2">
-                    <span className="rounded-full border border-white/10 bg-white/[0.025] px-3 py-1.5 text-[8px] font-semibold uppercase tracking-[0.08em] text-neutral-500">
-                      {step}
-                    </span>
-
-                    {index < arm.flow.length - 1 ? (
-                      <ArrowRight className="h-3 w-3 text-neutral-700" />
-                    ) : null}
-                  </div>
-                ))}
-              </div>
-            </article>
-          );
-        })}
+          <div className="mt-6 rounded-2xl border border-cyan-200/15 bg-black/50 px-5 py-4">
+            <p className="text-sm font-semibold text-cyan-50">
+              Problem → Product → Public Use → Learn → Scale
+            </p>
+          </div>
+        </article>
       </div>
 
-      <div className="mt-3 rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-center">
-        <p className="text-xs font-semibold text-neutral-300">
+      <div className="mt-4 rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-center">
+        <p className="text-sm font-semibold text-neutral-300">
           Businesses can hire GID now while GID continues building products for
           wider markets.
         </p>

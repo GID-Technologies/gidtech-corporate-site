@@ -12,28 +12,30 @@ export default function FollowLiveScene() {
             </span>
 
             <p className="text-[10px] font-semibold uppercase tracking-[0.27em] text-cyan-200/60">
-              Follow the live presentation
+              Enter the GID live experience
             </p>
           </div>
 
           <h1 className="mt-5 max-w-[9ch] text-balance text-[clamp(2.4rem,4vw,4.7rem)] font-semibold leading-[0.94] tracking-[-0.065em] text-white">
-            Everything here connects to something live.
+            Do not just watch GID. Explore it while we speak.
           </h1>
 
           <p className="mt-5 max-w-md text-[clamp(0.9rem,1vw,1.08rem)] leading-7 text-neutral-400">
-            Scan once and keep the page open. Explore GID Technologies and the
-            products as we move through the presentation.
+            Scan once and keep the page open. Explore GID Technologies, our
+            products and the problems we are building around while the
+            presentation continues.
           </p>
 
           <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.025] px-4 py-3">
             <p className="text-xs font-semibold leading-5 text-neutral-300">
-              Scan → Keep it open → Explore as we speak
+              Scan → Explore → Keep GID with you after the presentation
             </p>
           </div>
         </div>
 
         <div className="rounded-[2rem] border border-cyan-200/20 bg-cyan-200/[0.035] p-5 text-center shadow-[0_35px_120px_rgba(0,0,0,0.82)]">
           <div className="relative mx-auto aspect-square w-full max-w-[520px] overflow-hidden rounded-[1.5rem] bg-white">
+            {/* TODO: replace with career-quest QR code */}
             <Image
               src="/qr/graduation-live-qr.png"
               alt="Scan to follow the GID live presentation"
@@ -48,12 +50,12 @@ export default function FollowLiveScene() {
             <ScanLine className="h-5 w-5 text-cyan-100/70" />
 
             <h2 className="text-xl font-semibold tracking-[-0.035em] text-white">
-              Scan and follow along.
+              Enter the live experience.
             </h2>
           </div>
 
           <div className="mt-3 flex items-center justify-center gap-2 text-xs text-neutral-500">
-            <span>gidtechnologies.com/graduation/live</span>
+            <span>gidtechnologies.com/career-quest/live</span>
             <ExternalLink className="h-3.5 w-3.5" />
           </div>
         </div>
