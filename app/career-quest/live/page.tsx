@@ -115,7 +115,7 @@ export default function CareerQuestLivePage() {
             </a>
 
             <Link
-              href="/career-quest#connection-paths"
+              href="#work-with-gid"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.035] px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
             >
               Discuss a Solution
@@ -350,19 +350,19 @@ export default function CareerQuestLivePage() {
           <Sparkles className="mx-auto h-6 w-6 text-cyan-100/70" />
 
           <h2 className="mx-auto mt-5 max-w-4xl text-balance text-3xl font-semibold tracking-[-0.045em] text-white md:text-5xl">
-            See a problem GID should help solve?
+            Do not see your situation above?
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-neutral-400">
-            Choose the conversation that matches your organisation and give us a
-            clear route for follow-up.
+            Not every problem fits a predefined category. Tell us what is not
+            working, what you are trying to improve, or what opportunity you
+            believe technology could help unlock.
           </p>
-
           <Link
-            href="#work-with-gid"
+            href="/contact?service=other&source=career-quest-2026#contact-form"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200"
           >
-            Start a GID Conversation
+            Describe Your Problem
             <ArrowRight className="h-4 w-4" />
           </Link>
         </section>

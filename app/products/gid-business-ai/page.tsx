@@ -339,15 +339,16 @@ export default function GidBusinessAiPage() {
           </h2>
 
           <p className="mx-auto mt-7 max-w-3xl text-lg leading-8 text-neutral-400">
-            Bring GID the business information you already have and the
-            decisions you are struggling to make from it.
+            Tell GID about the business information you already have and the
+            decisions you struggle to make from it. We can explore whether the
+            GID Business AI direction fits that problem.
           </p>
 
           <Link
             href="/contact?service=business-ai#contact-form"
             className="mt-9 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition hover:bg-neutral-200"
           >
-            Start a Business AI Conversation
+            Discuss GID Business AI
             <ArrowRight className="h-4 w-4" />
           </Link>
         </section>
