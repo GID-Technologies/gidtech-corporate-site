@@ -60,13 +60,34 @@ const intelligenceCards: IntelligenceCard[] = [
   },
 ];
 
-const stepLabels = [
-  "The Business Problem",
-  "From Reports to Decisions",
-  "Executive Morning Briefing",
-  "Business Impact",
+const stepContent = [
+  {
+    label: "The Business Problem",
+    title: "Business information means little when nobody knows what matters.",
+    description:
+      "Orders, invoices, inventory and operations may all be recorded while the owner still struggles to decide what deserves attention.",
+  },
+  {
+    label: "From Reports to Decisions",
+    title: "Move from business activity to recommended action.",
+    description:
+      "GID Business AI is being developed to connect business signals with useful next steps instead of simply displaying more numbers.",
+  },
+  {
+    label: "Executive Morning Briefing",
+    title: "Start the day knowing what deserves attention first.",
+    description:
+      "A concise executive briefing can surface performance, risks and the most important actions for the day.",
+  },
+  {
+    label: "Business Impact",
+    title: "See risks earlier. Find opportunities sooner. Decide faster.",
+    description:
+      "The value is clearer priorities before small issues become larger losses or missed opportunities.",
+  },
 ];
 
+const stepLabels = stepContent.map((step) => step.label);
 export default function GidBusinessAiSequence({
   activeStep,
   mode,
@@ -75,6 +96,7 @@ export default function GidBusinessAiSequence({
 
   const safeStep = Math.min(activeStep, stepOrder.length - 1);
   const actualStep = stepOrder[safeStep];
+  const currentStep = stepContent[actualStep];
 
   return (
     <section className="w-full max-w-[1450px]">
@@ -83,27 +105,23 @@ export default function GidBusinessAiSequence({
           <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-200/15 bg-cyan-200/[0.045]">
             <BrainCircuit className="h-6 w-6 text-cyan-100/75" />
           </div>
-
           <p className="mt-6 text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200/60">
             GID Business AI
           </p>
-
-          <h1 className="mt-5 max-w-[10ch] text-balance text-[clamp(2.15rem,7.5vw,5.6rem)] font-semibold leading-[0.94] tracking-[-0.065em] text-white">
-            Turn business information into decisions that deserve attention.
+          <h1 className="mt-5 max-w-[12ch] text-balance text-[clamp(2.15rem,7.5vw,5.6rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-white">
+            {currentStep.title}
           </h1>
 
-          <p className="mt-6 max-w-lg text-[clamp(0.9rem,1.05vw,1.12rem)] leading-7 text-neutral-400">
-            GID Business AI is being developed to help owners understand what is
-            changing, why it matters and what may deserve action next.
+          <p className="mt-6 max-w-lg text-[clamp(0.95rem,1.05vw,1.15rem)] leading-7 text-neutral-400">
+            {currentStep.description}
           </p>
-
           <div className="mt-7 rounded-2xl border border-white/10 bg-white/[0.025] p-4">
             <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-neutral-600">
               Current section
             </p>
 
             <p className="mt-2 text-sm font-semibold text-white">
-              {stepLabels[actualStep]}
+              {currentStep.label}
             </p>
           </div>
         </div>
@@ -249,11 +267,11 @@ function DecisionIntelligenceVisual() {
                     {card.label}
                   </p>
 
-                  <p className="mt-2 text-base font-semibold text-white">
+                  <p className="mt-2 text-lg font-semibold text-white">
                     {card.value}
                   </p>
 
-                  <p className="mt-2 text-xs font-semibold text-cyan-100/60">
+                  <p className="mt-2 text-sm font-semibold text-cyan-100/60">
                     {card.action}
                   </p>
                 </div>
@@ -377,11 +395,11 @@ function BusinessImpactVisual() {
                 </span>
 
                 <div>
-                  <h3 className="text-base font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-white">
                     {item.label}
                   </h3>
 
-                  <p className="mt-2 text-xs leading-6 text-neutral-500">
+                  <p className="mt-2 text-sm leading-6 text-neutral-500">
                     {item.description}
                   </p>
                 </div>
@@ -392,7 +410,7 @@ function BusinessImpactVisual() {
       </div>
 
       <div className="mt-5 rounded-2xl border border-cyan-200/20 bg-cyan-200/[0.045] px-5 py-4 text-center">
-        <p className="text-sm font-semibold text-white">
+        <p className="text-base font-semibold text-white">
           Bring GID the business information you already have—and the decisions
           you are struggling to make from it.
         </p>

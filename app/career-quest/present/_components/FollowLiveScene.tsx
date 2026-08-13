@@ -16,7 +16,7 @@ export default function FollowLiveScene() {
             </p>
           </div>
 
-          <h1 className="mt-5 max-w-[9ch] text-balance text-[clamp(2.4rem,4vw,4.7rem)] font-semibold leading-[0.94] tracking-[-0.065em] text-white">
+          <h1 className="mt-5 max-w-[10ch] text-balance text-[clamp(2.4rem,4vw,4.7rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-white">
             Do not just watch GID. Explore it while we speak.
           </h1>
 
@@ -35,7 +35,6 @@ export default function FollowLiveScene() {
 
         <div className="rounded-[2rem] border border-cyan-200/20 bg-cyan-200/[0.035] p-5 text-center shadow-[0_35px_120px_rgba(0,0,0,0.82)]">
           <div className="relative mx-auto aspect-square w-full max-w-[520px] overflow-hidden rounded-[1.5rem] bg-white">
-            {/* TODO: replace with career-quest QR code */}
             <Image
               src="/qr/career-quest-live-qr.png"
               alt="Scan to follow the GID live presentation"

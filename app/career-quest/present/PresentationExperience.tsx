@@ -394,9 +394,9 @@ export default function PresentationExperience({
       ref={presentationRootRef}
       className="presentation-root fixed inset-0 z-[20000] overflow-x-hidden overflow-y-auto bg-[#020307] text-white"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(18,214,255,0.11),transparent_31%),radial-gradient(circle_at_82%_84%,rgba(255,255,255,0.07),transparent_30%)]" />
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(18,214,255,0.11),transparent_31%),radial-gradient(circle_at_82%_84%,rgba(255,255,255,0.07),transparent_30%)]" />
 
-      <div className="pointer-events-none absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:64px_64px]" />
+      <div className="pointer-events-none fixed inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:64px_64px]" />
 
       <div className="pointer-events-none absolute left-8 top-6 z-30 hidden items-center gap-3 xl:flex">
         <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl border border-white/15 bg-white/[0.04]">
@@ -414,7 +414,7 @@ export default function PresentationExperience({
             GID Live Experience
           </p>
           <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-neutral-600">
-            Aptech Graduation 2026
+            Aptech Career Quest 2026
           </p>
         </div>
       </div>
@@ -496,8 +496,8 @@ export default function PresentationExperience({
       </div>
 
       {menuOpen ? (
-        <div className="fixed inset-0 z-50 flex min-h-full items-start justify-center overflow-y-auto bg-black/80 p-4 backdrop-blur-xl md:items-center md:p-5">
-          <div className="my-4 w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/15 bg-[#050608] shadow-[0_40px_140px_rgba(0,0,0,0.95)] md:my-0">
+        <div className="fixed inset-0 z-50 flex min-h-full items-start justify-center overflow-y-auto bg-black/80 px-4 py-6 backdrop-blur-xl md:px-5 md:py-8">
+          <div className="w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/15 bg-[#050608] shadow-[0_40px_140px_rgba(0,0,0,0.95)]">
             <div className="flex items-start justify-between border-b border-white/10 p-6 md:p-8">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
