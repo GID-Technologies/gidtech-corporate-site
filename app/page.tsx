@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -12,6 +13,7 @@ import {
   Car,
   CheckCircle2,
   Eye,
+  FileSpreadsheet,
   FileText,
   Globe2,
   Handshake,
@@ -20,6 +22,7 @@ import {
   Mail,
   MapPin,
   Megaphone,
+  MessageSquare,
   Monitor,
   Network,
   Rocket,
@@ -30,6 +33,16 @@ import {
   Workflow,
 } from "lucide-react";
 import ProductScreenshot from "./_components/ProductScreenshot";
+import HeroBusinessSystem from "./_components/home/HeroBusinessSystem";
+import type { Metadata } from "next";
+import GIDHeroVisual from "./_components/visuals/hero/GIDHeroVisual";
+import GIDHeroExperience from "./_components/home/GIDHeroExperience";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 const credibilityItems = [
   "Registered company: RC 9595315",
@@ -38,66 +51,25 @@ const credibilityItems = [
   "Based in Lagos, Nigeria",
 ];
 
-const businessProblems: {
-  problem: string;
-  solution: string;
-  outcome: string;
-  href: string;
-  icon: LucideIcon;
-}[] = [
-  {
-    problem: "Your business does not look credible enough online.",
-    solution: "Business Websites",
-    outcome:
-      "Present the business professionally, explain its offers clearly, and create reliable customer contact paths.",
-    href: "/solutions#business-websites",
-    icon: Globe2,
-  },
-  {
-    problem: "People struggle to find, understand, or contact the business.",
-    solution: "Visibility Systems",
-    outcome:
-      "Improve public presentation, discoverability, campaign direction, and enquiry flow through structured visibility systems.",
-    href: "/solutions#visibility-systems",
-    icon: Search,
-  },
-  {
-    problem:
-      "The business has records and reports, but important decisions still depend on guesswork.",
-    solution: "GID Business AI",
-    outcome:
-      "Interpret operational information, identify risks and opportunities, and turn business activity into clearer recommended action.",
-    href: "/products/gid-business-ai",
-    icon: BrainCircuit,
-  },
-  {
-    problem:
-      "Customers, orders, inventory and invoices are difficult to track across scattered tools.",
-    solution: "GID Platform",
-    outcome:
-      "Bring essential business operations into a clearer system configured around how the organisation actually works.",
-    href: "/contact?service=business-system#contact-form",
-    icon: Briefcase,
-  },
-  {
-    problem: "Manual and repetitive work slows the team down.",
-    solution: "Automation",
-    outcome:
-      "Organize forms, enquiries, notifications, follow-ups, and repeated workflows into a clearer system.",
-    href: "/solutions#automation",
-    icon: Workflow,
-  },
-  {
-    problem: "Generic tools do not fit the business or product idea.",
-    solution: "Custom Platforms",
-    outcome:
-      "Plan and build dashboards, portals, internal tools, MVPs, and practical web platforms around real requirements.",
-    href: "/solutions#custom-platforms",
-    icon: Layers3,
-  },
+const beforeGid = [
+  "Customer enquiries scattered across chats",
+  "Records split between paper and spreadsheets",
+  "Important information living on different staff phones",
+  "Repeated work handled manually",
+  "Business decisions made with incomplete information",
+  "Follow-ups depending on memory",
 ];
 
-const featuredSolutions: {
+const afterGid = [
+  "Customer information organised",
+  "Workflows connected more clearly",
+  "Operations easier to monitor",
+  "Repeated work reduced or automated",
+  "Important information easier to understand",
+  "Growth easier to manage",
+];
+
+const commercialPaths: {
   title: string;
   description: string;
   outcome: string;
@@ -105,63 +77,167 @@ const featuredSolutions: {
   icon: LucideIcon;
 }[] = [
   {
-    title: "Business Websites & Digital Showrooms",
+    title: "Build Your Presence",
     description:
-      "Professional digital presence that explains the business, presents its offers, strengthens trust, and supports customer enquiries.",
-    outcome: "Better credibility and clearer customer journeys.",
+      "Professional websites, digital showrooms, visibility systems, discoverability support, and clearer customer enquiry paths.",
+    outcome:
+      "Help people find, understand, trust, and contact the business more easily.",
     href: "/solutions#business-websites",
     icon: Globe2,
   },
   {
-    title: "Business Visibility Systems",
+    title: "Organise Your Operations",
     description:
-      "Structured positioning, visibility assessment, campaign planning, social direction, and enquiry-flow support for serious businesses.",
-    outcome: "Improved discoverability, trust, and public presentation.",
-    href: "/solutions#visibility-systems",
-    icon: Megaphone,
-  },
-  {
-    title: "Custom Platforms & Business Tools",
-    description:
-      "Practical web applications, dashboards, portals, MVPs, and internal tools designed around specific business workflows.",
-    outcome: "Technology that fits the actual process.",
-    href: "/solutions#custom-platforms",
-    icon: Monitor,
-  },
-  {
-    title: "Configured Business Systems",
-    description:
-      "Business systems designed around customers, orders, inventory, invoices, communication and the organisation’s actual daily workflow.",
+      "Configured business systems connecting customers, orders, inventory, invoices, communication, and important daily workflows.",
     outcome:
-      "Better organisation, clearer records and stronger operational control.",
+      "Replace scattered processes with a clearer operational system built around how the organisation actually works.",
     href: "/contact?service=business-system#contact-form",
     icon: Briefcase,
   },
   {
-    title: "Automation & Intelligent Workflows",
+    title: "Automate Repetitive Work",
     description:
-      "Forms, enquiry routing, follow-up systems, notifications, and intelligent assistance for repetitive business processes.",
-    outcome: "Less manual work and more operational consistency.",
+      "Forms, enquiry routing, notifications, follow-ups, internal workflows, and practical automation around repeated business activity.",
+    outcome:
+      "Reduce manual work, improve consistency, and free people to focus on higher-value tasks.",
     href: "/solutions#automation",
     icon: Workflow,
   },
   {
-    title: "AI Business Intelligence",
+    title: "Understand Your Business Better",
     description:
-      "Executive intelligence designed to identify risks, explain performance, reveal opportunities, and prioritise useful business actions.",
-    outcome: "Faster decisions and earlier visibility into costly problems.",
+      "Business intelligence designed to highlight risks, opportunities, performance signals, and the areas that deserve attention.",
+    outcome:
+      "Support faster decisions, earlier awareness, and clearer priorities.",
     href: "/products/gid-business-ai",
     icon: BrainCircuit,
   },
-  {
-    title: "Ongoing Digital Care",
-    description:
-      "Structured post-launch maintenance for websites, content, integrations, performance, and essential business information.",
-    outcome: "Better reliability after launch.",
-    href: "/solutions#digital-care",
-    icon: Wrench,
-  },
 ];
+
+// const businessProblems: {
+//   problem: string;
+//   solution: string;
+//   outcome: string;
+//   href: string;
+//   icon: LucideIcon;
+// }[] = [
+//   {
+//     problem: "Your business does not look credible enough online.",
+//     solution: "Business Websites",
+//     outcome:
+//       "Present the business professionally, explain its offers clearly, and create reliable customer contact paths.",
+//     href: "/solutions#business-websites",
+//     icon: Globe2,
+//   },
+//   {
+//     problem: "People struggle to find, understand, or contact the business.",
+//     solution: "Visibility Systems",
+//     outcome:
+//       "Improve public presentation, discoverability, campaign direction, and enquiry flow through structured visibility systems.",
+//     href: "/solutions#visibility-systems",
+//     icon: Search,
+//   },
+//   {
+//     problem:
+//       "The business has records and reports, but important decisions still depend on guesswork.",
+//     solution: "GID Business AI",
+//     outcome:
+//       "Interpret operational information, identify risks and opportunities, and turn business activity into clearer recommended action.",
+//     href: "/products/gid-business-ai",
+//     icon: BrainCircuit,
+//   },
+//   {
+//     problem:
+//       "Customers, orders, inventory and invoices are difficult to track across scattered tools.",
+//     solution: "GID Platform",
+//     outcome:
+//       "Bring essential business operations into a clearer system configured around how the organisation actually works.",
+//     href: "/contact?service=business-system#contact-form",
+//     icon: Briefcase,
+//   },
+//   {
+//     problem: "Manual and repetitive work slows the team down.",
+//     solution: "Automation",
+//     outcome:
+//       "Organize forms, enquiries, notifications, follow-ups, and repeated workflows into a clearer system.",
+//     href: "/solutions#automation",
+//     icon: Workflow,
+//   },
+//   {
+//     problem: "Generic tools do not fit the business or product idea.",
+//     solution: "Custom Platforms",
+//     outcome:
+//       "Plan and build dashboards, portals, internal tools, MVPs, and practical web platforms around real requirements.",
+//     href: "/solutions#custom-platforms",
+//     icon: Layers3,
+//   },
+// ];
+
+// const featuredSolutions: {
+//   title: string;
+//   description: string;
+//   outcome: string;
+//   href: string;
+//   icon: LucideIcon;
+// }[] = [
+//   {
+//     title: "Business Websites & Digital Showrooms",
+//     description:
+//       "Professional digital presence that explains the business, presents its offers, strengthens trust, and supports customer enquiries.",
+//     outcome: "Better credibility and clearer customer journeys.",
+//     href: "/solutions#business-websites",
+//     icon: Globe2,
+//   },
+//   {
+//     title: "Business Visibility Systems",
+//     description:
+//       "Structured positioning, visibility assessment, campaign planning, social direction, and enquiry-flow support for serious businesses.",
+//     outcome: "Improved discoverability, trust, and public presentation.",
+//     href: "/solutions#visibility-systems",
+//     icon: Megaphone,
+//   },
+//   {
+//     title: "Custom Platforms & Business Tools",
+//     description:
+//       "Practical web applications, dashboards, portals, MVPs, and internal tools designed around specific business workflows.",
+//     outcome: "Technology that fits the actual process.",
+//     href: "/solutions#custom-platforms",
+//     icon: Monitor,
+//   },
+//   {
+//     title: "Configured Business Systems",
+//     description:
+//       "Business systems designed around customers, orders, inventory, invoices, communication and the organisation’s actual daily workflow.",
+//     outcome:
+//       "Better organisation, clearer records and stronger operational control.",
+//     href: "/contact?service=business-system#contact-form",
+//     icon: Briefcase,
+//   },
+//   {
+//     title: "Automation & Intelligent Workflows",
+//     description:
+//       "Forms, enquiry routing, follow-up systems, notifications, and intelligent assistance for repetitive business processes.",
+//     outcome: "Less manual work and more operational consistency.",
+//     href: "/solutions#automation",
+//     icon: Workflow,
+//   },
+//   {
+//     title: "AI Business Intelligence",
+//     description:
+//       "Executive intelligence designed to identify risks, explain performance, reveal opportunities, and prioritise useful business actions.",
+//     outcome: "Faster decisions and earlier visibility into costly problems.",
+//     href: "/products/gid-business-ai",
+//     icon: BrainCircuit,
+//   },
+//   {
+//     title: "Ongoing Digital Care",
+//     description:
+//       "Structured post-launch maintenance for websites, content, integrations, performance, and essential business information.",
+//     outcome: "Better reliability after launch.",
+//     href: "/solutions#digital-care",
+//     icon: Wrench,
+//   },
+// ];
 
 const statBetChips: {
   label: string;
@@ -481,251 +557,142 @@ function SecondaryButton({
 }
 
 function Hero() {
+  return <GIDHeroExperience />;
+}
+
+function BusinessTransformation() {
   return (
-    <section
-      id="home"
-      className="section-shell relative min-h-[90vh] overflow-hidden px-5 pb-16 pt-28 md:px-8 md:pt-36 lg:pt-40"
-    >
-      <div className="absolute inset-0 -z-20 bg-grid-pattern bg-[size:64px_64px] opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
-      <div className="absolute left-1/2 top-20 -z-10 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-white/[0.045] blur-3xl" />
+    <section className="section-shell px-5 py-20 md:px-8 md:py-28">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          eyebrow="What changes with better systems?"
+          title="Technology should change how the business works."
+          copy="Many businesses do not have one dramatic technology problem. They have several small operational problems happening at the same time — scattered information, manual work, unclear processes, slow follow-ups, and decisions made without enough visibility."
+        />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-        <div className="animate-fade-up">
-          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-xs font-medium text-neutral-200">
-            <span className="h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_18px_rgba(255,255,255,0.55)]" />
-            Proof-led technology company
-          </div>
+        <div className="grid gap-5 lg:grid-cols-[1fr_auto_1fr] lg:items-stretch">
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.025] p-7 md:p-9">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-600">
+              Before better systems
+            </p>
 
-          <h1 className="text-balance max-w-5xl text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            Practical digital solutions that help businesses earn trust,
-            organise operations, make better decisions, and grow.
-          </h1>
-
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-neutral-400 md:mt-8 md:text-xl">
-            GID Technologies builds business websites, visibility systems,
-            configured business systems, AI business intelligence, automation
-            workflows, and digital products around real business problems and
-            measurable outcomes.
-          </p>
-
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-            <PrimaryButton href="/solutions">
-              Explore Business Solutions
-            </PrimaryButton>
-            <SecondaryButton href="/statbet">
-              View Proof of Work
-            </SecondaryButton>
-          </div>
-
-          <div className="mt-6">
-            <Link
-              href="/build-with-gid"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-400 transition hover:text-white"
-            >
-              Build, partner, or grow with GID
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="mt-10 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            {credibilityItems.map((item) => (
-              <div
-                key={item}
-                className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-neutral-300 backdrop-blur"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative animate-fade-up lg:pl-8">
-          <div className="premium-border glass relative overflow-hidden rounded-[2rem] p-5">
-            <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-white/[0.035] blur-3xl" />
-
-            <div className="mb-5 flex items-center justify-between border-b border-white/10 pb-5">
-              <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-neutral-500">
-                  GIDTech command view
-                </p>
-                <h2 className="mt-2 text-xl font-semibold text-white">
-                  Product and solution ecosystem
-                </h2>
-              </div>
-
-              <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-black">
-                Active
+            <h3 className="mt-5 text-3xl font-semibold tracking-[-0.04em] text-white">
+              The business is working.
+              <span className="block text-neutral-500">
+                But too much depends on people holding everything together.
               </span>
-            </div>
+            </h3>
 
-            <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black shadow-premium">
-              <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-                <div>
-                  <p className="text-sm font-semibold text-white">StatBet</p>
-                  <p className="text-xs text-neutral-500">Live proof product</p>
-                </div>
-
-                <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-neutral-400">
-                  Live
-                </span>
-              </div>
-
-              <ProductScreenshot
-                src="/work/image.png"
-                alt="StatBet live football intelligence platform"
-                priority
-                cropTop={10}
-                zoom={1.14}
-              />
-            </div>
-
-            <div className="mt-5 grid gap-3 sm:grid-cols-3">
-              {[
-                { label: "Solutions", status: "Client work" },
-                { label: "StatBet", status: "Live product" },
-                { label: "PaperTalk", status: "In development" },
-              ].map((item) => (
+            <div className="mt-8 space-y-3">
+              {beforeGid.map((item) => (
                 <div
-                  key={item.label}
-                  className="rounded-2xl border border-white/10 bg-white/[0.035] p-4"
+                  key={item}
+                  className="rounded-2xl border border-white/10 bg-black/50 px-5 py-4 text-sm leading-6 text-neutral-400"
                 >
-                  <p className="text-sm font-semibold text-white">
-                    {item.label}
-                  </p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.18em] text-neutral-600">
-                    {item.status}
-                  </p>
+                  {item}
                 </div>
               ))}
             </div>
+          </div>
 
-            <div className="mt-5 rounded-3xl border border-white/10 bg-white/[0.035] p-5">
-              <div className="flex items-center justify-between gap-4">
-                <p className="text-sm leading-7 text-neutral-300">
-                  One company connecting client solutions, live products,
-                  assistive technology, and future connection platforms.
-                </p>
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.04]">
-                  <Building2 className="h-5 w-5 text-white" />
-                </div>
-              </div>
+          <div className="flex items-center justify-center py-3 lg:px-3 lg:py-0">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/15 bg-white/[0.04]">
+              <ArrowRight className="h-5 w-5 rotate-90 text-white lg:rotate-0" />
             </div>
           </div>
 
-          <div className="absolute -bottom-6 -left-2 hidden rounded-3xl border border-white/15 bg-white/[0.06] px-5 py-4 text-sm text-neutral-200 shadow-card backdrop-blur md:block">
-            Live product proof, not empty positioning.
+          <div className="premium-border relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 md:p-9">
+            <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-white/[0.04] blur-3xl" />
+
+            <div className="relative">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
+                After the right systems enter
+              </p>
+
+              <h3 className="mt-5 text-3xl font-semibold tracking-[-0.04em] text-white">
+                The same business becomes easier to operate, understand, and
+                improve.
+              </h3>
+
+              <div className="mt-8 space-y-3">
+                {afterGid.map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black/50 px-5 py-4 text-sm leading-6 text-neutral-300"
+                  >
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-neutral-500" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
 
-function BusinessProblems() {
-  return (
-    <section className="section-shell px-5 py-20 md:px-8 md:py-24">
-      <div className="mx-auto max-w-7xl">
-        <SectionHeading
-          eyebrow="Start with the problem"
-          title="Business owners should recognize their challenge before thinking about the technology."
-          copy="These are the practical problems GID Technologies is structured to help solve."
-        />
-
-        <div className="grid gap-5 md:grid-cols-2">
-          {businessProblems.map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <article
-                key={item.problem}
-                className="glass group rounded-[1.75rem] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25"
-              >
-                <div className="flex items-start justify-between gap-5">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
-                    <Icon className="h-5 w-5 text-white" />
-                  </span>
-
-                  <span className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-500">
-                    {item.solution}
-                  </span>
-                </div>
-
-                <h3 className="mt-8 text-2xl font-semibold tracking-[-0.03em] text-white">
-                  {item.problem}
-                </h3>
-
-                <p className="mt-4 leading-7 text-neutral-400">
-                  {item.outcome}
-                </p>
-
-                <Link
-                  href={item.href}
-                  className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-white transition group-hover:gap-3"
-                >
-                  See the solution
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </article>
-            );
-          })}
+        <div className="mt-6 rounded-[1.75rem] border border-white/10 bg-white/[0.025] p-6 text-center md:p-8">
+          <p className="mx-auto max-w-4xl text-lg leading-8 text-neutral-300 md:text-xl">
+            GID Technologies does not begin by forcing a particular product onto
+            the business. We begin by understanding what is not working, what it
+            is costing, and what should work differently.
+          </p>
         </div>
       </div>
     </section>
   );
 }
 
-function FeaturedSolutions() {
+function CommercialPaths() {
   return (
     <section id="solutions" className="section-shell px-5 py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="Featured business solutions"
-          title="Clear solutions clients can understand, evaluate, and hire."
-          copy="The emphasis is not technology for decoration. It is stronger credibility, better customer journeys, improved visibility, and smoother operations."
+          eyebrow="How GID can help"
+          title="Different problems need different kinds of technology."
+          copy="The solution depends on what the business is trying to improve. These are four of the main ways GID Technologies can enter that journey."
         />
 
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {featuredSolutions.map((solution, index) => {
-            const Icon = solution.icon;
+        <div className="grid gap-5 md:grid-cols-2">
+          {commercialPaths.map((path, index) => {
+            const Icon = path.icon;
 
             return (
               <article
-                key={solution.title}
-                className={`glass group rounded-[1.75rem] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25 ${
-                  index === 0 ? "lg:col-span-2" : ""
-                }`}
+                key={path.title}
+                className="glass group rounded-[1.75rem] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25 md:p-8"
               >
                 <div className="flex items-start justify-between gap-5">
                   <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
                     <Icon className="h-5 w-5 text-white" />
                   </span>
-                  <span className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-700">
+
+                  <span className="text-xs font-semibold uppercase tracking-[0.24em] text-neutral-700">
                     0{index + 1}
                   </span>
                 </div>
 
-                <h3 className="mt-9 text-2xl font-semibold tracking-[-0.03em] text-white">
-                  {solution.title}
+                <h3 className="mt-8 text-2xl font-semibold tracking-[-0.03em] text-white md:text-3xl">
+                  {path.title}
                 </h3>
 
                 <p className="mt-4 leading-7 text-neutral-400">
-                  {solution.description}
+                  {path.description}
                 </p>
 
-                <div className="mt-6 rounded-2xl border border-white/10 bg-black/50 p-4">
+                <div className="mt-7 rounded-2xl border border-white/10 bg-black/50 p-5">
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-600">
-                    Business outcome
+                    What changes
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-neutral-300">
-                    {solution.outcome}
+
+                  <p className="mt-3 text-sm leading-7 text-neutral-300">
+                    {path.outcome}
                   </p>
                 </div>
 
                 <Link
-                  href={solution.href}
+                  href={path.href}
                   className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-white transition group-hover:gap-3"
                 >
-                  Explore this solution
+                  Explore this direction
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </article>
@@ -735,7 +702,7 @@ function FeaturedSolutions() {
 
         <div className="mt-9 flex justify-center">
           <PrimaryButton href="/solutions">
-            View All Business Solutions
+            Explore All Business Solutions
           </PrimaryButton>
         </div>
       </div>
@@ -1416,8 +1383,8 @@ export default function Home() {
     <main>
       <div className="noise" />
       <Hero />
-      <BusinessProblems />
-      <FeaturedSolutions />
+      <BusinessTransformation />
+      <CommercialPaths />
       <BrandProof />
       <StatBetProof />
       <CurrentlyBuilding />

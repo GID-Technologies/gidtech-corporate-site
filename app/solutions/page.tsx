@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "Business Solutions",
   description:
     "Explore practical business websites, visibility systems, custom platforms, automation workflows, and ongoing digital support from GID Technologies.",
+  alternates: {
+    canonical: "/solutions",
+  },
 };
 
 type Solution = {

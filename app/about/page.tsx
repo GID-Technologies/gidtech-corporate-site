@@ -18,7 +18,10 @@ import {
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn about GID Technologies, a practical technology company building digital products, business visibility systems, and future connection platforms.",
+    "Learn about GID Technologies, a practical technology company building digital products, business systems, business intelligence, and technology solutions.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 const principles = [

@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   title: "Build With GID",
   description:
     "Explore opportunities to build, partner, support, test products, refer businesses, and grow with GID Technologies.",
+  alternates: {
+    canonical: "/build-with-gid",
+  },
 };
 
 type OpportunityPath = {

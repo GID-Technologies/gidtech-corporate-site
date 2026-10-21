@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Contact GID Technologies for digital products, business visibility systems, online presence, and practical technology solutions.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 const projectTypes = [

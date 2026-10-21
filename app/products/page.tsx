@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   title: "Products & Infrastructure",
   description:
     "Explore GID Technologies’ live product, active engineering work, software prototype, logistics roadmap, and long-term validation directions.",
+  alternates: {
+    canonical: "/products",
+  },
 };
 
 type Product = {

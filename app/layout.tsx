@@ -36,9 +36,9 @@ export const metadata: Metadata = {
   creator: "GID Technologies",
   publisher: "GID Technologies",
 
-  alternates: {
-    canonical: "/",
-  },
+  // alternates: {
+  //   canonical: "/",
+  // },
 
   openGraph: {
     title: "GID Technologies | Digital Products & Business Visibility Systems",
