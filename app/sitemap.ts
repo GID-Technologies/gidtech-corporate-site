@@ -3,55 +3,36 @@ import type { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.gidtechnologies.com";
 
-  return [
+  const publicPages = [
     {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+      path: "",
       priority: 1,
     },
     {
-      url: `${baseUrl}/solutions`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+      path: "/solutions",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/build-with-gid`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/graduation`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+      path: "/contact",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+      path: "/about",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/products`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
+      path: "/products",
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/statbet`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
+      path: "/statbet",
+      priority: 0.7,
     },
   ];
+
+  return publicPages.map(({ path, priority }) => ({
+    url: `${baseUrl}${path}`,
+    changeFrequency: "monthly" as const,
+    priority,
+  }));
 }

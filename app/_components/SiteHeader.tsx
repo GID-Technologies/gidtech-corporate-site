@@ -10,11 +10,10 @@ type NavigationItem = {
   label: string;
   href: string;
   description: string;
-  meta?: string;
 };
 
 type NavigationGroup = {
-  id: "solutions" | "products" | "company";
+  id: "solutions" | "company";
   label: string;
   href: string;
   overviewLabel: string;
@@ -24,82 +23,39 @@ type NavigationGroup = {
 const navigationGroups: NavigationGroup[] = [
   {
     id: "solutions",
-    label: "Solutions",
+    label: "Services",
     href: "/solutions",
-    overviewLabel: "View All Solutions",
+    overviewLabel: "Explore All Services",
     items: [
       {
         label: "Business Websites",
         href: "/solutions#business-websites",
         description:
-          "Professional websites and digital showrooms that strengthen credibility and customer enquiry flow.",
+          "Professional websites and digital showrooms for growing businesses.",
       },
       {
-        label: "Visibility Systems",
+        label: "Business Visibility",
         href: "/solutions#visibility-systems",
         description:
-          "Structured positioning, discoverability, campaign direction, and public business presentation.",
+          "Stronger presentation, discoverability and customer enquiry paths.",
       },
       {
         label: "Custom Platforms",
         href: "/solutions#custom-platforms",
         description:
-          "Web platforms, portals, dashboards, internal tools, and MVPs built around real workflows.",
+          "Digital tools, dashboards and platforms built around real workflows.",
       },
       {
         label: "Automation",
         href: "/solutions#automation",
         description:
-          "Practical workflows that reduce repetitive tasks and improve communication and organisation.",
+          "Practical digital workflows that reduce repeated manual work.",
       },
       {
         label: "Digital Care",
         href: "/solutions#digital-care",
         description:
-          "Ongoing technical maintenance, content updates, monitoring, and improvement support.",
-      },
-    ],
-  },
-  {
-    id: "products",
-    label: "Products",
-    href: "/products",
-    overviewLabel: "View Products & Infrastructure",
-    items: [
-      {
-        label: "StatBet",
-        href: "/statbet",
-        description:
-          "GID Technologies’ live football-intelligence product and strongest public proof of execution.",
-        meta: "Live",
-      },
-      {
-        label: "GID Platform Core",
-        href: "/products#gid-platform-core",
-        description:
-          "Reusable backend infrastructure being developed around customers, products, inventory, orders, and invoices.",
-        meta: "Active Backend",
-      },
-      {
-        label: "PaperTalk",
-        href: "/products#papertalk",
-        description:
-          "Working accessibility-focused software prototype for making documents readable and audible.",
-        meta: "Prototype",
-      },
-      {
-        label: "GID Track Ecosystem",
-        href: "/products#gid-track",
-        description:
-          "Future shipment tracking, notification, delivery-intelligence, and logistics-integration layers.",
-        meta: "Roadmap",
-      },
-      {
-        label: "Exploring Further",
-        href: "/products#long-term-validation",
-        description:
-          "Mechanic Connection, Property Connection, and GID Car Tracker remain under long-term validation.",
-        meta: "Validation",
+          "Ongoing website maintenance and agreed technical support.",
       },
     ],
   },
@@ -112,27 +68,13 @@ const navigationGroups: NavigationGroup[] = [
       {
         label: "About GID Technologies",
         href: "/about",
-        description:
-          "Understand the company, its proof-led model, execution principles, and long-term direction.",
-      },
-      {
-        label: "Build With GID",
-        href: "/build-with-gid",
-        description:
-          "Explore contributor, builder, business-partner, early-user, and strategic-support paths.",
+        description: "Meet the company and learn how we approach our work.",
       },
       {
         label: "Contact",
         href: "/contact",
         description:
-          "Start a business, product, partnership, support, or contributor conversation.",
-      },
-      {
-        label: "Aptech Graduation 2026",
-        href: "/graduation",
-        description:
-          "Review the presentation, product roadmap, and participation paths from the graduation event.",
-        meta: "Event",
+          "Tell us what your business needs and start a conversation.",
       },
     ],
   },
@@ -140,7 +82,9 @@ const navigationGroups: NavigationGroup[] = [
 
 export default function SiteHeader() {
   const pathname = usePathname();
+
   const desktopNavigationRef = useRef<HTMLElement | null>(null);
+
   const desktopCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
@@ -149,12 +93,14 @@ export default function SiteHeader() {
   const [desktopGroup, setDesktopGroup] = useState<string | null>(null);
   const [mobileGroup, setMobileGroup] = useState<string | null>(null);
 
+  // Close navigation whenever the route changes.
   useEffect(() => {
     setMobileOpen(false);
     setDesktopGroup(null);
     setMobileGroup(null);
   }, [pathname]);
 
+  // Prevent background scrolling while mobile menu is open.
   useEffect(() => {
     if (!mobileOpen) {
       return;
@@ -174,6 +120,7 @@ export default function SiteHeader() {
     };
   }, [mobileOpen]);
 
+  // Keyboard dismissal.
   useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
       if (event.key === "Escape") {
@@ -190,6 +137,7 @@ export default function SiteHeader() {
     };
   }, []);
 
+  // Close desktop dropdown when clicking outside.
   useEffect(() => {
     function handlePointerDown(event: PointerEvent) {
       const target = event.target;
@@ -250,10 +198,7 @@ export default function SiteHeader() {
 
   function isGroupActive(group: NavigationGroup) {
     return (
-      isActive(group.href) ||
-      group.items.some(
-        (item) => cleanHref(item.href) !== "/statbet" && isActive(item.href),
-      )
+      isActive(group.href) || group.items.some((item) => isActive(item.href))
     );
   }
 
@@ -289,7 +234,6 @@ export default function SiteHeader() {
               <p className="truncate text-sm font-bold tracking-[0.22em] text-white">
                 GIDTECH
               </p>
-
               <p className="truncate text-xs text-neutral-500">
                 GID Technologies
               </p>
@@ -317,7 +261,9 @@ export default function SiteHeader() {
 
             {navigationGroups.map((group) => {
               const expanded = desktopGroup === group.id;
+
               const active = isGroupActive(group);
+
               return (
                 <div
                   key={group.id}
@@ -378,17 +324,9 @@ export default function SiteHeader() {
                         onClick={() => setDesktopGroup(null)}
                         className="group rounded-2xl border border-transparent p-4 transition hover:border-white/10 hover:bg-white/[0.055]"
                       >
-                        <div className="flex items-start justify-between gap-3">
-                          <p className="text-sm font-semibold text-white">
-                            {item.label}
-                          </p>
-
-                          {item.meta ? (
-                            <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.05] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-neutral-500">
-                              {item.meta}
-                            </span>
-                          ) : null}
-                        </div>
+                        <p className="text-sm font-semibold text-white">
+                          {item.label}
+                        </p>
 
                         <p className="mt-3 text-xs leading-5 text-neutral-500 transition group-hover:text-neutral-400">
                           {item.description}
@@ -403,6 +341,7 @@ export default function SiteHeader() {
                     className="mt-3 flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
                   >
                     {activeDesktopGroup.overviewLabel}
+
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
@@ -410,6 +349,7 @@ export default function SiteHeader() {
             ) : null}
           </nav>
 
+          {/* Desktop call to action */}
           <div className="hidden lg:flex">
             <Link
               href="/contact?service=consultation"
@@ -420,6 +360,7 @@ export default function SiteHeader() {
             </Link>
           </div>
 
+          {/* Mobile menu toggle */}
           <button
             type="button"
             aria-label={
@@ -442,6 +383,7 @@ export default function SiteHeader() {
         </div>
       </header>
 
+      {/* Mobile navigation */}
       {mobileOpen ? (
         <div
           className="fixed inset-x-0 bottom-0 top-[77px] z-[9998] lg:hidden"
@@ -478,6 +420,7 @@ export default function SiteHeader() {
 
               {navigationGroups.map((group) => {
                 const expanded = mobileGroup === group.id;
+
                 const active = isGroupActive(group);
 
                 return (
@@ -520,6 +463,7 @@ export default function SiteHeader() {
                           className="flex items-center justify-between gap-4 rounded-xl bg-white/[0.07] px-4 py-3.5 text-sm font-semibold text-white"
                         >
                           <span>{group.overviewLabel}</span>
+
                           <ArrowRight className="h-4 w-4 shrink-0" />
                         </Link>
 
@@ -531,19 +475,13 @@ export default function SiteHeader() {
                               onClick={closeMobileNavigation}
                               className="rounded-xl px-4 py-3.5 transition active:bg-white/[0.08]"
                             >
-                              <div className="flex items-start justify-between gap-4">
+                              <span className="flex items-start justify-between gap-4">
                                 <span className="text-sm font-semibold text-neutral-200">
                                   {item.label}
                                 </span>
 
-                                {item.meta ? (
-                                  <span className="max-w-[42%] shrink-0 text-right text-[9px] font-semibold uppercase leading-4 tracking-[0.1em] text-neutral-600">
-                                    {item.meta}
-                                  </span>
-                                ) : (
-                                  <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-neutral-600" />
-                                )}
-                              </div>
+                                <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-neutral-600" />
+                              </span>
 
                               <p className="mt-2 text-xs leading-5 text-neutral-600">
                                 {item.description}

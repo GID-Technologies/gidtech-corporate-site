@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+
 import type { ReactNode } from "react";
 import "./globals.css";
 
@@ -10,40 +11,38 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default:
-      "GID Technologies | Digital Products & Business Visibility Systems",
+    default: "GID Technologies | Business Websites & Digital Solutions",
     template: "%s | GID Technologies",
   },
 
   description:
-    "GID Technologies builds practical digital products, business visibility systems, and technology solutions that help modern businesses become easier to find, trust, and contact.",
+    "GID Technologies creates professional business websites, custom software and practical digital solutions for growing organisations.",
 
   applicationName: "GID Technologies",
 
   keywords: [
     "GID Technologies",
     "GIDTech",
-    "StatBet",
-    "Business Visibility Systems",
-    "business visibility systems",
-    "digital products",
-    "technology solutions",
+    "business websites Nigeria",
+    "business website design",
+    "custom web development",
+    "business digital solutions",
     "Lagos technology company",
-    "Nigeria technology company",
   ],
 
-  authors: [{ name: "GID Technologies" }],
+  authors: [
+    {
+      name: "GID Technologies",
+    },
+  ],
+
   creator: "GID Technologies",
   publisher: "GID Technologies",
 
-  alternates: {
-    canonical: "/",
-  },
-
   openGraph: {
-    title: "GID Technologies | Digital Products & Business Visibility Systems",
+    title: "GID Technologies | Business Websites & Digital Solutions",
     description:
-      "A practical technology company building digital products, business visibility systems, and future connection platforms.",
+      "Professional business websites, custom software and practical digital solutions from GID Technologies.",
     url: "/",
     siteName: "GID Technologies",
     type: "website",
@@ -52,9 +51,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "GID Technologies | Digital Products & Business Visibility Systems",
+    title: "GID Technologies | Business Websites & Digital Solutions",
     description:
-      "Practical technology company building digital products, business visibility systems, and future connection platforms.",
+      "Professional websites, custom software and practical digital solutions.",
   },
 
   robots: {
