@@ -2,444 +2,441 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import type { LucideIcon } from "lucide-react";
 import {
-  AppWindow,
   ArrowRight,
   CheckCircle2,
-  Clock3,
   Globe2,
+  LayoutDashboard,
+  Mail,
   Megaphone,
-  ShieldCheck,
   Wrench,
   Workflow,
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Business Solutions",
+  title: "Business Websites & Digital Services",
   description:
-    "Explore practical business websites, visibility systems, custom platforms, automation workflows, and ongoing digital support from GID Technologies.",
+    "Explore GID Business Presence, custom software, business visibility, automation and website maintenance services from GID Technologies.",
+  alternates: {
+    canonical: "/solutions",
+  },
 };
 
-type Solution = {
+type SupportingService = {
+  id: string;
+  number: string;
   title: string;
-  shortTitle: string;
-  problem: string;
   description: string;
-  outcomes: string[];
-  deliverables: string[];
-  timeline: string;
-  audience: string;
-  href: string;
+  features: string[];
+  serviceType: string;
   icon: LucideIcon;
 };
 
-const solutions: Solution[] = [
+const presenceDeliverables = [
+  "Responsive business website",
+  "Clear products and services presentation",
+  "Customer contact and enquiry options",
+  "Basic search and social sharing setup",
+  "Testing, launch and handover",
+];
+
+const supportingServices: SupportingService[] = [
   {
-    title: "Business Websites & Digital Showrooms",
-    shortTitle: "Business Websites",
-    problem:
-      "Customers struggle to understand the business, confirm its credibility, or find a reliable way to make enquiries.",
+    id: "visibility-systems",
+    number: "02",
+    title: "Business Visibility",
     description:
-      "We create professional websites and digital showrooms that explain what a business offers, strengthen public trust, and make customer contact easier.",
-    outcomes: [
-      "Stronger business credibility",
-      "Clearer presentation of products and services",
-      "Better customer enquiry flow",
-      "A professional link for outreach and promotion",
-    ],
-    deliverables: [
-      "Business website or landing page",
-      "Mobile-responsive design",
-      "Products and services presentation",
-      "WhatsApp, email, and call contact paths",
-      "Basic search and social sharing setup",
-    ],
-    timeline: "Typical delivery: 2–6 weeks",
-    audience:
-      "Local businesses, schools, churches, hospitality businesses, service providers, property businesses, and growing brands.",
-    href: "/contact?service=business-website",
-    icon: Globe2,
-  },
-  {
-    title: "Business Visibility Systems",
-    shortTitle: "Visibility Systems",
-    problem:
-      "The business exists, but people cannot easily discover it, understand it, trust it, or know how to contact it.",
-    description:
-      "We structure the business’s online presence, public positioning, enquiry paths, campaign direction, and visibility review process.",
-    outcomes: [
-      "Improved discoverability",
-      "Stronger online presentation",
-      "Clearer customer communication",
-      "More structured visibility activity",
-    ],
-    deliverables: [
-      "Visibility assessment",
+      "Improve how customers discover, understand and connect with your business.",
+    features: [
+      "Digital presence review",
       "Business profile and positioning",
-      "Digital showroom direction",
-      "Social media cleanup and guidance",
-      "Campaign planning and review",
-      "WhatsApp and enquiry flow setup",
+      "Campaign and enquiry guidance",
     ],
-    timeline: "Timeline depends on scope and campaign direction",
-    audience:
-      "Businesses that need stronger visibility, public trust, professional presentation, and clearer enquiry systems.",
-    href: "/contact?service=visibility-system",
+    serviceType: "visibility-system",
     icon: Megaphone,
   },
   {
-    title: "Custom Web Platforms & Business Tools",
-    shortTitle: "Custom Platforms",
-    problem:
-      "Generic tools do not properly match the business process, product idea, customer journey, or internal workflow.",
+    id: "custom-platforms",
+    number: "03",
+    title: "Custom Software",
     description:
-      "We plan and build practical web platforms, dashboards, portals, internal tools, and MVPs around specific business requirements.",
-    outcomes: [
-      "Technology built around the real workflow",
-      "Reduced dependence on scattered manual tools",
-      "A clearer digital customer experience",
-      "A foundation that can grow over time",
+      "Web platforms, dashboards and internal tools designed around your requirements.",
+    features: [
+      "Workflow and requirements planning",
+      "Custom interface development",
+      "Testing and deployment support",
     ],
-    deliverables: [
-      "Product and requirements planning",
-      "Interface and workflow design",
-      "Web application development",
-      "Database and backend direction",
-      "Testing and launch support",
-    ],
-    timeline: "Typical delivery: 4–12+ weeks",
-    audience:
-      "Startups, organizations, founders, schools, service companies, and businesses with a defined digital product or process problem.",
-    href: "/contact?service=custom-platform",
-    icon: AppWindow,
+    serviceType: "custom-platform",
+    icon: LayoutDashboard,
   },
   {
-    title: "Automation & Intelligent Workflows",
-    shortTitle: "Automation",
-    problem:
-      "The team spends too much time repeating tasks, answering the same enquiries, transferring information manually, or managing disconnected processes.",
+    id: "automation",
+    number: "04",
+    title: "Business Automation",
     description:
-      "We identify repetitive workflows and design practical automation systems that improve response, organization, communication, and operational efficiency.",
-    outcomes: [
-      "Less repetitive manual work",
-      "Faster handling of enquiries",
-      "More organized business information",
-      "Improved operational consistency",
+      "Reduce repetitive tasks and connect processes through practical digital workflows.",
+    features: [
+      "Workflow assessment",
+      "Forms and information routing",
+      "Notifications and follow-up systems",
     ],
-    deliverables: [
-      "Workflow discovery",
-      "Automation opportunity mapping",
-      "Forms and enquiry routing",
-      "Notification and follow-up workflows",
-      "Intelligent assistance where appropriate",
-    ],
-    timeline: "Typical delivery: 2–8 weeks",
-    audience:
-      "Businesses with repeated enquiries, manual reporting, customer follow-up challenges, or fragmented internal workflows.",
-    href: "/contact?service=automation",
+    serviceType: "automation",
     icon: Workflow,
   },
   {
-    title: "Ongoing Digital Care & Maintenance",
-    shortTitle: "Digital Care",
-    problem:
-      "Websites and digital systems become outdated, insecure, broken, or neglected after launch.",
+    id: "digital-care",
+    number: "05",
+    title: "Digital Care",
     description:
-      "We provide structured post-launch support to keep websites, content, integrations, and digital systems functional and professionally maintained.",
-    outcomes: [
-      "Reduced website downtime",
-      "Faster issue resolution",
-      "Updated business information",
-      "Better long-term system reliability",
+      "Keep your existing website or digital service maintained and properly supported.",
+    features: [
+      "Website and content updates",
+      "Technical maintenance",
+      "Agreed monitoring and support",
     ],
-    deliverables: [
-      "Website updates",
-      "Technical monitoring",
-      "Content and information changes",
-      "Performance review",
-      "Basic improvement recommendations",
-    ],
-    timeline: "Monthly or agreed support period",
-    audience:
-      "Businesses that already have a website or digital system but need reliable ongoing technical and content support.",
-    href: "/contact?service=digital-care",
+    serviceType: "digital-care",
     icon: Wrench,
   },
 ];
 
-const engagementSteps = [
+const processSteps = [
   {
     number: "01",
-    title: "Discovery",
-    text: "We understand the business, current problem, customers, available resources, and intended outcome.",
+    title: "Tell us what you need",
+    description:
+      "Share your business goals, current challenges or project idea.",
   },
   {
     number: "02",
-    title: "Solution Scope",
-    text: "We define the recommended solution, deliverables, responsibilities, timeline, professional fees, and external expenses.",
+    title: "Agree on the scope",
+    description: "We define deliverables, responsibilities, cost and timeline.",
   },
   {
     number: "03",
-    title: "Execution",
-    text: "The approved work is designed, built, reviewed, and prepared for deployment or campaign activity.",
-  },
-  {
-    number: "04",
-    title: "Launch & Improvement",
-    text: "We launch, monitor the agreed areas, collect useful feedback, and identify the next improvement opportunities.",
+    title: "Build and deliver",
+    description: "We execute the agreed work, test it and complete handover.",
   },
 ];
 
 export default function SolutionsPage() {
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="section-shell mx-auto max-w-7xl px-5 pb-24 pt-32 md:px-8 md:pb-32 md:pt-40">
-        <Link
-          href="/"
-          className="mb-8 inline-flex rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/[0.08] hover:text-white"
-        >
-          ← Back to Home
-        </Link>
+      {/* PAGE INTRODUCTION */}
+      <section
+        aria-labelledby="solutions-title"
+        className="section-shell relative overflow-hidden px-5 pb-14 pt-32 md:px-8 md:pb-20 md:pt-40"
+      >
+        <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[420px] w-[700px] -translate-x-1/2 rounded-full bg-white/[0.035] blur-3xl" />
 
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div>
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.35em] text-neutral-500">
-              Business Solutions
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-neutral-500">
+              GID Technologies · Services
             </p>
 
-            <h1 className="text-balance text-4xl font-semibold tracking-[-0.05em] text-white md:text-6xl">
-              Practical technology solutions built around real business
-              problems.
+            <h1
+              id="solutions-title"
+              className="max-w-4xl text-balance text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl lg:text-6xl"
+            >
+              Better digital presence. Better ways to work.
             </h1>
 
-            <p className="mt-8 max-w-4xl text-lg leading-8 text-neutral-400 md:text-xl">
-              GID Technologies helps businesses improve credibility,
-              discoverability, customer communication, operational efficiency,
-              and digital execution through clearly scoped solutions.
+            <p className="mt-6 max-w-2xl text-base leading-8 text-neutral-400 md:text-lg">
+              We build business websites, digital tools and practical solutions
+              that help organisations present themselves clearly and work more
+              effectively.
             </p>
 
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/contact?service=consultation"
+                href="#business-websites"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200"
               >
-                Discuss Your Business
-                <ArrowRight className="h-4 w-4" />
+                Explore Business Presence
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
 
               <Link
-                href="/statbet"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+                href="/contact?service=consultation#contact-form"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.07]"
               >
-                View Proof of Execution
-                <ArrowRight className="h-4 w-4" />
+                Talk to GID
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>
 
-          <div className="premium-border rounded-[2rem] border border-white/10 bg-white/[0.025] p-6 md:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
-              Outcome-first direction
-            </p>
-
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
-              Clients do not need technology for decoration.
-            </h2>
-
-            <p className="mt-5 leading-8 text-neutral-400">
-              They need clearer customer journeys, stronger trust, better
-              visibility, smoother operations, and systems that support real
-              growth.
+          {/* Compact service introduction */}
+          <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.035] p-6 md:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
+              What we can help with
             </p>
 
             <div className="mt-6 grid gap-3">
               {[
-                "More professional public presence",
-                "Clearer enquiry and customer contact paths",
-                "More efficient digital workflows",
-                "Technology designed around real needs",
+                "Establish a professional online presence",
+                "Present products and services clearly",
+                "Improve customer contact paths",
+                "Build tools for specific business needs",
               ].map((item) => (
                 <div
                   key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black/50 px-4 py-4 text-sm text-neutral-300"
+                  className="flex items-start gap-3 border-b border-white/10 pb-3 text-sm leading-6 text-neutral-300 last:border-0 last:pb-0"
                 >
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-white" />
+                  <CheckCircle2
+                    className="mt-1 h-4 w-4 shrink-0 text-white"
+                    aria-hidden="true"
+                  />
                   <span>{item}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
+      </section>
 
-        <div className="mt-20 space-y-6">
-          {solutions.map((solution, index) => {
-            const Icon = solution.icon;
+      {/* PRIMARY COMMERCIAL SERVICE */}
+      <section
+        id="business-websites"
+        aria-labelledby="presence-title"
+        className="section-shell scroll-mt-28 px-5 py-12 md:px-8 md:py-16"
+      >
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-white/15 bg-white/[0.035]">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="flex flex-col justify-center p-7 md:p-10 lg:p-12">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06]">
+                  <Globe2 className="h-6 w-6 text-white" aria-hidden="true" />
+                </span>
 
-            return (
-              <article
-                key={solution.title}
-                id={solution.shortTitle
-                  .toLowerCase()
-                  .replaceAll(" ", "-")
-                  .replaceAll("&", "and")}
-                className="scroll-mt-28 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.025]"
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
+                  01 · Business Presence
+                </span>
+              </div>
+
+              <h2
+                id="presence-title"
+                className="mt-8 max-w-xl text-balance text-3xl font-semibold tracking-[-0.045em] text-white md:text-5xl"
               >
-                <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
-                  <div className="border-b border-white/10 p-7 md:p-9 lg:border-b-0 lg:border-r">
-                    <div className="flex items-start justify-between gap-5">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
-                        <Icon className="h-6 w-6 text-white" />
-                      </div>
+                Give your business a professional home online.
+              </h2>
 
-                      <span className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-700">
-                        Solution {String(index + 1).padStart(2, "0")}
-                      </span>
-                    </div>
+              <p className="mt-5 max-w-lg text-base leading-8 text-neutral-400">
+                A well-structured website helps customers understand your
+                business, explore what you offer and know how to reach you.
+              </p>
 
-                    <h2 className="mt-10 text-3xl font-semibold tracking-[-0.04em] text-white md:text-4xl">
-                      {solution.title}
-                    </h2>
+              <p className="mt-5 max-w-lg text-sm leading-7 text-neutral-300">
+                Suitable for growing businesses, professional services, schools,
+                organisations and brands establishing a stronger digital
+                presence.
+              </p>
 
-                    <p className="mt-5 text-sm font-semibold uppercase tracking-[0.22em] text-neutral-600">
-                      The business problem
-                    </p>
+              <Link
+                href="/contact?service=business-website#contact-form"
+                className="mt-8 inline-flex w-fit items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-black transition hover:bg-neutral-200"
+              >
+                Discuss Your Website
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
 
-                    <p className="mt-3 leading-8 text-neutral-400">
-                      {solution.problem}
-                    </p>
+            <div className="border-t border-white/10 bg-black/35 p-7 md:p-10 lg:border-l lg:border-t-0">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
+                Typical deliverables
+              </p>
 
-                    <div className="mt-8 rounded-2xl border border-white/10 bg-black/50 p-5">
-                      <div className="flex items-start gap-3">
-                        <Clock3 className="mt-1 h-4 w-4 shrink-0 text-neutral-500" />
-                        <div>
-                          <p className="text-sm font-semibold text-white">
-                            Typical timeline
-                          </p>
-                          <p className="mt-2 text-sm leading-6 text-neutral-400">
-                            {solution.timeline}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+              <div className="mt-7 grid gap-3">
+                {presenceDeliverables.map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-4"
+                  >
+                    <CheckCircle2
+                      className="mt-0.5 h-4 w-4 shrink-0 text-white"
+                      aria-hidden="true"
+                    />
+
+                    <span className="text-sm leading-6 text-neutral-200">
+                      {item}
+                    </span>
                   </div>
+                ))}
+              </div>
 
-                  <div className="p-7 md:p-9">
-                    <p className="text-lg leading-8 text-neutral-300">
-                      {solution.description}
-                    </p>
+              <div className="mt-7 border-t border-white/10 pt-6">
+                <p className="text-sm font-semibold text-white">
+                  Scoped to your business
+                </p>
 
-                    <div className="mt-8 grid gap-6 md:grid-cols-2">
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-600">
-                          Business outcomes
-                        </p>
-
-                        <div className="mt-4 space-y-3">
-                          {solution.outcomes.map((outcome) => (
-                            <div
-                              key={outcome}
-                              className="flex items-start gap-3 text-sm leading-6 text-neutral-300"
-                            >
-                              <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-neutral-500" />
-                              <span>{outcome}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-600">
-                          Possible deliverables
-                        </p>
-
-                        <div className="mt-4 space-y-3">
-                          {solution.deliverables.map((deliverable) => (
-                            <div
-                              key={deliverable}
-                              className="flex items-start gap-3 text-sm leading-6 text-neutral-300"
-                            >
-                              <ShieldCheck className="mt-1 h-4 w-4 shrink-0 text-neutral-500" />
-                              <span>{deliverable}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-8 rounded-2xl border border-white/10 bg-black/50 p-5">
-                      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-600">
-                        Who this is for
-                      </p>
-                      <p className="mt-3 text-sm leading-7 text-neutral-300">
-                        {solution.audience}
-                      </p>
-                    </div>
-
-                    <Link
-                      href={solution.href}
-                      className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200"
-                    >
-                      Discuss This Solution
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
+                <p className="mt-2 text-sm leading-7 text-neutral-400">
+                  Project fees, delivery time, hosting, domain costs and
+                  optional integrations are confirmed in the agreed proposal.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <section className="mt-20 rounded-[2rem] border border-white/10 bg-white/[0.025] p-8 md:p-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
-            How engagements work
-          </p>
+      {/* SUPPORTING COMMERCIAL SERVICES */}
+      <section
+        aria-labelledby="more-services-title"
+        className="section-shell px-5 py-12 md:px-8 md:py-16"
+      >
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8 max-w-2xl">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-neutral-500">
+              More ways we can help
+            </p>
 
-          <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
-            Clear scope before execution.
-          </h2>
+            <h2
+              id="more-services-title"
+              className="text-balance text-3xl font-semibold tracking-[-0.04em] text-white md:text-4xl"
+            >
+              Solutions shaped around your work.
+            </h2>
+          </div>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {engagementSteps.map((step) => (
-              <div
-                key={step.number}
-                className="rounded-[1.5rem] border border-white/10 bg-black/50 p-6"
-              >
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-600">
+          <div className="grid gap-4 lg:grid-cols-2">
+            {supportingServices.map((service) => {
+              const Icon = service.icon;
+
+              return (
+                <article
+                  key={service.id}
+                  id={service.id}
+                  aria-labelledby={`${service.id}-title`}
+                  className="glass scroll-mt-28 rounded-[1.75rem] p-6 md:p-8"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05]">
+                      <Icon className="h-5 w-5 text-white" aria-hidden="true" />
+                    </span>
+
+                    <span className="text-xs font-semibold tracking-[0.2em] text-neutral-600">
+                      {service.number}
+                    </span>
+                  </div>
+
+                  <h3
+                    id={`${service.id}-title`}
+                    className="mt-6 text-2xl font-semibold tracking-[-0.03em] text-white"
+                  >
+                    {service.title}
+                  </h3>
+
+                  <p className="mt-3 max-w-lg text-sm leading-7 text-neutral-400">
+                    {service.description}
+                  </p>
+
+                  <div className="mt-6 grid gap-2">
+                    {service.features.map((feature) => (
+                      <div
+                        key={feature}
+                        className="flex items-start gap-3 text-sm leading-6 text-neutral-300"
+                      >
+                        <CheckCircle2
+                          className="mt-1 h-3.5 w-3.5 shrink-0 text-neutral-500"
+                          aria-hidden="true"
+                        />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link
+                    href={`/contact?service=${service.serviceType}#contact-form`}
+                    className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:text-neutral-300"
+                  >
+                    Discuss this service
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ENGAGEMENT PROCESS */}
+      <section
+        aria-labelledby="process-title"
+        className="section-shell px-5 py-12 md:px-8 md:py-14"
+      >
+        <div className="mx-auto max-w-7xl border-t border-white/10 pt-8">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-500">
+              Working with GID
+            </p>
+
+            <h2
+              id="process-title"
+              className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white md:text-3xl"
+            >
+              Clear scope. Practical delivery.
+            </h2>
+          </div>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {processSteps.map((step) => (
+              <div key={step.number} className="flex items-start gap-4">
+                <span className="text-sm font-semibold text-neutral-500">
                   {step.number}
-                </p>
-                <h3 className="mt-6 text-xl font-semibold text-white">
-                  {step.title}
-                </h3>
-                <p className="mt-4 text-sm leading-7 text-neutral-400">
-                  {step.text}
-                </p>
+                </span>
+
+                <div>
+                  <h3 className="text-base font-semibold text-white">
+                    {step.title}
+                  </h3>
+
+                  <p className="mt-2 text-sm leading-6 text-neutral-400">
+                    {step.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mt-20 overflow-hidden rounded-[2rem] border border-white/10 bg-white p-8 text-center text-black md:p-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
-            Start with the business problem
-          </p>
+      {/* FINAL CUSTOMER ACTION */}
+      <section
+        aria-labelledby="solutions-contact-title"
+        className="section-shell px-5 pb-24 pt-8 md:px-8 md:pb-28"
+      >
+        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-7 rounded-[1.75rem] border border-white/15 bg-white/[0.05] p-7 md:p-10 lg:flex-row lg:items-center">
+          <div>
+            <h2
+              id="solutions-contact-title"
+              className="text-balance text-2xl font-semibold tracking-[-0.04em] text-white md:text-3xl"
+            >
+              Tell us what your business needs.
+            </h2>
 
-          <h2 className="mx-auto mt-4 max-w-4xl text-balance text-3xl font-semibold tracking-[-0.05em] md:text-5xl">
-            You do not need to know the exact technology before speaking with
-            us.
-          </h2>
+            <p className="mt-3 max-w-xl text-sm leading-7 text-neutral-400">
+              Whether you need a website, a digital tool or help improving an
+              existing process, start with a conversation.
+            </p>
+          </div>
 
-          <p className="mx-auto mt-6 max-w-3xl leading-8 text-neutral-600">
-            Tell us what the business is trying to improve. We will help define
-            the right digital solution, scope, timeline, and next step.
-          </p>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/contact?service=consultation#contact-form"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-black transition hover:bg-neutral-200"
+            >
+              Start a Project
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
 
-          <Link
-            href="/contact?service=consultation"
-            className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800"
-          >
-            Start a Business Conversation
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </section>
+            <a
+              href="mailto:gidtech8@gmail.com?subject=Business%20Enquiry%20-%20GID%20Technologies"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+            >
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              Email GID
+            </a>
+          </div>
+        </div>
       </section>
     </main>
   );
